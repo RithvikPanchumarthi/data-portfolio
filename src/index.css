@@ -13,7 +13,7 @@
   
   /* Dark mode styles */
   .dark {
-    background-image: url('/bg.jpg');
+    background-image: url('/data-portfolio/bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
