@@ -2,7 +2,7 @@
 
 Durable context for Cursor agents. **Read this at session start. Update it after meaningful work.** Prefer facts written here over chat memory or guesses.
 
-Last updated: 2026-07-30
+Last updated: 2026-07-31
 
 ## Ground truth (do not invent)
 
@@ -18,6 +18,7 @@ Last updated: 2026-07-30
 | Deploy | GitHub Pages via `npm run deploy`; Netlify via `netlify.toml` |
 | Docs hub | `CURSOR.md/` |
 | Skills | `.cursor/skills/portfolio-init`, `portfolio-dev`, `portfolio-content` |
+| Roadmap | `CURSOR.md/roadmap.md` — phased plan for GitHub activity feed, LinkedIn badge, project re-prioritization |
 
 ## Current workspace state
 
@@ -27,6 +28,12 @@ Last updated: 2026-07-30
 - Init skill + always-apply rule wired for context refresh.
 
 ## Session log (newest first)
+
+### 2026-07-31 — Long-term roadmap doc
+
+- Added `CURSOR.md/roadmap.md`: phased long-term plan to (1) re-prioritize `projects.js` featured/order toward core data engineering work without deleting any project, (2) add a live "Recent GitHub Activity" component (`src/components/GitHubActivity.jsx`, spec only) pulling from the public GitHub REST API so the site reflects pushes with no manual edits, (3) add a static LinkedIn follow badge (no API/sync), (4) document the low-maintenance cadence.
+- Linked `roadmap.md` from `CURSOR.md/README.md` doc index.
+- No component code was changed in this session — Phases 2–4 in the roadmap remain unimplemented specs for a future session.
 
 ### 2026-07-30 — Init + memory unit
 
@@ -43,6 +50,9 @@ Last updated: 2026-07-30
 
 ## Open next steps
 
+- Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
+- Execute roadmap Phase 2: build `src/components/GitHubActivity.jsx` (live GitHub API feed) and mount it in `src/App.jsx`.
+- Execute roadmap Phase 3: add a static LinkedIn follow badge (no API sync).
 - Continue feature/content work using `portfolio-dev` or `portfolio-content` as appropriate.
 - After each meaningful change: append a short Session log entry and refresh Ground truth / Current workspace state if needed.
 
