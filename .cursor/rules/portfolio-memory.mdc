@@ -1,0 +1,25 @@
+---
+description: Always refresh from CURSOR.md memory; update it after meaningful work to avoid hallucination.
+alwaysApply: true
+---
+
+# Portfolio memory protocol
+
+At the start of a new conversation or after a context reset:
+
+1. Read `CURSOR.md/memory.md` before making claims about project state.
+2. If the user says **init**, **refresh context**, or **catch me up**, follow `.cursor/skills/portfolio-init/SKILL.md`.
+3. Prefer `CURSOR.md/` docs and repo source over remembered chat details.
+
+While working:
+
+- Use `portfolio-dev` for run/build/deploy.
+- Use `portfolio-content` for projects, contact, copy, theme.
+- Vite `base` is `/data-portfolio/`; local URL is `http://localhost:5173/data-portfolio/`.
+
+After meaningful changes (features, content, structure, deploy decisions):
+
+1. Update `CURSOR.md/memory.md` (date, ground truth, session log, next steps).
+2. Keep memory factual and short — no speculation.
+
+Never invent project data, asset paths, Formspree/analytics IDs, or hosting config. Verify in code if missing from memory.
