@@ -29,6 +29,12 @@ Last updated: 2026-07-31
 
 ## Session log (newest first)
 
+### 2026-07-31 — Added Snowflake project card
+
+- Added project id 7 to `src/data/projects.js`: "Snowflake Cloud Data Warehouse & Governance", sourced from `https://github.com/RithvikPanchumarthi/Snowflake` (Tasty Bytes Zero-to-Snowflake quickstart — multi-schema warehouse, RBAC role hierarchy, data masking, resource monitors/financial governance). `featured: true`.
+- Image path set to `/data-portfolio/Snowflake.png` but the file does not yet exist in `public/` — needs to be added before the card renders correctly (see Open next steps).
+- Started local dev server via `portfolio-dev` (`npm install` + `npm run dev`); running at `http://localhost:5174/data-portfolio/` (port 5173 was already occupied).
+
 ### 2026-07-31 — Long-term roadmap doc
 
 - Added `CURSOR.md/roadmap.md`: phased long-term plan to (1) re-prioritize `projects.js` featured/order toward core data engineering work without deleting any project, (2) add a live "Recent GitHub Activity" component (`src/components/GitHubActivity.jsx`, spec only) pulling from the public GitHub REST API so the site reflects pushes with no manual edits, (3) add a static LinkedIn follow badge (no API/sync), (4) document the low-maintenance cadence.
@@ -50,6 +56,7 @@ Last updated: 2026-07-31
 
 ## Open next steps
 
+- Add `public/Snowflake.png` (referenced by project id 7) — no thematically-fitting image exists in the repo yet, so the new Snowflake card currently shows a broken image until one is added.
 - Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
 - Execute roadmap Phase 2: build `src/components/GitHubActivity.jsx` (live GitHub API feed) and mount it in `src/App.jsx`.
 - Execute roadmap Phase 3: add a static LinkedIn follow badge (no API sync).

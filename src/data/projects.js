@@ -53,5 +53,14 @@ export const projects = [
     github: "https://github.com/RithvikPanchumarthi/Visualization_with_PowerBI",
     image: "/data-portfolio/Power_BI.jpg",
     featured: true
+  },
+  {
+    id: 7,
+    title: "Snowflake Cloud Data Warehouse & Governance",
+    description: "Architected a multi-layer Snowflake data warehouse (raw, harmonized, and analytics schemas) for the Tasty Bytes dataset, loading raw POS and customer data from S3 stages and building harmonized/analytics views that join orders, menu, location, and customer loyalty data. Designed a full RBAC role hierarchy (admin, data engineer, data scientist, BI, dev) with granular current and future object grants, and applied dynamic data masking policies with tag-based classification to protect PII. Implemented financial governance controls including resource monitors with tiered credit-quota alerts, warehouse auto-suspend/resume, statement and queued timeout limits, and on-demand warehouse scaling to balance query performance against compute cost.",
+    technologies: ["Snowflake", "Data Warehousing", "RBAC", "Data Masking", "Resource Monitors", "Cost Governance", "SQL", "Cloud Architecture"],
+    github: "https://github.com/RithvikPanchumarthi/Snowflake",
+    image: "/data-portfolio/Snowflake.png",
+    featured: true
   }
 ];
