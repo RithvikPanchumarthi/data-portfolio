@@ -1,6 +1,6 @@
 # Agents
 
-Portfolio project guidance for Cursor (local and cloud).
+Portfolio project guidance for Cursor (local and cloud) and Claude Code.
 
 ## Session start
 
@@ -19,6 +19,8 @@ Portfolio project guidance for Cursor (local and cloud).
 | Where files live | `CURSOR.md/project-structure.md` |
 | Content edits | `CURSOR.md/customization.md` |
 | Deploy | `CURSOR.md/deployment.md` |
+| Claude Code entrypoint | `CLAUDE.md` |
+| Claude Code skills | `.claude/skills/` (symlinks to `.cursor/skills/`) |
 
 ## Non-negotiables
 
