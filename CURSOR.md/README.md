@@ -27,3 +27,9 @@ Cursor-oriented docs for the data portfolio. Agents should read these before cha
 ## Always-apply rule
 
 - `.cursor/rules/portfolio-memory.mdc` — read/update memory; prefer docs over guesses
+
+## Claude Code
+
+- Root [CLAUDE.md](../CLAUDE.md) — Claude Code entrypoint; imports `AGENTS.md` and `memory.md`
+- `.claude/skills/*` — symlinks to `.cursor/skills/*`, so both tools share the same skill files (edit in `.cursor/skills`)
+- `.claude/settings.json` — shared Claude Code permissions

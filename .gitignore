@@ -92,3 +92,7 @@ jspm_packages/
 # TernJS port file
 .tern-port
 
+
+# Claude Code (personal settings and local worktrees)
+.claude/settings.local.json
+.claude/worktrees/

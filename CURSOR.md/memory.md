@@ -2,7 +2,7 @@
 
 Durable context for Cursor agents. **Read this at session start. Update it after meaningful work.** Prefer facts written here over chat memory or guesses.
 
-Last updated: 2026-07-31
+Last updated: 2026-10-05
 
 ## Ground truth (do not invent)
 
@@ -18,6 +18,7 @@ Last updated: 2026-07-31
 | Deploy | GitHub Pages via `npm run deploy`; Netlify via `netlify.toml` |
 | Docs hub | `CURSOR.md/` |
 | Skills | `.cursor/skills/portfolio-init`, `portfolio-dev`, `portfolio-content` |
+| Claude Code | `CLAUDE.md` (imports `AGENTS.md` + this file); `.claude/skills/*` symlink to `.cursor/skills/*`; `.claude/settings.json` |
 | Roadmap | `CURSOR.md/roadmap.md` — phased plan for GitHub activity feed, LinkedIn badge, project re-prioritization |
 
 ## Current workspace state
@@ -28,6 +29,14 @@ Last updated: 2026-07-31
 - Init skill + always-apply rule wired for context refresh.
 
 ## Session log (newest first)
+
+### 2026-10-05 — [Claude] Claude Code scaffolding
+
+- Added root `CLAUDE.md` (imports `AGENTS.md` and this file, plus Claude-specific notes).
+- Added `.claude/skills/{portfolio-init,portfolio-dev,portfolio-content}` as relative symlinks to `.cursor/skills/` — one shared copy for both tools.
+- Added `.claude/settings.json` (allow npm dev/build/preview/install and read-only git; ask before `npm run deploy` / `git push`).
+- `.gitignore`: added `.claude/settings.local.json`, `.claude/worktrees/`.
+- Additive mentions of Claude Code in `AGENTS.md` and `CURSOR.md/README.md`. No `.cursor/` files changed; no site source changed.
 
 ### 2026-07-31 — Added Snowflake project card
 
@@ -60,6 +69,7 @@ Last updated: 2026-07-31
 - Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
 - Execute roadmap Phase 2: build `src/components/GitHubActivity.jsx` (live GitHub API feed) and mount it in `src/App.jsx`.
 - Execute roadmap Phase 3: add a static LinkedIn follow badge (no API sync).
+- Plan Claude-specific workflows once feature goals are set.
 - Continue feature/content work using `portfolio-dev` or `portfolio-content` as appropriate.
 - After each meaningful change: append a short Session log entry and refresh Ground truth / Current workspace state if needed.
 
@@ -77,6 +87,6 @@ After completing a task that changes project behavior, structure, or decisions:
 
 1. Bump `Last updated`.
 2. Patch **Ground truth** / **Current workspace state** if facts changed.
-3. Prepend a dated bullet under **Session log**.
+3. Prepend a dated bullet under **Session log**, tagged with the tool used: `[Cursor]` or `[Claude]`.
 4. Move finished items out of **Open next steps**; add new ones if work remains.
 5. Keep entries short and factual — no speculative “probably” notes.
