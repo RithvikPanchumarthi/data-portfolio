@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowDown, Download } from 'lucide-react';
+import { profile } from '../data/profile.js';
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -20,7 +21,7 @@ const Hero = () => {
           
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4 animate-slide-up" style={{animationDelay: '0.2s'}}>
-            Data & Analytics Engineer | Cloud Solutions Architect
+            {profile.headline}
           </p>
           
           {/* Description */}

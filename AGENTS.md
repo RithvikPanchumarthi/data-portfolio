@@ -9,6 +9,7 @@ Portfolio project guidance for Cursor (local and cloud) and Claude Code.
 3. Then pick:
    - `portfolio-dev` — run, build, preview, deploy
    - `portfolio-content` — projects, contact, copy, theme
+   - `portfolio-sync` — GitHub / LinkedIn / Cursor stats data
 
 ## Source of truth
 

@@ -24,6 +24,17 @@
   }
 }
 
+/* Scroll-reveal start state (useReveal). Always visible when printing. */
+.reveal-hidden {
+  opacity: 0;
+}
+
+@media print {
+  .reveal-hidden {
+    opacity: 1;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;

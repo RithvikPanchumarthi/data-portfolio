@@ -62,5 +62,14 @@ export const projects = [
     github: "https://github.com/RithvikPanchumarthi/Snowflake",
     image: "/data-portfolio/Snowflake.png",
     featured: true
+  },
+  {
+    id: 8,
+    title: "WorkVibe — Talent Matching SaaS",
+    description: "Built for the DataExpert.io Vibe Coding Challenge: a Next.js 15 SaaS that replaces keyword job search with a weighted \"Vibe Match\" score. Candidates rank skills on a 5-10-5 hierarchy (high confidence, moderate, aware) weighted at 100%, 60% and 20%, so employers see real proficiency in required skills. Includes Supabase auth with GitHub OAuth, Stripe webhooks for premium accounts, premium listings sorted via PostgreSQL indexing, and structured-output skill extraction from PDF resumes.",
+    technologies: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Prisma", "Stripe", "Tailwind CSS"],
+    github: "https://github.com/RithvikPanchumarthi/Vibing-with-ZACH-LI",
+    demo: "https://vibing-with-zach-li-guvx.vercel.app/",
+    featured: true
   }
 ];

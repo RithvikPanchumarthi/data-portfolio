@@ -25,6 +25,20 @@ Rules:
 - `featured: true` surfaces the project as featured in the UI.
 - Keep descriptions concrete: stack, what was built, outcome when possible.
 
+- `image` is optional. Missing or broken images show a gradient fallback tile, so never point `image` at a file that isn't in `public/`.
+- Long descriptions are clamped on the card; the full text shows in the Details modal.
+
+## Synced data (see the `portfolio-sync` skill)
+
+| Section | Data file | How it updates |
+| --- | --- | --- |
+| Recent GitHub Activity | `src/data/github.json` | Automatic: `npm run sync:github` runs in CI before each deploy and weekly |
+| Experience | `src/data/profile.js` | Manual, from a LinkedIn "Save to PDF" export |
+| Building with AI | `src/data/aiStats.js` | Manual, from the Cursor stats page |
+| Learning Journey | `src/data/learning.js` (+ certifications from `profile.js`) | Manual, curated |
+
+Never invent values: a `null` stat or empty list keeps its tile or section hidden.
+
 ## Contact information
 
 Update details in:
@@ -48,6 +62,7 @@ colors: {
 ```
 
 Theme toggle / dark-mode helpers: `src/utils/themeConfig.js`, `src/components/ThemeToggle.jsx`.
+Components read the current theme with `useTheme()` (`src/hooks/useTheme.js`) and style via `getThemeClass(theme, key)`.
 
 ## Responsive breakpoints
 

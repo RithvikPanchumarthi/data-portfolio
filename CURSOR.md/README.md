@@ -23,6 +23,7 @@ Cursor-oriented docs for the data portfolio. Agents should read these before cha
 - `.cursor/skills/portfolio-init` — refresh memory + docs at session start
 - `.cursor/skills/portfolio-dev` — local/cloud run, build, deploy workflows
 - `.cursor/skills/portfolio-content` — content and visual customization
+- `.cursor/skills/portfolio-sync` — refresh GitHub, LinkedIn and Cursor stats data
 
 ## Always-apply rule
 
