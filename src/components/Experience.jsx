@@ -1,12 +1,10 @@
 import React from 'react';
 import { Briefcase, GraduationCap, Award, MapPin } from 'lucide-react';
-import { profile } from '../data/profile.js';
+import { profile, hasExperience } from '../data/profile.js';
 import { getThemeClass } from '../utils/themeConfig.js';
 import { useTheme } from '../hooks/useTheme.js';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
-
-export const hasExperience = profile.experience.length > 0 || profile.education.length > 0;
 
 const Experience = () => {
   const theme = useTheme();

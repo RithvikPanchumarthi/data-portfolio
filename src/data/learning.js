@@ -42,14 +42,14 @@ export const learning = [
     year: 2026,
     title: "DataExpert.io Vibe Coding Challenge",
     kind: "repo",
-    summary: "Shipped WorkVibe, a full-stack Next.js 15 SaaS, with AI-assisted development.",
+    summary: "Shipped WorkVibe, a full-stack Next.js 15 SaaS with weighted skill matching, Supabase auth and Stripe payments.",
     repos: ["Vibing-with-ZACH-LI"]
   },
   {
     year: 2026,
     title: "Data Engineering Handbook",
     kind: "course",
-    summary: "Keeping a personal copy of a curated data engineering learning resource collection.",
+    summary: "A curated collection of data engineering learning resources.",
     repos: ["data-expert-rithvik"]
   }
 ];

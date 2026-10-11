@@ -19,7 +19,7 @@ const repoUrl = Object.fromEntries(github.repos.map((repo) => [repo.name, repo.h
 const timeline = [
   ...learning,
   ...profile.certifications.map((cert) => ({
-    year: new Date(cert.date).getFullYear(),
+    year: Number(String(cert.date).match(/\d{4}/)?.[0]) || 0,
     title: cert.name,
     kind: 'cert',
     summary: cert.issuer,

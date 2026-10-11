@@ -8,15 +8,20 @@ export const useActiveSection = (ids) => {
   const key = ids.join(',');
 
   useEffect(() => {
+    const ordered = key.split(',');
+    const inView = new Set();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) setActive(visible.target.id);
+        entries.forEach((entry) =>
+          entry.isIntersecting ? inView.add(entry.target.id) : inView.delete(entry.target.id)
+        );
+        setActive(ordered.find((id) => inView.has(id)) ?? null);
       },
       { rootMargin: '-45% 0px -50% 0px' }
     );
 
-    key.split(',').forEach((id) => {
+    ordered.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });

@@ -14,11 +14,11 @@ export const aiStats = {
   workflow: [
     {
       tool: "Cursor",
-      text: "Agent-driven feature work with project rules and skills in .cursor/."
+      text: "Project rules and skills in .cursor/ guide agent work on this repo."
     },
     {
       tool: "Claude Code",
-      text: "Planning, reviews and multi-step changes, reading the same skills through .claude/skills symlinks."
+      text: "Reads the same skills through .claude/skills symlinks, with CLAUDE.md pointing at the shared project docs."
     },
     {
       tool: "Shared memory",

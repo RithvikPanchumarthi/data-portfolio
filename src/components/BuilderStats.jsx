@@ -15,7 +15,7 @@ const tiles = [
   { label: 'Cursor tokens', value: cursor.tokens },
   { label: 'Cursor agents run', value: cursor.agents },
   { label: 'Longest-running agent', value: cursor.longestRunningAgent },
-  { label: 'Public GitHub repos', value: github.user.publicRepos },
+  { label: 'Public GitHub repos', value: github.repos.filter((repo) => !repo.fork).length },
 ].filter((tile) => tile.value !== null && tile.value !== undefined);
 
 const WORKFLOW_ICONS = [Sparkles, Bot, Brain];

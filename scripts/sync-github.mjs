@@ -30,9 +30,9 @@ async function getReadme(repo) {
   return res.text();
 }
 
-// Pull the first heading and first prose paragraph out of a README.
+// Pull the first prose paragraph out of a README.
 export function extractExcerpt(markdown) {
-  if (!markdown) return { title: null, excerpt: null };
+  if (!markdown) return null;
 
   const cleaned = markdown
     .replace(/```[\s\S]*?```/g, '')          // code fences
@@ -43,21 +43,24 @@ export function extractExcerpt(markdown) {
     .replace(/\r/g, '');
 
   const blocks = cleaned.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean);
-  const heading = blocks.find((b) => /^#{1,3}\s/.test(b));
-  const title = heading ? heading.split('\n')[0].replace(/^#+\s*/, '').trim() : null;
 
   // A heading can sit directly on top of its paragraph with no blank line between them.
   const bodies = blocks.map((b) => b.replace(/^#{1,6}\s.*(\n|$)/, '').trim()).filter(Boolean);
   const prose = bodies.find(
     (b) => !/^(#|[-*+]\s|\d+\.\s|\||>|---)/.test(b) && b.replace(/[*_`]/g, '').length >= 40,
   );
-  if (!prose) return { title, excerpt: null };
+  if (!prose) return null;
 
-  let excerpt = prose.replace(/[*_`#]/g, '').replace(/\s+/g, ' ').trim();
+  // Strip emphasis markers but keep underscores inside words (snake_case, file names).
+  let excerpt = prose
+    .replace(/[*`]/g, '')
+    .replace(/(^|\s)_+|_+(?=\s|$)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
   if (excerpt.length > EXCERPT_MAX) {
     excerpt = `${excerpt.slice(0, EXCERPT_MAX).replace(/\s+\S*$/, '')}…`;
   }
-  return { title, excerpt };
+  return excerpt;
 }
 
 async function sync() {
@@ -68,10 +71,9 @@ async function sync() {
 
   const items = await Promise.all(
     repos.map(async (r) => {
-      const { title, excerpt } = extractExcerpt(await getReadme(r.name));
+      const excerpt = extractExcerpt(await getReadme(r.name));
       return {
         name: r.name,
-        title,
         description: r.description,
         excerpt,
         language: r.language,

@@ -28,6 +28,6 @@ export const useReveal = () => {
     return () => observer.disconnect();
   }, [state]);
 
-  const className = { hidden: 'opacity-0', shown: 'animate-slide-up', static: '' }[state];
+  const className = { hidden: 'reveal-hidden', shown: 'animate-slide-up', static: '' }[state];
   return [ref, className];
 };

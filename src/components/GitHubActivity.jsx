@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Github, GitBranch, Clock, Info } from 'lucide-react';
 import github from '../data/github.json';
 import { getThemeClass } from '../utils/themeConfig.js';
@@ -10,6 +10,7 @@ import Reveal from './Reveal';
 
 const INITIAL_COUNT = 6;
 const ownRepos = github.repos.filter((repo) => !repo.fork);
+const languages = ['All', ...new Set(ownRepos.map((repo) => repo.language).filter(Boolean))];
 
 const toModalItem = (repo) => ({
   title: repo.name,
@@ -29,10 +30,6 @@ const GitHubActivity = () => {
   const [selected, setSelected] = useState(null);
   const closeModal = useCallback(() => setSelected(null), []);
 
-  const languages = useMemo(
-    () => ['All', ...new Set(ownRepos.map((repo) => repo.language).filter(Boolean))],
-    []
-  );
   const filtered = language === 'All' ? ownRepos : ownRepos.filter((repo) => repo.language === language);
   const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
 

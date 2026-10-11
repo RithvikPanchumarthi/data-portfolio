@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-11T20:45:06.615Z",
+  "syncedAt": "2026-10-11T20:53:20.998Z",
   "user": {
     "login": "RithvikPanchumarthi",
     "name": "Rithvik Panchumarthi",
@@ -11,7 +11,6 @@
   "repos": [
     {
       "name": "data-portfolio",
-      "title": "Rithvik Panchumarthi - Data Portfolio",
       "description": "Modern React portfolio showcasing data engineering projects with dark/light theme system",
       "excerpt": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS showcasing data engineering expertise and projects.",
       "language": "JavaScript",
@@ -24,7 +23,6 @@
     },
     {
       "name": "data-expert-rithvik",
-      "title": "The Data Engineering Handbook",
       "description": "This is a repo that links to everything I'd ever want to learn about data engineering",
       "excerpt": "This repo has all the resources you need to become an amazing data engineer!",
       "language": null,
@@ -37,7 +35,6 @@
     },
     {
       "name": "Vibing-with-ZACH-LI",
-      "title": "WorkVibe ✨",
       "description": null,
       "excerpt": "The High-Fidelity Matching Engine for the 2026 Talent Economy",
       "language": "TypeScript",
@@ -50,7 +47,6 @@
     },
     {
       "name": "python-for-data-engineering",
-      "title": null,
       "description": "This repo contains all the code used in the Python for Data Engineering",
       "excerpt": null,
       "language": "Jupyter Notebook",
@@ -63,7 +59,6 @@
     },
     {
       "name": "LM_Engineering",
-      "title": null,
       "description": "Build the future LM",
       "excerpt": null,
       "language": "Jupyter Notebook",
@@ -76,7 +71,6 @@
     },
     {
       "name": "Visualization_with_PowerBI",
-      "title": "Visualization_with_PowerBI",
       "description": null,
       "excerpt": "power BI usage Power BI is a powerful business intelligence tool developed by Microsoft. It is used to visualize and analyze data from various sources to gain insights and make informed business decisions. Here are some key uses of Power BI:",
       "language": null,
@@ -89,7 +83,6 @@
     },
     {
       "name": "Rithvik-s-Portfolio-with-HTML",
-      "title": "Rithvik Panchumarthi",
       "description": "Updated out Portfolio Website  with GA snippet",
       "excerpt": "I'm a passionate Data Engineer architecting scalable cloud data solutions that transform complex data into actionable business insights. With expertise in the full data lifecycle, I specialize in building robust ETL/ELT pipelines, designing data warehouses, and creating compelling visualizations that drive strategic…",
       "language": "CSS",
@@ -102,7 +95,6 @@
     },
     {
       "name": "Spark",
-      "title": null,
       "description": null,
       "excerpt": null,
       "language": "Python",
@@ -115,7 +107,6 @@
     },
     {
       "name": "DataAnalytics",
-      "title": null,
       "description": "This channel will include CRM analytics, Python, R examples used for creating content on youtube channel",
       "excerpt": null,
       "language": "Jupyter Notebook",
@@ -128,7 +119,6 @@
     },
     {
       "name": "cumulative-table-design",
-      "title": "Cumulative Table Design",
       "description": "This repository helps teach people how to correctly define and create cumulative tables!",
       "excerpt": "Cumulative table design is an extremely powerful data engineering tool that all data engineers should know.",
       "language": null,
@@ -141,7 +131,6 @@
     },
     {
       "name": "pythonAlevar",
-      "title": null,
       "description": null,
       "excerpt": null,
       "language": "Python",
@@ -154,7 +143,6 @@
     },
     {
       "name": "pycharm",
-      "title": "pycharm",
       "description": "Python Development through Pycharm",
       "excerpt": null,
       "language": null,
@@ -167,7 +155,6 @@
     },
     {
       "name": "Snowflake",
-      "title": null,
       "description": "Work with Snowflake using of Tasty Bites Data",
       "excerpt": null,
       "language": null,
@@ -180,7 +167,6 @@
     },
     {
       "name": "WorkwithExcel",
-      "title": "WorkwithExcel",
       "description": "Working on the Excel sheets",
       "excerpt": "Microsoft Excel is a popular spreadsheet software developed by Microsoft. It is part of the Microsoft Office suite and is widely used for organizing, analyzing, and manipulating numerical data. Excel provides a grid-like interface where users can create worksheets, enter data into cells, and perform various…",
       "language": null,
@@ -193,7 +179,6 @@
     },
     {
       "name": "Storytelling",
-      "title": "Storytelling",
       "description": "Data Visualizations to Stories.",
       "excerpt": "Data visualization is the process of transforming data into a visual format that can be easily understood by humans. This can be done through the use of charts, graphs, maps, and other visual representations. Data visualization can be used to tell stories about data, by highlighting trends, patterns, and relationships.",
       "language": null,
@@ -206,7 +191,6 @@
     },
     {
       "name": "python",
-      "title": "python",
       "description": "Work on the Data sets using of python to perform Data Analysis",
       "excerpt": "Work on the Data sets using of python to perform Data Analysis",
       "language": "Jupyter Notebook",
@@ -219,7 +203,6 @@
     },
     {
       "name": "Tableau",
-      "title": "Tableau Dashboards",
       "description": null,
       "excerpt": "This section contains Tableau dashboards that visualize data related to the project. The dashboards have been created using Tableau, a powerful data visualization tool.",
       "language": null,
@@ -232,7 +215,6 @@
     },
     {
       "name": "WorkwithSQL",
-      "title": "WorkwithSQL",
       "description": null,
       "excerpt": "SQL (Structured Query Language) is indeed an essential tool in data analysis for several reasons:",
       "language": "Jupyter Notebook",
@@ -245,7 +227,6 @@
     },
     {
       "name": "begin",
-      "title": "begin",
       "description": "introduction",
       "excerpt": "I have extensive experience in data analysis, with a focus on using Python and a variety of libraries to clean, explore, visualize, and analyze data. I have worked with a variety of data sets, including customer datasets, product datasets, and sales datasets. I have gained a number of insights into customer behavior,…",
       "language": null,

@@ -15,3 +15,5 @@ export const profile = {
   // { name, issuer, date }
   certifications: []
 };
+
+export const hasExperience = profile.experience.length > 0 || profile.education.length > 0;
