@@ -1,29 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Cloud, Database, BarChart3, Code, Award, MapPin } from 'lucide-react';
-import { themeConfig, getThemeClass } from '../utils/themeConfig.js';
+import { getThemeClass } from '../utils/themeConfig.js';
+import { useTheme } from '../hooks/useTheme.js';
+import Reveal from './Reveal';
 
 const About = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-
-  // Listen for theme changes from other components
-  useEffect(() => {
-    const handleThemeChange = () => {
-      const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      setTheme(currentTheme);
-    };
-
-    // Initial check
-    handleThemeChange();
-
-    // Listen for class changes on document element
-    const observer = new MutationObserver(handleThemeChange);
-    observer.observe(document.documentElement, { 
-      attributes: true, 
-      attributeFilter: ['class'] 
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const theme = useTheme();
 
   const skills = [
     {
@@ -81,7 +63,7 @@ const About = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Story */}
-          <div className="space-y-6">
+          <Reveal className="space-y-6">
             <div className={`prose prose-lg ${getThemeClass(theme, 'textSecondary')}`}>
               <p className="text-xl leading-relaxed mb-6">
                 I'm a <span className={`${getThemeClass(theme, 'accentEmerald')} font-semibold`}>Data and Analytics Engineer</span> with 
@@ -133,10 +115,10 @@ const About = () => {
                 );
               })}
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Column - Skills - Consistent theming */}
-          <div className="space-y-8">
+          <Reveal className="space-y-8">
             <h3 className={`text-2xl font-bold ${getThemeClass(theme, 'headingTech')} mb-8`}>
               Technical Expertise
             </h3>
@@ -197,7 +179,7 @@ const About = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

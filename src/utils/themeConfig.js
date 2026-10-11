@@ -14,6 +14,7 @@ export const themeConfig = {
     // Section backgrounds with soft gradients
     backgroundProjects: "bg-gradient-to-br from-indigo-50 via-purple-50 to-indigo-100",
     backgroundAbout: "bg-gradient-to-br from-teal-50 via-blue-50 to-teal-100",
+    backgroundNeutral: "bg-gradient-to-br from-gray-50 via-white to-gray-100",
     
     // Card styling - clean white cards with soft shadows
     card: "bg-white border border-gray-200 shadow-md hover:shadow-lg",
@@ -62,13 +63,20 @@ export const themeConfig = {
     progressViolet: "bg-gradient-to-r from-violet-500 to-purple-500",
     progressAmber: "bg-gradient-to-r from-amber-500 to-orange-500",
     progressRose: "bg-gradient-to-r from-rose-500 to-pink-500",
-    progressBg: "bg-gray-200"
+    progressBg: "bg-gray-200",
+
+    // Modal, dividers and timeline rail
+    modal: "bg-white border border-gray-200 shadow-2xl",
+    divider: "border-gray-200",
+    timelineRail: "bg-gray-300",
+    timelineDot: "bg-white border-2 border-cyan-500"
   },
   
   dark: {
     // Section backgrounds with dramatic gradients
     backgroundProjects: "bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800",
     backgroundAbout: "bg-gradient-to-br from-teal-900 via-blue-900 to-teal-800",
+    backgroundNeutral: "bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800",
     
     // Glass-morphism cards with glow effects
     card: "bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 shadow-2xl shadow-purple-900/20 hover:shadow-purple-800/30",
@@ -117,7 +125,13 @@ export const themeConfig = {
     progressViolet: "bg-gradient-to-r from-violet-500 to-purple-500",
     progressAmber: "bg-gradient-to-r from-amber-500 to-orange-500",
     progressRose: "bg-gradient-to-r from-rose-500 to-pink-500",
-    progressBg: "bg-gray-700"
+    progressBg: "bg-gray-700",
+
+    // Modal, dividers and timeline rail
+    modal: "bg-gray-900 border border-gray-700 shadow-2xl shadow-black/50",
+    divider: "border-gray-700",
+    timelineRail: "bg-gray-700",
+    timelineDot: "bg-gray-900 border-2 border-cyan-400"
   }
 };
 

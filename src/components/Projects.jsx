@@ -1,31 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Github, ExternalLink, Code, Database, BarChart3, FileSpreadsheet } from 'lucide-react';
+import React, { useCallback, useState } from 'react';
+import { Github, ExternalLink, Code, Database, BarChart3, FileSpreadsheet, Info } from 'lucide-react';
 import { projects } from '../data/projects.js';
-import { themeConfig, getThemeClass } from '../utils/themeConfig.js';
+import { getThemeClass } from '../utils/themeConfig.js';
+import { useTheme } from '../hooks/useTheme.js';
+import DetailModal from './DetailModal';
+
+// Shows the project image, or a gradient tile when the image is missing or fails to load.
+const ProjectImage = ({ project, icon }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (!project.image || failed) {
+    return (
+      <div
+        role="img"
+        aria-label={project.title}
+        className="w-full h-48 flex items-center justify-center bg-gradient-to-br from-cyan-500 via-violet-500 to-purple-600 text-white/90 transition-transform duration-300 group-hover:scale-110 [&>svg]:w-16 [&>svg]:h-16"
+      >
+        {icon}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={project.image}
+      alt={project.title}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
+    />
+  );
+};
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-
-  // Listen for theme changes from other components
-  useEffect(() => {
-    const handleThemeChange = () => {
-      const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      setTheme(currentTheme);
-    };
-
-    // Initial check
-    handleThemeChange();
-
-    // Listen for class changes on document element
-    const observer = new MutationObserver(handleThemeChange);
-    observer.observe(document.documentElement, { 
-      attributes: true, 
-      attributeFilter: ['class'] 
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const theme = useTheme();
+  const [selected, setSelected] = useState(null);
+  const closeModal = useCallback(() => setSelected(null), []);
   
   const getIcon = (technologies) => {
     if (technologies.some(tech => tech.includes('SQL'))) return <Database className="w-6 h-6" />;
@@ -91,11 +102,7 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative overflow-hidden rounded-lg mb-4">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
-                />
+                <ProjectImage project={project} icon={getIcon(project.technologies)} />
                 {/* Icon overlay with consistent theming */}
                 <div className={`absolute top-3 left-3 p-2 ${getThemeClass(theme, 'iconCyan')} rounded-lg backdrop-blur-sm`}>
                   {getIcon(project.technologies)}
@@ -109,11 +116,11 @@ const Projects = () => {
 
               {/* Project Content - Consistent theming */}
               <div className="space-y-4">
-                <h3 className={`text-xl font-bold ${getThemeClass(theme, 'textPrimary')} group-hover:${getThemeClass(theme, 'accentViolet')} transition-colors`}>
+                <h3 className={`text-xl font-bold ${getThemeClass(theme, 'textPrimary')} ${theme === 'dark' ? 'group-hover:text-violet-400' : 'group-hover:text-violet-600'} transition-colors`}>
                   {project.title}
                 </h3>
                 
-                <p className={`${getThemeClass(theme, 'textSecondary')} text-sm leading-relaxed`}>
+                <p className={`${getThemeClass(theme, 'textSecondary')} text-sm leading-relaxed line-clamp-4`}>
                   {project.description}
                 </p>
 
@@ -134,7 +141,22 @@ const Projects = () => {
                 </div>
 
                 {/* Action Buttons - Consistent theming */}
-                <div className="flex gap-3 pt-2">
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <button
+                    onClick={() => setSelected({
+                      title: project.title,
+                      body: project.description,
+                      tags: project.technologies,
+                      links: [
+                        { label: 'View Code', href: project.github, kind: 'github' },
+                        ...(project.demo ? [{ label: 'Live Demo', href: project.demo, kind: 'demo' }] : []),
+                      ],
+                    })}
+                    className={`flex items-center gap-2 px-4 py-2 ${getThemeClass(theme, 'filterInactive')} rounded-lg transition-all duration-300 text-sm font-medium`}
+                  >
+                    <Info size={16} />
+                    Details
+                  </button>
                   <a
                     href={project.github}
                     target="_blank"
@@ -178,6 +200,8 @@ const Projects = () => {
           </a>
         </div>
       </div>
+
+      <DetailModal item={selected} theme={theme} onClose={closeModal} />
     </section>
   );
 };
