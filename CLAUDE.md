@@ -14,5 +14,6 @@ project context lives in tool-neutral files and is imported here rather than dup
   - `portfolio-init` — context refresh ("init", "catch me up")
   - `portfolio-dev` — run, build, preview, deploy
   - `portfolio-content` — projects, contact, copy, theme
+  - `portfolio-sync` — GitHub / LinkedIn / Cursor stats data
 - **Commands**: `npm run dev` (http://localhost:5173/data-portfolio/), `npm run build`, `npm run preview`.
 - **Deploy**: pushing to `main` deploys via `.github/workflows/deploy.yml`. Don't run `npm run deploy` or push unless asked.

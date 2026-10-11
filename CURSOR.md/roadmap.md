@@ -2,7 +2,9 @@
 
 Goal: keep the portfolio concentrated on Rithvik's actual data engineering work, and keep it fresh as he pushes code to GitHub and posts on LinkedIn — with minimal manual upkeep.
 
-This is a planning document. Phases are not yet implemented; each one lists concrete file-level actions for a future session (use `portfolio-content` for Phase 1/3 content edits, `portfolio-dev` for anything touching build/deploy).
+**Status (2026-10-11):** Phase 2 shipped as a build-time sync (`scripts/sync-github.mjs` → `src/data/github.json`, refreshed by the deploy workflow weekly) instead of a client-side fetch. Phase 3 shipped as a footer LinkedIn callout. Phase 1 (re-ranking) is still open. See `memory.md`.
+
+This is a planning document. Phases were originally unimplemented; each one lists concrete file-level actions for a future session (use `portfolio-content` for Phase 1/3 content edits, `portfolio-dev` for anything touching build/deploy).
 
 ## Guiding principle
 

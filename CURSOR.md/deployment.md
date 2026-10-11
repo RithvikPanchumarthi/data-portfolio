@@ -10,7 +10,9 @@ Output: `dist/` (assets under `dist/assets/`).
 
 ## GitHub Pages
 
-Configured via `gh-pages` and Vite `base: '/data-portfolio/'`.
+Primary path: `.github/workflows/deploy.yml` deploys on every push to `main`, weekly (Mondays 06:00 UTC) and on manual dispatch. It runs `npm run sync:github` before `npm run build`, so the GitHub section refreshes on each deploy.
+
+Manual fallback: `gh-pages` with Vite `base: '/data-portfolio/'`.
 
 ```bash
 npm run deploy
