@@ -5,10 +5,11 @@
 export const aiStats = {
   cursor: {
     profileUrl: "https://cursor.com/@rithvikbuilds4u",
-    asOf: null, // "YYYY-MM-DD" the numbers were read
-    tokens: null, // e.g. "1.2B"
-    agents: null, // e.g. 340
-    longestRunningAgent: null // e.g. "3h 12m"
+    asOf: "2026-10-11", // date the numbers were read
+    tokens: 95500000,
+    agents: 5,
+    longestRunningAgent: "7.5h",
+    models: ["Grok 4.6", "Claude Opus 5.5"]
   },
 
   workflow: [

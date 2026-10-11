@@ -66,7 +66,7 @@ const About = () => {
           <Reveal className="space-y-6">
             <div className={`prose prose-lg ${getThemeClass(theme, 'textSecondary')}`}>
               <p className="text-xl leading-relaxed mb-6">
-                I'm a <span className={`${getThemeClass(theme, 'accentEmerald')} font-semibold`}>Data and Analytics Engineer</span> with 
+                I'm a <span className={`${getThemeClass(theme, 'accentEmerald')} font-semibold`}>Senior Data Engineer</span> with 
                 expertise in designing scalable data solutions and transforming complex datasets into 
                 actionable business insights.
               </p>

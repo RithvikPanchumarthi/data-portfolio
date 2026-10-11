@@ -45,6 +45,17 @@ const BuilderStats = () => {
           ))}
         </dl>
 
+        {cursor.models?.length > 0 && (
+          <div className="flex flex-wrap justify-center items-center gap-2 -mt-8 mb-14">
+            <span className={`text-sm ${getThemeClass(theme, 'textSecondary')}`}>Models I build with:</span>
+            {cursor.models.map((model) => (
+              <span key={model} className={`px-3 py-1 rounded-full text-sm font-medium ${getThemeClass(theme, 'tagViolet')}`}>
+                {model}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="grid md:grid-cols-3 gap-6">
           {aiStats.workflow.map((step, index) => {
             const Icon = WORKFLOW_ICONS[index % WORKFLOW_ICONS.length];

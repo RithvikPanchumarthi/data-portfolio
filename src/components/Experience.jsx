@@ -85,9 +85,11 @@ const Experience = () => {
                   {profile.certifications.map((cert) => (
                     <li key={cert.name}>
                       <p className={`text-sm font-medium ${getThemeClass(theme, 'textPrimary')}`}>{cert.name}</p>
-                      <p className={`text-xs ${getThemeClass(theme, 'textTertiary')}`}>
-                        {[cert.issuer, cert.date].filter(Boolean).join(' · ')}
-                      </p>
+                      {(cert.issuer || cert.date) && (
+                        <p className={`text-xs ${getThemeClass(theme, 'textTertiary')}`}>
+                          {[cert.issuer, cert.date].filter(Boolean).join(' · ')}
+                        </p>
+                      )}
                     </li>
                   ))}
                 </ul>

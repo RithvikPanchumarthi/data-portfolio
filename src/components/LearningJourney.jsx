@@ -18,13 +18,16 @@ const repoUrl = Object.fromEntries(github.repos.map((repo) => [repo.name, repo.h
 
 const timeline = [
   ...learning,
-  ...profile.certifications.map((cert) => ({
-    year: Number(String(cert.date).match(/\d{4}/)?.[0]) || 0,
-    title: cert.name,
-    kind: 'cert',
-    summary: cert.issuer,
-    repos: [],
-  })),
+  // Only dated certifications fit the timeline; the rest are listed under Experience.
+  ...profile.certifications
+    .map((cert) => ({
+      year: Number(String(cert.date).match(/\d{4}/)?.[0]),
+      title: cert.name,
+      kind: 'cert',
+      summary: cert.issuer,
+      repos: [],
+    }))
+    .filter((item) => item.year),
 ].sort((a, b) => b.year - a.year);
 
 const LearningJourney = () => {

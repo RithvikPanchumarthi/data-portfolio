@@ -31,6 +31,12 @@ Last updated: 2026-10-11
 
 ## Session log (newest first)
 
+### 2026-10-11 — [Claude] Filled LinkedIn + Cursor data
+
+- `profile.js` filled from the user's LinkedIn PDF export (2026-10-11): headline, 7 roles (Curi Senior Data Engineer, current), 2 degrees, 7 certifications. The export gives no certification issuers or dates (DP-203/DP-900 come from its summary), so certs show under Experience only, not in the Learning timeline.
+- `aiStats.js` filled from the user's Cursor profile screenshot (2026-10-11): 95.5M tokens, 5 agents, longest agent 7.5h, models Grok 4.6 and Claude Opus 5.5.
+- Hero subtitle now reads `profile.headline`; About intro says "Senior Data Engineer" to match LinkedIn.
+
 ### 2026-10-11 — [Claude] Profile-driven sections + UX upgrade
 
 - Added `scripts/sync-github.mjs` → `src/data/github.json` (19 repos + README excerpts); keeps the last snapshot if the API fails. `deploy.yml` now runs it before build and also deploys weekly (Mon 06:00 UTC) and on manual dispatch.
@@ -75,7 +81,7 @@ Last updated: 2026-10-11
 
 ## Open next steps
 
-- Fill `src/data/profile.js` from a LinkedIn "Save to PDF" export and `src/data/aiStats.js` from Cursor stats (use `portfolio-sync`).
+- Refresh `profile.js` / `aiStats.js` with `portfolio-sync` when LinkedIn or Cursor stats change. `cursor.com/@rithvikbuilds4u` returned 404 when signed out; confirm it's public before relying on the link.
 - Optional: add `public/Snowflake.png` and a WorkVibe image (cards currently show the fallback tile).
 - Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
 - Plan Claude-specific workflows once feature goals are set.
