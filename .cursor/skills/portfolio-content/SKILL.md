@@ -39,10 +39,10 @@ Edit both when relevant:
 - Hero: `src/components/Hero.jsx`
 - About: `src/components/About.jsx`
 
-### Colors / theme
+### Colors / type
 
-- Palette: `tailwind.config.js` (`primary` scale)
-- Theme helpers: `src/utils/themeConfig.js`, `src/components/ThemeToggle.jsx`
+- Palette: `src/index.css` HSL tokens, mapped in `tailwind.config.js`
+- Dark-only editorial theme (Bebas Neue + Inter). No light mode / ThemeToggle.
 
 ## Hard constraints
 

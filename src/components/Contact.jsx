@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Linkedin, Github, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
+
+const fieldClass =
+  'w-full bg-transparent border-0 border-b border-gray-800 rounded-none px-0 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-white transition-colors';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -14,7 +18,7 @@ const Contact = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,12 +39,11 @@ const Contact = () => {
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-        
-        // Track form submission with Google Analytics
+
         if (typeof gtag !== 'undefined') {
           gtag('event', 'form_submit', {
-            'event_category': 'Contact',
-            'event_label': 'Portfolio Contact Form'
+            event_category: 'Contact',
+            event_label: 'Portfolio Contact Form',
           });
         }
       } else {
@@ -53,217 +56,233 @@ const Contact = () => {
     }
   };
 
-  const contactMethods = [
+  const contactRows = [
     {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      value: "rithvikpanchumarthi@gmail.com",
-      link: "mailto:rithvikpanchumarthi@gmail.com"
+      label: 'Email',
+      value: 'rithvikpanchumarthi@gmail.com',
+      href: 'mailto:rithvikpanchumarthi@gmail.com',
+    },
+    { label: 'Location', value: 'Minneapolis, MN, USA', href: null },
+    {
+      label: 'LinkedIn',
+      value: 'Connect with me',
+      href: 'https://www.linkedin.com/in/rithvikpanchumarthi/',
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Location",
-      value: "Minneapolis, MN, USA",
-      link: null
+      label: 'GitHub',
+      value: 'View my repositories',
+      href: 'https://github.com/RithvikPanchumarthi',
     },
     {
-      icon: <Linkedin className="w-6 h-6" />,
-      title: "LinkedIn",
-      value: "Connect with me",
-      link: "https://www.linkedin.com/in/rithvikpanchumarthi/"
+      label: 'Training & Certifications',
+      value: 'Linktree',
+      href: 'https://linktr.ee/rithvikpanchumarthi',
     },
     {
-      icon: <Github className="w-6 h-6" />,
-      title: "GitHub",
-      value: "View my repositories",
-      link: "https://github.com/RithvikPanchumarthi"
-    }
+      label: 'Tableau Public',
+      value: 'Profile',
+      href: 'https://public.tableau.com/app/profile/rithvik.sai.panchumarthi',
+    },
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gray-900 text-white">
+    <section id="contact" className="section-padding">
       <div className="container-max">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Get In Touch
+        <SectionHeader label="Contact" />
+
+        <Reveal>
+          <h2 className="font-display text-[12vw] lg:text-hero leading-none tracking-tight mb-8">
+            Get in touch
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Interested in collaborating or discussing data engineering opportunities? 
-            I'd love to hear from you!
+        </Reveal>
+
+        <Reveal>
+          <div className="w-full h-px bg-gray-700 mb-12 lg:mb-16" />
+        </Reveal>
+
+        <Reveal className="mb-12 lg:mb-16 max-w-2xl">
+          <h3 className="text-xl md:text-2xl lg:text-3xl text-white font-light leading-tight mb-4">
+            INTERESTED IN COLLABORATING
+            <br />
+            OR DISCUSSING DATA
+            <br />
+            ENGINEERING OPPORTUNITIES?
+          </h3>
+          <p className="text-sm text-gray-500 tracking-widest uppercase">
+            Fill out the form and I&apos;ll get back to you as soon as possible.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Send me a message</h3>
-              <p className="text-gray-300 mb-8">
-                Fill out the form below and I'll get back to you as soon as possible.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400 transition-colors"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400 transition-colors"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject *
+                <label htmlFor="name" className="block text-xs tracking-widest uppercase text-gray-500 mb-2">
+                  Name *
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400 transition-colors"
-                  placeholder="What's this about?"
+                  className={fieldClass}
+                  placeholder="Your full name"
                 />
               </div>
-
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message *
+                <label htmlFor="email" className="block text-xs tracking-widest uppercase text-gray-500 mb-2">
+                  Email *
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400 transition-colors resize-none"
-                  placeholder="Tell me about your project or opportunity..."
+                  className={fieldClass}
+                  placeholder="your.email@example.com"
                 />
               </div>
+            </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    Send Message
-                  </>
-                )}
-              </button>
-
-              {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <div className="flex items-center gap-3 p-4 bg-green-900/50 border border-green-700 rounded-lg text-green-300">
-                  <CheckCircle size={20} />
-                  <span>Thank you! Your message has been sent successfully. I'll get back to you soon!</span>
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="flex items-center gap-3 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-300">
-                  <AlertCircle size={20} />
-                  <span>Sorry, there was an error sending your message. Please try again or contact me directly.</span>
-                </div>
-              )}
-            </form>
-          </div>
-
-          {/* Contact Information */}
-          <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4">Let's connect</h3>
-              <p className="text-gray-300 mb-8">
-                I'm always excited to discuss new opportunities, collaborate on interesting projects, 
-                or simply connect with fellow data professionals.
+              <label htmlFor="subject" className="block text-xs tracking-widest uppercase text-gray-500 mb-2">
+                Subject *
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                className={fieldClass}
+                placeholder="What's this about?"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-xs tracking-widest uppercase text-gray-500 mb-2">
+                Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className={`${fieldClass} resize-none`}
+                placeholder="Tell me about your project or opportunity..."
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="text-sm tracking-widest uppercase text-white hover:opacity-60 transition-opacity underline underline-offset-8 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Sending…' : 'Send Message'}
+            </button>
+
+            {submitStatus === 'success' && (
+              <p className="text-sm text-gray-300 border-l border-white pl-4">
+                Thank you! Your message has been sent successfully. I&apos;ll get back to you soon!
               </p>
-            </div>
+            )}
 
-            <div className="space-y-6">
-              {contactMethods.map((method, index) => (
-                <div key={index} className="flex items-start gap-4 p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-primary-500 transition-colors">
-                  <div className="flex-shrink-0 p-3 bg-primary-600 rounded-lg text-white">
-                    {method.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-white mb-1">{method.title}</h4>
-                    {method.link ? (
-                      <a
-                        href={method.link}
-                        target={method.link.startsWith('http') ? '_blank' : '_self'}
-                        rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
-                        className="text-gray-300 hover:text-primary-400 transition-colors"
-                      >
-                        {method.value}
-                      </a>
-                    ) : (
-                      <span className="text-gray-300">{method.value}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {submitStatus === 'error' && (
+              <p className="text-sm text-gray-300 border-l border-gray-500 pl-4">
+                Sorry, there was an error sending your message. Please try again or contact me directly.
+              </p>
+            )}
+          </form>
 
-            {/* Additional Links */}
-            <div className="p-6 bg-gray-800/50 rounded-xl border border-gray-700">
-              <h4 className="font-semibold text-white mb-4">More Resources</h4>
-              <div className="space-y-3">
-                <a
-                  href="https://linktr.ee/rithvikpanchumarthi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-gray-300 hover:text-primary-400 transition-colors"
+          <div className="space-y-0 max-w-2xl">
+            {contactRows.map((row, index) => {
+              const inner = (
+                <>
+                  <span className="text-sm text-gray-400 tracking-widest uppercase">{row.label}</span>
+                  <span className="text-gray-500 group-hover:text-white transition-colors flex items-center gap-3">
+                    {row.value}
+                    {row.href && <span aria-hidden="true">↗</span>}
+                  </span>
+                </>
+              );
+
+              const rowClass =
+                'flex items-center justify-between border-t border-gray-800 py-5 md:py-6 group hover:bg-gray-900/30 transition-colors px-4 -mx-4';
+
+              return row.href ? (
+                <Reveal as="a" key={row.label} href={row.href} delay={index * 0.08} className={rowClass}
+                  {...(row.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
-                  📚 Training & Certifications
-                </a>
-                <a
-                  href="https://public.tableau.com/app/profile/rithvik.sai.panchumarthi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-gray-300 hover:text-primary-400 transition-colors"
-                >
-                  📊 Tableau Public Profile
-                </a>
-              </div>
-            </div>
+                  {inner}
+                </Reveal>
+              ) : (
+                <Reveal key={row.label} delay={index * 0.08} className={rowClass}>
+                  {inner}
+                </Reveal>
+              );
+            })}
+            <div className="border-t border-gray-800" />
           </div>
         </div>
+
+        <Reveal className="mt-16 lg:mt-24 pt-12 lg:pt-16 border-t border-gray-800">
+          <p className="text-sm text-gray-500 mb-6 lg:mb-8 tracking-widest uppercase">
+            Or reach me directly
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 md:gap-16">
+            <a
+              href="mailto:rithvikpanchumarthi@gmail.com"
+              className="text-lg lg:text-xl text-gray-300 hover:text-white transition-colors underline underline-offset-4"
+            >
+              rithvikpanchumarthi@gmail.com
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rithvikpanchumarthi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-lg lg:text-xl text-gray-300 hover:text-white transition-colors underline underline-offset-4"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/RithvikPanchumarthi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-lg lg:text-xl text-gray-300 hover:text-white transition-colors underline underline-offset-4"
+            >
+              GitHub
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal
+          as="footer"
+          className="mt-24 lg:mt-32 pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+        >
+          <div>
+            <p className="text-xs text-gray-600">
+              © {new Date().getFullYear()} Rithvik Panchumarthi. Built with React &amp; Tailwind CSS.
+            </p>
+            <p className="text-xs text-gray-600 mt-2 max-w-xl">
+              &quot;Data is the new oil, but unlike oil, data is reusable and grows more valuable with use.&quot;
+            </p>
+          </div>
+          <a
+            href="https://www.linkedin.com/in/rithvikpanchumarthi/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-500 hover:text-white transition-colors underline underline-offset-4"
+          >
+            Follow me on LinkedIn for data engineering updates
+          </a>
+        </Reveal>
       </div>
     </section>
   );

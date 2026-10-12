@@ -1,12 +1,19 @@
 import React, { useCallback, useState } from 'react';
-import { Github, ExternalLink, Code, Database, BarChart3, FileSpreadsheet, Info } from 'lucide-react';
 import { projects } from '../data/projects.js';
-import { getThemeClass } from '../utils/themeConfig.js';
-import { useTheme } from '../hooks/useTheme.js';
 import DetailModal from './DetailModal';
+import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 
-// Shows the project image, or a gradient tile when the image is missing or fails to load.
-const ProjectImage = ({ project, icon }) => {
+const monogram = (title) =>
+  title
+    .split(/\s+/)
+    .filter((word) => /[A-Za-z0-9]/.test(word))
+    .slice(0, 3)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+
+const ProjectImage = ({ project }) => {
   const [failed, setFailed] = useState(false);
 
   if (!project.image || failed) {
@@ -14,194 +21,210 @@ const ProjectImage = ({ project, icon }) => {
       <div
         role="img"
         aria-label={project.title}
-        className="w-full h-48 flex items-center justify-center bg-gradient-to-br from-cyan-500 via-violet-500 to-purple-600 text-white/90 transition-transform duration-300 group-hover:scale-110 [&>svg]:w-16 [&>svg]:h-16"
+        className="img-plate w-full aspect-[16/10] flex items-center justify-center text-white/40 font-display text-6xl md:text-8xl tracking-tight"
       >
-        {icon}
+        {monogram(project.title)}
       </div>
     );
   }
 
   return (
-    <img
-      src={project.image}
-      alt={project.title}
-      loading="lazy"
-      onError={() => setFailed(true)}
-      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
-    />
+    <div className="img-plate">
+      <img
+        src={project.image}
+        alt={project.title}
+        loading="lazy"
+        onError={() => setFailed(true)}
+        className="w-full h-auto img-editorial"
+      />
+    </div>
   );
 };
 
+const projectLinks = (project) => [
+  { label: 'View Code', href: project.github, kind: 'github' },
+  ...(project.demo ? [{ label: 'Live Demo', href: project.demo, kind: 'demo' }] : []),
+];
+
+const toModalItem = (project) => ({
+  title: project.title,
+  body: project.description,
+  tags: project.technologies,
+  links: projectLinks(project),
+});
+
 const Projects = () => {
   const [filter, setFilter] = useState('all');
-  const theme = useTheme();
   const [selected, setSelected] = useState(null);
   const closeModal = useCallback(() => setSelected(null), []);
-  
-  const getIcon = (technologies) => {
-    if (technologies.some(tech => tech.includes('SQL'))) return <Database className="w-6 h-6" />;
-    if (technologies.some(tech => tech.includes('Python'))) return <Code className="w-6 h-6" />;
-    if (technologies.some(tech => tech.includes('Tableau') || tech.includes('Power BI'))) return <BarChart3 className="w-6 h-6" />;
-    if (technologies.some(tech => tech.includes('Excel'))) return <FileSpreadsheet className="w-6 h-6" />;
-    return <Code className="w-6 h-6" />;
-  };
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => 
-        filter === 'featured' ? project.featured : 
-        project.technologies.some(tech => tech.toLowerCase().includes(filter.toLowerCase()))
+  const filteredProjects = filter === 'all'
+    ? projects
+    : projects.filter((project) =>
+        filter === 'featured'
+          ? project.featured
+          : project.technologies.some((tech) => tech.toLowerCase().includes(filter.toLowerCase()))
       );
+
+  const featured = filteredProjects.filter((project) => project.featured);
+  const rest = filteredProjects.filter((project) => !project.featured);
 
   const filters = [
     { key: 'all', label: 'All Projects' },
     { key: 'featured', label: 'Featured' },
     { key: 'sql', label: 'SQL' },
     { key: 'python', label: 'Python' },
-    { key: 'visualization', label: 'Visualization' }
+    { key: 'visualization', label: 'Visualization' },
   ];
 
   return (
-    <section id="projects" className={`section-padding ${getThemeClass(theme, 'backgroundProjects')} transition-all duration-300`}>
+    <section id="projects" className="section-padding">
       <div className="container-max">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold ${getThemeClass(theme, 'headingProjects')} mb-4`}>
-            Featured Projects
-          </h2>
-          <p className={`text-xl ${getThemeClass(theme, 'textSecondary')} max-w-3xl mx-auto`}>
-            A showcase of data engineering projects demonstrating expertise in ETL pipelines, 
-            data analysis, and business intelligence solutions.
-          </p>
-        </div>
+        <SectionHeader
+          label="Selected work"
+          title="PROJECTS"
+          subtitle="A showcase of data engineering projects demonstrating expertise in ETL pipelines, data analysis, and business intelligence solutions."
+        />
 
-        {/* Filter Buttons - Consistent theming with accent colors */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {filters.map((filterOption) => (
+        <div className="flex flex-wrap gap-6 mb-16 lg:mb-24" role="group" aria-label="Filter projects">
+          {filters.map((option) => (
             <button
-              key={filterOption.key}
-              onClick={() => setFilter(filterOption.key)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
-                filter === filterOption.key
-                  ? getThemeClass(theme, 'filterActive')
-                  : getThemeClass(theme, 'filterInactive')
+              key={option.key}
+              type="button"
+              onClick={() => setFilter(option.key)}
+              aria-pressed={filter === option.key}
+              className={`text-sm tracking-widest uppercase transition-colors ${
+                filter === option.key
+                  ? 'text-white underline underline-offset-8'
+                  : 'text-gray-500 hover:text-white'
               }`}
             >
-              {filterOption.label}
+              {option.label}
             </button>
           ))}
         </div>
 
-        {/* Projects Grid - Consistent theming for both light and dark modes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div
+        <div className="space-y-24 lg:space-y-32">
+          {featured.map((project, index) => (
+            <Reveal
+              as="article"
               key={project.id}
-              className={`${getThemeClass(theme, 'card')} rounded-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 p-6 group animate-slide-up`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24"
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden rounded-lg mb-4">
-                <ProjectImage project={project} icon={getIcon(project.technologies)} />
-                {/* Icon overlay with consistent theming */}
-                <div className={`absolute top-3 left-3 p-2 ${getThemeClass(theme, 'iconCyan')} rounded-lg backdrop-blur-sm`}>
-                  {getIcon(project.technologies)}
-                </div>
-                {project.featured && (
-                  <div className="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-medium rounded-full shadow-lg">
-                    Featured
-                  </div>
-                )}
+              <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <ProjectImage project={project} />
               </div>
-
-              {/* Project Content - Consistent theming */}
-              <div className="space-y-4">
-                <h3 className={`text-xl font-bold ${getThemeClass(theme, 'textPrimary')} ${theme === 'dark' ? 'group-hover:text-violet-400' : 'group-hover:text-violet-600'} transition-colors`}>
-                  {project.title}
-                </h3>
-                
-                <p className={`${getThemeClass(theme, 'textSecondary')} text-sm leading-relaxed line-clamp-4`}>
+              <div className={`flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                {project.featured && (
+                  <p className="text-xs text-gray-500 tracking-widest uppercase mb-4">Featured</p>
+                )}
+                <h3 className="text-2xl md:text-3xl font-light text-white mb-4">{project.title}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm lg:text-base mb-6">
                   {project.description}
                 </p>
-
-                {/* Technologies - Consistent accent colors across themes */}
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => {
-                    const tagTypes = ['tagEmerald', 'tagCyan', 'tagViolet', 'tagAmber'];
-                    const tagClass = tagTypes[techIndex % tagTypes.length];
-                    return (
-                      <span
-                        key={tech}
-                        className={`px-3 py-1 ${getThemeClass(theme, tagClass)} text-xs font-medium rounded-full transition-all duration-300 hover:scale-105`}
-                      >
-                        {tech}
-                      </span>
-                    );
-                  })}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs text-gray-500 border border-gray-800 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-
-                {/* Action Buttons - Consistent theming */}
-                <div className="flex flex-wrap gap-3 pt-2">
+                <div className="flex flex-wrap gap-6 text-sm tracking-widest uppercase">
                   <button
-                    onClick={() => setSelected({
-                      title: project.title,
-                      body: project.description,
-                      tags: project.technologies,
-                      links: [
-                        { label: 'View Code', href: project.github, kind: 'github' },
-                        ...(project.demo ? [{ label: 'Live Demo', href: project.demo, kind: 'demo' }] : []),
-                      ],
-                    })}
-                    className={`flex items-center gap-2 px-4 py-2 ${getThemeClass(theme, 'filterInactive')} rounded-lg transition-all duration-300 text-sm font-medium`}
+                    type="button"
+                    onClick={() => setSelected(toModalItem(project))}
+                    className="text-gray-400 hover:text-white transition-colors underline underline-offset-4"
                   >
-                    <Info size={16} />
                     Details
                   </button>
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center gap-2 px-4 py-2 ${getThemeClass(theme, 'buttonSecondary')} rounded-lg transition-all duration-300 text-sm font-medium transform hover:scale-105`}
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Github size={16} />
-                    View Code
+                    View Code ↗
                   </a>
-                  
                   {project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center gap-2 px-4 py-2 ${getThemeClass(theme, 'buttonDemo')} rounded-lg transition-all duration-300 text-sm font-medium transform hover:scale-105`}
+                      className="text-gray-400 hover:text-white transition-colors"
                     >
-                      <ExternalLink size={16} />
-                      Live Demo
+                      Live Demo ↗
                     </a>
                   )}
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Call to Action - Consistent theming */}
-        <div className="text-center mt-16">
-          <p className={`${getThemeClass(theme, 'textSecondary')} mb-6`}>
+        {rest.length > 0 && (
+          <div className="mt-24 lg:mt-32 space-y-0">
+            {rest.map((project, index) => (
+              <Reveal
+                key={project.id}
+                delay={index * 0.06}
+                className="border-t border-gray-800 py-6 md:py-8 group hover:bg-gray-900/30 transition-colors px-4 -mx-4"
+              >
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setSelected(toModalItem(project))}
+                    className="text-left"
+                  >
+                    <h3 className="text-lg md:text-xl lg:text-2xl text-white font-light group-hover:text-gray-300 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1 md:mt-2 line-clamp-2">
+                      {project.description}
+                    </p>
+                  </button>
+                  <div className="flex items-center gap-6 shrink-0 text-sm text-gray-500">
+                    <button
+                      type="button"
+                      onClick={() => setSelected(toModalItem(project))}
+                      className="hover:text-white transition-colors tracking-widest uppercase"
+                    >
+                      Details
+                    </button>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors"
+                    >
+                      ↗
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+            <div className="border-t border-gray-800" />
+          </div>
+        )}
+
+        <div className="mt-16 lg:mt-24">
+          <p className="text-gray-500 mb-6">
             Interested in seeing more of my work or discussing a collaboration?
           </p>
           <a
             href="https://github.com/RithvikPanchumarthi"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${getThemeClass(theme, 'buttonPrimary')} inline-flex items-center gap-2`}
+            className="text-sm tracking-widest uppercase text-white hover:opacity-60 transition-opacity underline underline-offset-4"
           >
-            <Github size={20} />
-            View All on GitHub
+            View All on GitHub ↗
           </a>
         </div>
       </div>
 
-      <DetailModal item={selected} theme={theme} onClose={closeModal} />
+      <DetailModal item={selected} onClose={closeModal} />
     </section>
   );
 };

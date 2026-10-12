@@ -1,130 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import React, { useState } from 'react';
 import { useActiveSection } from '../hooks/useActiveSection.js';
+import { useScrollVisibility } from '../hooks/useScrollVisibility.js';
 
 const SOCIAL_LINKS = [
-  { href: 'https://github.com/RithvikPanchumarthi', label: 'GitHub', icon: Github, external: true },
-  { href: 'https://www.linkedin.com/in/rithvikpanchumarthi/', label: 'LinkedIn', icon: Linkedin, external: true },
-  { href: 'mailto:rithvikpanchumarthi@gmail.com', label: 'Email', icon: Mail, external: false },
+  { href: 'https://github.com/RithvikPanchumarthi', label: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com/in/rithvikpanchumarthi/', label: 'LinkedIn', external: true },
+  { href: 'mailto:rithvikpanchumarthi@gmail.com', label: 'Email', external: false },
 ];
 
+const linkClass = 'text-sm text-white mix-blend-difference hover:opacity-60 transition-opacity';
+
+const navItemClass = (isActive) =>
+  `text-sm text-white mix-blend-difference transition-all duration-300 relative py-1 hover:opacity-60 ${
+    isActive ? 'after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-white' : ''
+  }`;
+
 const SocialLinks = () =>
-  SOCIAL_LINKS.map(({ href, label, icon: Icon, external }) => (
+  SOCIAL_LINKS.map(({ href, label, external }) => (
     <a
       key={label}
       href={href}
       aria-label={label}
       {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
-      className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      className={linkClass}
     >
-      <Icon size={20} />
+      {label}
     </a>
   ));
 
 const Header = ({ sections }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const active = useActiveSection(sections.map((section) => section.id));
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const isVisible = useScrollVisibility();
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
+      setMobileMenuOpen(false);
     }
   };
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-    }`}>
-      <nav className="container-max">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <button 
-              onClick={() => scrollToSection('hero')}
-              className="text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Rithvik Panchumarthi
-            </button>
-          </div>
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-start md:hidden pointer-events-none">
+        <div className="relative pointer-events-auto">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            className="text-sm text-white mix-blend-difference"
+          >
+            {mobileMenuOpen ? 'Close' : 'Menu'}
+          </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-1">
-              {sections.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => scrollToSection(id)}
-                  aria-current={active === id ? 'location' : undefined}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    active === id
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Social Links & Theme Toggle */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <SocialLinks />
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile menu button & Theme Toggle */}
-          <div className="lg:hidden flex items-center space-x-3">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isMenuOpen}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+          <div
+            className={`flex flex-col items-start gap-3 mt-6 transition-all duration-300 ${
+              mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
+            }`}
+          >
+            {sections.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => scrollToSection(id)}
+                aria-current={active === id ? 'location' : undefined}
+                className={navItemClass(active === id)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg mt-2 shadow-lg">
-              {sections.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => scrollToSection(id)}
-                  aria-current={active === id ? 'location' : undefined}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors ${
-                    active === id
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-              <div className="flex items-center space-x-4 px-3 py-2">
-                <SocialLinks />
-              </div>
-            </div>
-          </div>
-        )}
+        <div className="flex items-center gap-4 pointer-events-auto">
+          <SocialLinks />
+        </div>
+      </div>
+
+      <div className="hidden md:block fixed top-0 right-0 z-50 p-6 md:p-10 pointer-events-none">
+        <div className="flex items-center gap-6 justify-end pointer-events-auto">
+          <SocialLinks />
+        </div>
+      </div>
+
+      <nav
+        className={`hidden md:block fixed bottom-0 right-0 z-50 p-6 md:p-10 pointer-events-none transition-all duration-500 ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+        }`}
+      >
+        <div className={`flex flex-col items-end gap-3 pointer-events-auto ${isVisible ? '' : 'pointer-events-none'}`}>
+          {sections.map(({ id, label }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => scrollToSection(id)}
+              aria-current={active === id ? 'location' : undefined}
+              className={navItemClass(active === id)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </nav>
-    </header>
+    </>
   );
 };
 

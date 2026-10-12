@@ -25,8 +25,8 @@ Rules:
 - `featured: true` surfaces the project as featured in the UI.
 - Keep descriptions concrete: stack, what was built, outcome when possible.
 
-- `image` is optional. Missing or broken images show a gradient fallback tile, so never point `image` at a file that isn't in `public/`.
-- Long descriptions are clamped on the card; the full text shows in the Details modal.
+- `image` is optional. Missing or broken images show a dark monogram tile, so never point `image` at a file that isn't in `public/`.
+- Featured projects render as editorial image+text rows; others as hairline list rows. Full text shows in the Details modal.
 
 ## Synced data (see the `portfolio-sync` skill)
 
@@ -46,23 +46,13 @@ Update details in:
 - `src/components/Contact.jsx`
 - `src/components/Header.jsx`
 
-## Colors
+## Colors / type
 
-Primary palette lives in `tailwind.config.js`:
+The site is **dark-only**. Tokens live in `src/index.css` (`:root` HSL variables) and are mapped in `tailwind.config.js` (`background`, `foreground`, `muted`, `border`, plus `font-display` / `font-body`).
 
-```javascript
-colors: {
-  primary: {
-    50: '#eff6ff',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-  }
-}
-```
-
-Theme toggle / dark-mode helpers: `src/utils/themeConfig.js`, `src/components/ThemeToggle.jsx`.
-Components read the current theme with `useTheme()` (`src/hooks/useTheme.js`) and style via `getThemeClass(theme, key)`.
+- Display: Bebas Neue (`font-display`)
+- Body: Inter
+- Do not reintroduce a light theme or `ThemeToggle` unless the user asks.
 
 ## Responsive breakpoints
 
