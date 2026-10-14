@@ -8,24 +8,36 @@ export const useActiveSection = (ids) => {
   const key = ids.join(',');
 
   useEffect(() => {
-    const ordered = key.split(',');
-    const inView = new Set();
+    const ordered = key.split(',').filter(Boolean);
+    if (ordered.length === 0) return undefined;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) =>
-          entry.isIntersecting ? inView.add(entry.target.id) : inView.delete(entry.target.id)
-        );
-        setActive(ordered.find((id) => inView.has(id)) ?? null);
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    );
+    const observers = [];
 
-    ordered.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
+    ordered.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActive(sectionId);
+            }
+          });
+        },
+        {
+          rootMargin: '-20% 0px -60% 0px',
+          threshold: 0,
+        }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
     });
-    return () => observer.disconnect();
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
   }, [key]);
 
   return active;

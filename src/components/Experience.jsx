@@ -1,110 +1,137 @@
 import React from 'react';
-import { Briefcase, GraduationCap, Award, MapPin } from 'lucide-react';
 import { profile, hasExperience } from '../data/profile.js';
-import { getThemeClass } from '../utils/themeConfig.js';
-import { useTheme } from '../hooks/useTheme.js';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 
+const formatPeriod = (start, end) => `${start} — ${end ?? 'Present'}`;
+
 const Experience = () => {
-  const theme = useTheme();
   if (!hasExperience) return null;
 
   return (
-    <section id="experience" className={`section-padding ${getThemeClass(theme, 'backgroundNeutral')} transition-all duration-300`}>
-      <div className="container-max">
-        <SectionHeader
-          theme={theme}
-          heading="headingAbout"
-          title="Experience"
-          subtitle="Roles, education and certifications, from my LinkedIn profile."
-        />
+    <section id="experience">
+      <div className="section-padding">
+        <div className="container-max">
+          <SectionHeader
+            label="Career"
+            title={<>WORK<br />EXPERIENCE</>}
+            subtitle="Roles, education and certifications, from my LinkedIn profile."
+          />
 
-        <div className="grid lg:grid-cols-3 gap-10">
-          <ol className="lg:col-span-2 relative">
-            <span aria-hidden="true" className={`absolute left-5 top-2 bottom-2 w-0.5 ${getThemeClass(theme, 'timelineRail')}`} />
-            {profile.experience.map((job) => (
-              <Reveal as="li" key={`${job.company}-${job.role}-${job.start}`} className="relative pl-16 pb-8 last:pb-0">
-                <div className={`absolute left-0 top-0 p-2.5 rounded-full ${getThemeClass(theme, 'iconEmerald')}`}>
-                  <Briefcase className="w-5 h-5" />
-                </div>
-                <div className={`${getThemeClass(theme, 'cardSkill')} rounded-xl p-6`}>
-                  <h3 className={`text-lg font-semibold ${getThemeClass(theme, 'textPrimary')}`}>{job.role}</h3>
-                  <p className={`font-medium ${getThemeClass(theme, 'accentCyan')}`}>{job.company}</p>
-                  <p className={`mt-1 text-sm flex flex-wrap items-center gap-x-3 ${getThemeClass(theme, 'textTertiary')}`}>
-                    <span>{job.start} – {job.end ?? 'Present'}</span>
+          <div className="space-y-0">
+            {profile.experience.map((job, index) => (
+              <Reveal
+                as="article"
+                key={`${job.company}-${job.role}-${job.start}`}
+                delay={index * 0.08}
+                className="border-t border-border py-8 md:py-12 lg:py-16"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                  <div className="lg:col-span-5">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-light text-foreground mb-2">
+                      {job.role}
+                    </h3>
+                    <p className="text-base lg:text-lg text-muted-foreground">{job.company}</p>
                     {job.location && (
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {job.location}
-                      </span>
+                      <p className="text-sm text-muted-foreground/80 mt-2">{job.location}</p>
                     )}
-                  </p>
-                  {job.highlights?.length > 0 && (
-                    <ul className={`mt-3 space-y-1.5 text-sm list-disc pl-5 ${getThemeClass(theme, 'textSecondary')}`}>
-                      {job.highlights.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  )}
+                  </div>
+
+                  <div className="lg:col-span-2">
+                    <p className="text-sm text-muted-foreground tracking-widest uppercase">
+                      {formatPeriod(job.start, job.end)}
+                    </p>
+                  </div>
+
+                  <div className="lg:col-span-5">
+                    {job.highlights?.length > 0 && (
+                      <ul className="text-muted-foreground leading-relaxed text-sm lg:text-base space-y-3">
+                        {job.highlights.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </div>
               </Reveal>
             ))}
-          </ol>
-
-          <div className="space-y-6">
-            {profile.education.length > 0 && (
-              <Reveal className={`${getThemeClass(theme, 'cardSkill')} rounded-xl p-6`}>
-                <h3 className={`flex items-center gap-2 font-semibold mb-4 ${getThemeClass(theme, 'textPrimary')}`}>
-                  <GraduationCap className={`w-5 h-5 ${getThemeClass(theme, 'accentViolet')}`} />
-                  Education
-                </h3>
-                <ul className="space-y-4">
-                  {profile.education.map((edu) => (
-                    <li key={`${edu.school}-${edu.degree}`}>
-                      <p className={`font-medium ${getThemeClass(theme, 'textPrimary')}`}>{edu.degree}</p>
-                      <p className={`text-sm ${getThemeClass(theme, 'textSecondary')}`}>{edu.school}</p>
-                      {(edu.start || edu.end) && (
-                        <p className={`text-xs ${getThemeClass(theme, 'textTertiary')}`}>
-                          {[edu.start, edu.end].filter(Boolean).join(' – ')}
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
-
-            {profile.certifications.length > 0 && (
-              <Reveal className={`${getThemeClass(theme, 'cardSkill')} rounded-xl p-6`}>
-                <h3 className={`flex items-center gap-2 font-semibold mb-4 ${getThemeClass(theme, 'textPrimary')}`}>
-                  <Award className={`w-5 h-5 ${getThemeClass(theme, 'accentAmber')}`} />
-                  Certifications
-                </h3>
-                <ul className="space-y-3">
-                  {profile.certifications.map((cert) => (
-                    <li key={cert.name}>
-                      <p className={`text-sm font-medium ${getThemeClass(theme, 'textPrimary')}`}>{cert.name}</p>
-                      {(cert.issuer || cert.date) && (
-                        <p className={`text-xs ${getThemeClass(theme, 'textTertiary')}`}>
-                          {[cert.issuer, cert.date].filter(Boolean).join(' · ')}
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
-
-            <a
-              href={profile.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`block text-center text-sm underline ${getThemeClass(theme, 'textSecondary')}`}
-            >
-              Full profile on LinkedIn
-            </a>
+            <div className="border-t border-border" />
           </div>
+        </div>
+      </div>
+
+      <div id="education" className="section-padding bg-secondary">
+        <div className="container-max">
+          <SectionHeader label="Background" title="EDUCATION" />
+
+          <div className="space-y-0 mb-24">
+            {profile.education.map((edu) => (
+              <Reveal
+                key={`${edu.school}-${edu.degree}`}
+                className="border-t border-border py-10 md:py-14"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                  <div className="lg:col-span-7">
+                    <h3 className="text-xl lg:text-2xl font-light text-foreground mb-3">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                      {edu.school}
+                    </p>
+                  </div>
+                  <div className="lg:col-span-5 lg:text-right">
+                    {(edu.start || edu.end) && (
+                      <p className="text-sm text-muted-foreground tracking-widest uppercase">
+                        {[edu.start, edu.end].filter(Boolean).join(' — ')}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+            <div className="border-t border-border" />
+          </div>
+
+          {profile.certifications.length > 0 && (
+            <>
+              <SectionHeader label="Credentials" title="CERTIFICATIONS" />
+              <div className="space-y-0">
+                {profile.certifications.map((cert, index) => (
+                  <Reveal
+                    key={cert.name}
+                    delay={index * 0.06}
+                    className="border-t border-border py-6 md:py-8"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
+                      <div>
+                        <h3 className="text-lg md:text-xl lg:text-2xl text-foreground font-light">
+                          {cert.name}
+                        </h3>
+                        {cert.issuer && (
+                          <p className="text-sm text-muted-foreground mt-1 md:mt-2">
+                            Certified — {cert.issuer}
+                          </p>
+                        )}
+                      </div>
+                      {cert.date && (
+                        <span className="text-sm text-muted-foreground/80">{cert.date}</span>
+                      )}
+                    </div>
+                  </Reveal>
+                ))}
+                <div className="border-t border-border" />
+              </div>
+            </>
+          )}
+
+          <a
+            href={profile.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-12 text-sm text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
+          >
+            Full profile on LinkedIn
+          </a>
         </div>
       </div>
     </section>

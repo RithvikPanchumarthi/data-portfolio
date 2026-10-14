@@ -26,5 +26,6 @@ Portfolio project guidance for Cursor (local and cloud) and Claude Code.
 ## Non-negotiables
 
 - Vite base path: `/data-portfolio/`
+- Cream-light editorial; identity lives in the sticky Header (not a giant Hero H1) — see `CURSOR.md/memory.md`
 - Do not hallucinate facts missing from memory or source — verify in the repo
 - Update `CURSOR.md/memory.md` after meaningful work

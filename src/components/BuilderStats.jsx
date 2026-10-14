@@ -1,11 +1,7 @@
 import React from 'react';
-import { Bot, Sparkles, Brain } from 'lucide-react';
 import { aiStats } from '../data/aiStats.js';
 import github from '../data/github.json';
-import { getThemeClass } from '../utils/themeConfig.js';
 import { formatCompact, formatDate } from '../utils/format.js';
-import { useTheme } from '../hooks/useTheme.js';
-import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 
 const { cursor } = aiStats;
@@ -18,70 +14,71 @@ const tiles = [
   { label: 'Public GitHub repos', value: github.repos.filter((repo) => !repo.fork).length },
 ].filter((tile) => tile.value !== null && tile.value !== undefined);
 
-const WORKFLOW_ICONS = [Sparkles, Bot, Brain];
-const WORKFLOW_ACCENTS = ['iconCyan', 'iconViolet', 'iconEmerald'];
+const BuilderStats = () => (
+  <div className="px-4 sm:px-6 md:px-12 lg:px-16 pb-24 md:pb-32 lg:pb-40">
+    <div className="container-max">
+      <Reveal className="mb-12 lg:mb-16">
+        <span className="text-sm text-muted-foreground tracking-widest uppercase">Building with AI</span>
+        <div className="w-6 h-px bg-accent mt-2" />
+        <p className="mt-6 text-base lg:text-lg text-muted-foreground max-w-3xl leading-relaxed">
+          How I pair AI agents with data engineering fundamentals to ship faster.
+        </p>
+      </Reveal>
 
-const BuilderStats = () => {
-  const theme = useTheme();
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16 lg:mb-24">
+        {tiles.map((tile, index) => (
+          <Reveal key={tile.label} delay={index * 0.08}>
+            <dt className="text-xs text-muted-foreground tracking-widest uppercase">{tile.label}</dt>
+            <dd className="mt-3 font-display text-[12vw] lg:text-large leading-none tracking-tight text-accent">
+              {formatCompact(tile.value)}
+            </dd>
+          </Reveal>
+        ))}
+      </dl>
 
-  return (
-    <section id="builder" className={`section-padding ${getThemeClass(theme, 'backgroundProjects')} transition-all duration-300`}>
-      <div className="container-max">
-        <SectionHeader
-          theme={theme}
-          heading="headingTech"
-          title="Building with AI"
-          subtitle="How I pair AI agents with data engineering fundamentals to ship faster."
-        />
-
-        <dl className="flex flex-wrap justify-center gap-4 mb-14">
-          {tiles.map((tile) => (
-            <Reveal key={tile.label} className={`${getThemeClass(theme, 'cardSkill')} rounded-xl p-5 w-[calc(50%-0.5rem)] lg:w-64`}>
-              <dt className={`text-sm ${getThemeClass(theme, 'textSecondary')}`}>{tile.label}</dt>
-              <dd className={`mt-2 text-3xl md:text-4xl font-semibold ${getThemeClass(theme, 'textPrimary')}`}>
-                {formatCompact(tile.value)}
-              </dd>
-            </Reveal>
+      {cursor.models?.length > 0 && (
+        <Reveal className="flex flex-wrap items-center gap-3 mb-16 lg:mb-24">
+          <span className="text-sm text-muted-foreground tracking-widest uppercase">Models I build with</span>
+          {cursor.models.map((model) => (
+            <span
+              key={model}
+              className="px-3 py-1 text-xs text-muted-foreground border border-border rounded-full"
+            >
+              {model}
+            </span>
           ))}
-        </dl>
+        </Reveal>
+      )}
 
-        {cursor.models?.length > 0 && (
-          <div className="flex flex-wrap justify-center items-center gap-2 -mt-8 mb-14">
-            <span className={`text-sm ${getThemeClass(theme, 'textSecondary')}`}>Models I build with:</span>
-            {cursor.models.map((model) => (
-              <span key={model} className={`px-3 py-1 rounded-full text-sm font-medium ${getThemeClass(theme, 'tagViolet')}`}>
-                {model}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {aiStats.workflow.map((step, index) => {
-            const Icon = WORKFLOW_ICONS[index % WORKFLOW_ICONS.length];
-            return (
-              <Reveal key={step.tool} className={`${getThemeClass(theme, 'card')} rounded-xl p-6`}>
-                <div className={`inline-flex p-2.5 rounded-lg mb-4 ${getThemeClass(theme, WORKFLOW_ACCENTS[index % WORKFLOW_ACCENTS.length])}`}>
-                  <Icon className="w-5 h-5" />
-                </div>
-                <h3 className={`font-semibold mb-2 ${getThemeClass(theme, 'textPrimary')}`}>{step.tool}</h3>
-                <p className={`text-sm leading-relaxed ${getThemeClass(theme, 'textSecondary')}`}>{step.text}</p>
-              </Reveal>
-            );
-          })}
-        </div>
-
-        {cursor.asOf && (
-          <p className={`mt-8 text-center text-xs ${getThemeClass(theme, 'textTertiary')}`}>
-            Cursor stats as of {formatDate(cursor.asOf)} ·{' '}
-            <a href={cursor.profileUrl} target="_blank" rel="noopener noreferrer" className="underline">
-              Cursor profile
-            </a>
-          </p>
-        )}
+      <div className="space-y-0">
+        {aiStats.workflow.map((step, index) => (
+          <Reveal
+            key={step.tool}
+            delay={index * 0.08}
+            className="border-t border-border py-8 md:py-10"
+          >
+            <h3 className="text-xl md:text-2xl font-light text-foreground mb-3">{step.tool}</h3>
+            <p className="text-muted-foreground leading-relaxed text-sm lg:text-base max-w-3xl">{step.text}</p>
+          </Reveal>
+        ))}
+        <div className="border-t border-border" />
       </div>
-    </section>
-  );
-};
+
+      {cursor.asOf && (
+        <p className="mt-10 text-xs text-muted-foreground">
+          Cursor stats as of {formatDate(cursor.asOf)} ·{' '}
+          <a
+            href={cursor.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-accent"
+          >
+            Cursor profile
+          </a>
+        </p>
+      )}
+    </div>
+  </div>
+);
 
 export default BuilderStats;

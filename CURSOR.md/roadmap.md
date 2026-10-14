@@ -32,7 +32,7 @@ Data source — GitHub's public REST API, no auth required for public data:
 - `GET https://api.github.com/users/RithvikPanchumarthi/repos?sort=pushed&per_page=6` — most recently pushed repos.
 - Optionally `GET https://api.github.com/users/RithvikPanchumarthi/events/public` — a commit/push activity timeline.
 
-Display per item: repo name, description, primary language, last-pushed date, link out. Style consistently with `Projects.jsx` cards, respecting dark mode via `src/utils/themeConfig.js`.
+Display per item: repo name, description, primary language, last-pushed date, link out. Style consistently with the dark editorial `Projects.jsx` / `GitHubActivity.jsx` list rows.
 
 Operational notes:
 

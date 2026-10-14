@@ -34,12 +34,21 @@ Init Progress:
    - Projects/contact/theme → `.cursor/skills/portfolio-content/SKILL.md`
 4. Deeper docs only as needed (`getting-started.md`, `customization.md`, etc.)
 
+## Current site (verify in memory.md — do not assume the old dark restyle)
+
+- Cream-light editorial (warm cream, charcoal type, pale yellow accent). Not dark-only.
+- Sticky header identity: “Rithvik Panchumarthi | Agentic Data Engineer”. Hero has no giant name H1.
+- Nav: About, Experience (when filled), Projects, GitHub, Learning, Contact. **No AI Builder nav** — Cursor stats render inside the hero.
+- About is text-first (no project screenshot plates). Project images stay in Projects.
+- This workspace often serves at http://localhost:5174/data-portfolio/ (5173 is the sibling `data-portfolio` clone). Always include the `/data-portfolio/` base.
+
 ## Output after init
 
 Give a short refresh summary:
 
 - What this project is (one line)
 - Local/live URLs and Vite base
+- Theme + where identity lives (header, not hero)
 - What was done recently (from Session log)
 - Open next steps
 - Which skill you will use next

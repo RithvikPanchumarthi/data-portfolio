@@ -1,17 +1,14 @@
 import React from 'react';
-import { BookOpen, Code, Award } from 'lucide-react';
 import { learning } from '../data/learning.js';
 import { profile } from '../data/profile.js';
 import github from '../data/github.json';
-import { getThemeClass } from '../utils/themeConfig.js';
-import { useTheme } from '../hooks/useTheme.js';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 
 const KIND = {
-  repo: { label: 'Built', icon: Code, iconClass: 'iconCyan' },
-  course: { label: 'Studied', icon: BookOpen, iconClass: 'iconViolet' },
-  cert: { label: 'Certified', icon: Award, iconClass: 'iconAmber' },
+  repo: { label: 'Built' },
+  course: { label: 'Studied' },
+  cert: { label: 'Certified' },
 };
 
 const repoUrl = Object.fromEntries(github.repos.map((repo) => [repo.name, repo.htmlUrl]));
@@ -30,61 +27,58 @@ const timeline = [
     .filter((item) => item.year),
 ].sort((a, b) => b.year - a.year);
 
-const LearningJourney = () => {
-  const theme = useTheme();
+const LearningJourney = () => (
+  <section id="learning" className="section-padding bg-secondary">
+    <div className="container-max">
+      <SectionHeader
+        label="Timeline"
+        title="LEARNING"
+        subtitle="What I have studied and built along the way, newest first."
+      />
 
-  return (
-    <section id="learning" className={`section-padding ${getThemeClass(theme, 'backgroundAbout')} transition-all duration-300`}>
-      <div className="container-max">
-        <SectionHeader
-          theme={theme}
-          heading="headingAbout"
-          title="Learning Journey"
-          subtitle="What I have studied and built along the way, newest first."
-        />
-
-        <ol className="relative max-w-3xl mx-auto">
-          <span aria-hidden="true" className={`absolute left-5 top-2 bottom-2 w-0.5 ${getThemeClass(theme, 'timelineRail')}`} />
-          {timeline.map((item) => {
-            const { label, icon: Icon, iconClass } = KIND[item.kind];
-            return (
-              <Reveal as="li" key={`${item.year}-${item.title}`} className="relative pl-16 pb-10 last:pb-0">
-                <div className={`absolute left-0 top-0 p-2.5 rounded-full ${getThemeClass(theme, iconClass)}`}>
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div className={`${getThemeClass(theme, 'cardSkill')} rounded-xl p-5`}>
-                  <div className={`flex items-center gap-2 text-xs font-medium uppercase tracking-wide ${getThemeClass(theme, 'textTertiary')}`}>
-                    <span>{item.year}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{label}</span>
-                  </div>
-                  <h3 className={`mt-1 text-lg font-semibold ${getThemeClass(theme, 'textPrimary')}`}>{item.title}</h3>
-                  {item.summary && (
-                    <p className={`mt-2 text-sm leading-relaxed ${getThemeClass(theme, 'textSecondary')}`}>{item.summary}</p>
-                  )}
+      <div className="space-y-0">
+        {timeline.map((item, index) => {
+          const { label } = KIND[item.kind];
+          return (
+            <Reveal
+              key={`${item.year}-${item.title}`}
+              delay={index * 0.06}
+              className="block border-t border-border py-6 md:py-8 hover:bg-background/60 transition-colors px-4 -mx-4"
+            >
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4">
+                <div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl text-foreground font-light">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1 md:mt-2">
+                    {label}
+                    {item.summary ? ` — ${item.summary}` : ''}
+                  </p>
                   {item.repos.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-4">
                       {item.repos.filter((name) => repoUrl[name]).map((name) => (
                         <a
                           key={name}
                           href={repoUrl[name]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${getThemeClass(theme, 'tagEmerald')}`}
+                          className="text-xs text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
                         >
-                          {name}
+                          {name} ↗
                         </a>
                       ))}
                     </div>
                   )}
                 </div>
-              </Reveal>
-            );
-          })}
-        </ol>
+                <span className="text-sm text-muted-foreground/80 shrink-0">{item.year}</span>
+              </div>
+            </Reveal>
+          );
+        })}
+        <div className="border-t border-border" />
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default LearningJourney;

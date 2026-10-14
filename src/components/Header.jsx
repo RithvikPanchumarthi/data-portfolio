@@ -1,130 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import React, { useState } from 'react';
 import { useActiveSection } from '../hooks/useActiveSection.js';
+import { useScrollVisibility } from '../hooks/useScrollVisibility.js';
+
+const QUOTE =
+  'Data is the new oil, but unlike oil, data is reusable and grows more valuable with use.';
+
+const IDENTITY = 'Rithvik Panchumarthi | Agentic Data Engineer';
 
 const SOCIAL_LINKS = [
-  { href: 'https://github.com/RithvikPanchumarthi', label: 'GitHub', icon: Github, external: true },
-  { href: 'https://www.linkedin.com/in/rithvikpanchumarthi/', label: 'LinkedIn', icon: Linkedin, external: true },
-  { href: 'mailto:rithvikpanchumarthi@gmail.com', label: 'Email', icon: Mail, external: false },
+  { href: 'https://github.com/RithvikPanchumarthi', label: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com/in/rithvikpanchumarthi/', label: 'LinkedIn', external: true },
+  { href: 'mailto:rithvikpanchumarthi@gmail.com', label: 'Email', external: false },
 ];
 
+const linkClass = 'text-sm text-foreground hover:text-accent transition-colors';
+
+const navItemClass = (isActive) =>
+  `text-sm text-foreground transition-all duration-300 relative py-1 hover:text-accent ${
+    isActive ? 'after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-accent' : ''
+  }`;
+
 const SocialLinks = () =>
-  SOCIAL_LINKS.map(({ href, label, icon: Icon, external }) => (
+  SOCIAL_LINKS.map(({ href, label, external }) => (
     <a
       key={label}
       href={href}
       aria-label={label}
       {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
-      className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      className={linkClass}
     >
-      <Icon size={20} />
+      {label}
     </a>
   ));
 
 const Header = ({ sections }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const active = useActiveSection(sections.map((section) => section.id));
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const isVisible = useScrollVisibility();
 
   const scrollToSection = (sectionId) => {
+    if (sectionId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setMobileMenuOpen(false);
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
+      setMobileMenuOpen(false);
     }
   };
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-    }`}>
-      <nav className="container-max">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <button 
-              onClick={() => scrollToSection('hero')}
-              className="text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Rithvik Panchumarthi
-            </button>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-1">
-              {sections.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => scrollToSection(id)}
-                  aria-current={active === id ? 'location' : undefined}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    active === id
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Social Links & Theme Toggle */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <SocialLinks />
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile menu button & Theme Toggle */}
-          <div className="lg:hidden flex items-center space-x-3">
-            <ThemeToggle />
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-accent/40">
+        <div className="flex items-center justify-between gap-3 px-6 py-3 md:grid md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center md:gap-6 md:px-10">
+          <h1 className="min-w-0 text-sm font-medium tracking-tight leading-snug text-foreground">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isMenuOpen}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
+              type="button"
+              onClick={() => scrollToSection('hero')}
+              aria-label={`${IDENTITY} — go to top`}
+              className="text-left hover:text-accent transition-colors md:whitespace-nowrap"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {IDENTITY}
             </button>
+          </h1>
+          <p className="hidden min-w-0 text-center text-xs italic leading-relaxed text-muted-foreground md:block">
+            {QUOTE}
+          </p>
+          <div className="hidden items-center justify-end gap-6 md:flex">
+            <SocialLinks />
           </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            className="shrink-0 text-sm text-foreground md:hidden"
+          >
+            {mobileMenuOpen ? 'Close' : 'Menu'}
+          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg mt-2 shadow-lg">
-              {sections.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => scrollToSection(id)}
-                  aria-current={active === id ? 'location' : undefined}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors ${
-                    active === id
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-              <div className="flex items-center space-x-4 px-3 py-2">
-                <SocialLinks />
-              </div>
-            </div>
+        <div className="flex items-center gap-4 px-6 pb-2 md:hidden">
+          <SocialLinks />
+        </div>
+        {mobileMenuOpen && (
+          <div className="flex flex-col items-start gap-3 px-6 pb-4 md:hidden">
+            {sections.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => scrollToSection(id)}
+                aria-current={active === id ? 'location' : undefined}
+                className={navItemClass(active === id)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         )}
+        <p className="px-6 pb-3 text-[11px] leading-snug italic text-muted-foreground line-clamp-2 md:hidden">
+          {QUOTE}
+        </p>
+      </header>
+
+      <nav
+        className={`hidden md:block fixed bottom-0 right-0 z-50 p-6 md:p-10 pointer-events-none transition-all duration-500 ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+        }`}
+      >
+        <div className={`flex flex-col items-end gap-3 pointer-events-auto ${isVisible ? '' : 'pointer-events-none'}`}>
+          {sections.map(({ id, label }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => scrollToSection(id)}
+              aria-current={active === id ? 'location' : undefined}
+              className={navItemClass(active === id)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </nav>
-    </header>
+    </>
   );
 };
 

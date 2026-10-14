@@ -48,5 +48,5 @@ LinkedIn has no public profile API and blocks signed-out reads. Do not scrape it
 ## Verify
 
 - [ ] `npm run build` succeeds
-- [ ] Updated section shows the new values in light and dark mode
+- [ ] Updated section shows the new values on the cream-light site
 - [ ] No placeholder text or `null` rendered on the page

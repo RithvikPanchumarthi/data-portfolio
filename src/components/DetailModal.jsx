@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { X, Github, ExternalLink } from 'lucide-react';
-import { getThemeClass } from '../utils/themeConfig.js';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -8,11 +6,11 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
  * Accessible detail dialog shared by project and repo cards.
  * item: { title, subtitle?, body, tags?: [], links?: [{ label, href, kind: 'github' | 'demo' }] }
  */
-const DetailModal = ({ item, theme, onClose }) => {
+const DetailModal = ({ item, onClose }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
-    if (!item) return;
+    if (!item) return undefined;
     const previouslyFocused = document.activeElement;
     const { overflow } = document.body.style;
     document.body.style.overflow = 'hidden';
@@ -48,7 +46,7 @@ const DetailModal = ({ item, theme, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-foreground/40 animate-fade-in"
       onClick={onClose}
     >
       <div
@@ -56,30 +54,34 @@ const DetailModal = ({ item, theme, onClose }) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="detail-modal-title"
-        className={`${getThemeClass(theme, 'modal')} relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8`}
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-card border border-border p-6 sm:p-10"
         onClick={(event) => event.stopPropagation()}
       >
         <button
+          type="button"
           onClick={onClose}
           aria-label="Close details"
-          className={`absolute top-4 right-4 p-2 rounded-lg ${getThemeClass(theme, 'filterInactive')}`}
+          className="absolute top-4 right-4 text-sm text-muted-foreground hover:text-accent transition-colors"
         >
-          <X size={18} />
+          Close
         </button>
 
-        <h3 id="detail-modal-title" className={`text-2xl font-bold pr-10 ${getThemeClass(theme, 'textPrimary')}`}>
+        <h3 id="detail-modal-title" className="text-2xl md:text-3xl font-light text-foreground pr-16">
           {item.title}
         </h3>
         {item.subtitle && (
-          <p className={`mt-1 text-sm ${getThemeClass(theme, 'textTertiary')}`}>{item.subtitle}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{item.subtitle}</p>
         )}
 
-        <p className={`mt-4 leading-relaxed ${getThemeClass(theme, 'textSecondary')}`}>{item.body}</p>
+        <p className="mt-6 leading-relaxed text-muted-foreground">{item.body}</p>
 
         {item.tags?.length > 0 && (
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap gap-2">
             {item.tags.map((tag) => (
-              <span key={tag} className={`px-3 py-1 text-xs font-medium rounded-full ${getThemeClass(theme, 'tagCyan')}`}>
+              <span
+                key={tag}
+                className="px-3 py-1 text-xs text-muted-foreground border border-border rounded-full"
+              >
                 {tag}
               </span>
             ))}
@@ -87,17 +89,17 @@ const DetailModal = ({ item, theme, onClose }) => {
         )}
 
         {item.links?.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-0 border-t border-border">
             {item.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${getThemeClass(theme, link.kind === 'demo' ? 'buttonDemo' : 'buttonSecondary')}`}
+                className="flex items-center justify-between border-b border-border py-4 text-sm text-muted-foreground hover:text-accent hover:bg-secondary transition-colors px-2 -mx-2"
               >
-                {link.kind === 'demo' ? <ExternalLink size={16} /> : <Github size={16} />}
-                {link.label}
+                <span className="tracking-widest uppercase">{link.label}</span>
+                <span aria-hidden="true">↗</span>
               </a>
             ))}
           </div>

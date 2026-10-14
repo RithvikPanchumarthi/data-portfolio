@@ -34,15 +34,18 @@ Edit both when relevant:
 - `src/components/Contact.jsx`
 - `src/components/Header.jsx`
 
-### Update hero / about copy
+### Update header / hero / about copy
 
-- Hero: `src/components/Hero.jsx`
-- About: `src/components/About.jsx`
+- **Identity lives in the header**, not the hero. Edit `IDENTITY` in `src/components/Header.jsx` (currently “Rithvik Panchumarthi | Agentic Data Engineer”). That button is the site H1 and scrolls to `#hero`. Do not put a giant name H1 back in Hero.
+- Hero (`src/components/Hero.jsx`): LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI stats (`BuilderStats` / `aiStats.js`). No portrait.
+- About (`src/components/About.jsx`): text + skills only. **No project screenshot plates** — Tableau / COVID / Power BI images stay in `Projects.jsx`.
+- Sticky data-oil quote lives in `Header.jsx`. Do not re-add it to the Contact footer.
+- Nav comes from `sections` in `src/App.jsx`. There is no AI Builder nav item.
 
-### Colors / theme
+### Colors / type
 
-- Palette: `tailwind.config.js` (`primary` scale)
-- Theme helpers: `src/utils/themeConfig.js`, `src/components/ThemeToggle.jsx`
+- Palette: `src/index.css` HSL tokens, mapped in `tailwind.config.js`
+- Cream-light editorial theme (warm cream page, charcoal type, pale yellow accent; Bebas Neue + Inter). No `ThemeToggle` / light-dark switch.
 
 ## Hard constraints
 

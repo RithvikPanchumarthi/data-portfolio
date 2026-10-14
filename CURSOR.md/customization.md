@@ -25,8 +25,8 @@ Rules:
 - `featured: true` surfaces the project as featured in the UI.
 - Keep descriptions concrete: stack, what was built, outcome when possible.
 
-- `image` is optional. Missing or broken images show a gradient fallback tile, so never point `image` at a file that isn't in `public/`.
-- Long descriptions are clamped on the card; the full text shows in the Details modal.
+- `image` is optional. Missing or broken images show a cream monogram plate, so never point `image` at a file that isn't in `public/`.
+- Featured projects render as editorial image+text rows; others as hairline list rows. Full text shows in the Details modal.
 
 ## Synced data (see the `portfolio-sync` skill)
 
@@ -39,6 +39,14 @@ Rules:
 
 Never invent values: a `null` stat or empty list keeps its tile or section hidden.
 
+## Header identity / hero / about
+
+- Site identity lives in `src/components/Header.jsx` (`IDENTITY`): “Rithvik Panchumarthi | Agentic Data Engineer”. That control is the page H1 and scrolls to `#hero`. Do not restore a giant name H1 in Hero.
+- Hero (`src/components/Hero.jsx`): LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI (`BuilderStats`). No portrait.
+- About (`src/components/About.jsx`) is text + skills. Project screenshots belong in `Projects.jsx` only.
+- The data-oil quote is sticky in the header, not the Contact footer.
+- Nav is the `sections` list in `src/App.jsx` (no AI Builder item).
+
 ## Contact information
 
 Update details in:
@@ -46,23 +54,14 @@ Update details in:
 - `src/components/Contact.jsx`
 - `src/components/Header.jsx`
 
-## Colors
+## Colors / type
 
-Primary palette lives in `tailwind.config.js`:
+The site is **cream-light editorial**. Tokens live in `src/index.css` (`:root` HSL variables) and are mapped in `tailwind.config.js` (`background`, `foreground`, `muted`, `accent`, `border`, plus `font-display` / `font-body`).
 
-```javascript
-colors: {
-  primary: {
-    50: '#eff6ff',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-  }
-}
-```
-
-Theme toggle / dark-mode helpers: `src/utils/themeConfig.js`, `src/components/ThemeToggle.jsx`.
-Components read the current theme with `useTheme()` (`src/hooks/useTheme.js`) and style via `getThemeClass(theme, key)`.
+- Page: warm cream; type: charcoal; accent: pale Power BI yellow
+- Display: Bebas Neue (`font-display`)
+- Body: Inter
+- No `ThemeToggle` / `themeConfig`. Do not reintroduce a dual light/dark toggle unless the user asks.
 
 ## Responsive breakpoints
 
