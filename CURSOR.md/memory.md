@@ -2,7 +2,7 @@
 
 Durable context for Cursor agents. **Read this at session start. Update it after meaningful work.** Prefer facts written here over chat memory or guesses.
 
-Last updated: 2026-10-11
+Last updated: 2026-10-14
 
 ## Ground truth (do not invent)
 
@@ -12,9 +12,10 @@ Last updated: 2026-10-11
 | Owner | Rithvik Panchumarthi |
 | Live site | https://rithvikpanchumarthi.github.io/data-portfolio/ |
 | Vite base | `/data-portfolio/` |
-| Local URL | http://localhost:5173/data-portfolio/ |
-| Theme | Dark-only editorial (Bebas Neue + Inter, HSL tokens in `src/index.css`). No light mode, `ThemeToggle`, `useTheme`, or `themeConfig`. |
-| Hero | Typographic: RITHVIK / PANCHUMARTHI / DATA ENGINEER. No portrait photo. |
+| Local URL | http://localhost:5174/data-portfolio/ (5173 is the sibling `data-portfolio` clone) |
+| Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. No `ThemeToggle`, `useTheme`, or `themeConfig`. |
+| Hero | LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI stats from `aiStats.js`. No name H1 and no portrait photo. |
+| Header | Sticky bar: site identity “Rithvik Panchumarthi \| Agentic Data Engineer” (scrolls to `#hero`); data-oil quote; GitHub / LinkedIn / Email; corner section nav. |
 | Motion | `framer-motion` (`Reveal`, hero entrance). Grain overlay in `GrainOverlay.jsx`. |
 | Project data | `src/data/projects.js` (unchanged in the 2026-10-11 restyle) |
 | Contact | Formspree `https://formspree.io/f/xgvlranb` in `Contact.jsx`; analytics GA `G-HSZSSRQ2ST`, Clarity `s37la0ur19` in `index.html` |
@@ -27,12 +28,46 @@ Last updated: 2026-10-11
 
 ## Current workspace state
 
-- Dark editorial restyle is committed (in-place restyle, not a Lovable/shadcn port).
-- Local Vite preview is stopped. Start again with `npm run dev` at `http://localhost:5173/data-portfolio/`.
-- `npm run build` succeeded after the restyle (`dist/assets/index-690fafb6.css` 20.59 kB, `index-e6c2fed3.js` 309.41 kB).
-- `src/data/*` was not changed.
+- Cream-light editorial + header identity is the live local site. Identity is “Rithvik Panchumarthi | Agentic Data Engineer” in the sticky header (desktop: left; mobile: with Menu + socials). Hero has no name H1. Quote is sticky. About has no project plates. No AI Builder nav. Verified at `http://localhost:5174/data-portfolio/` (desktop 1440 + mobile 390).
+- Shipping on branch `cursor` via PR into `main`. GitHub Pages still deploys from `main` — live site updates only after merge.
+- This workspace's Vite is at `http://localhost:5174/data-portfolio/`. Do not use 5173 (sibling `data-portfolio` clone).
+- `src/data/*` was not changed. Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
+
+### 2026-10-14 — [Cursor] Commit cream restyle + agent context
+
+- Skills and docs now match the cream-light site so later local/cloud agents do not assume the old dark restyle: identity in Header, hero without a giant name H1, AI stats in hero, sticky quote, About without project plates, no AI Builder nav.
+- Committing restyle + docs on `cursor` for a PR into `main` (Pages deploy waits on merge). No `src/data/*` edits.
+
+### 2026-10-14 — [Cursor] Identity in sticky header
+
+- Moved “Rithvik Panchumarthi | Agentic Data Engineer” into the sticky header as the site identity (button scrolls to `#hero`). Desktop: identity left, data-oil quote center, GitHub / LinkedIn / Email right. Mobile: same identity with Menu + socials; quote stays under the bar.
+- Removed the duplicate name H1 from Hero. Kept `profile.headline`, Minneapolis, Resume & Links, and BuilderStats at the top-left of `#hero`. No AI Builder nav. No `src/data/*` edits.
+- Verified at `http://localhost:5174/data-portfolio/` (desktop 1440 + mobile 390). Cream tokens unchanged.
+
+### 2026-10-14 — [Cursor] Compact top-left hero
+
+- Replaced the full-bleed stacked all-caps poster (RITHVIK / PANCHUMARTHI / DATA ENGINEER) with a two-line compact headline, top-left: “Rithvik Panchumarthi” / “Agentic Data Engineer”.
+- Kept LinkedIn `profile.headline`, Minneapolis, and Resume & Links under the new H1. Wrapper is `items-start` with modest padding-top (section still uses `pt-[var(--header-height)]`). BuilderStats stays in `#hero`. No AI Builder nav. No `src/data/*` edits.
+- Verified at `http://localhost:5174/data-portfolio/` (desktop 1440: H1 ~72px / 16% of viewport height; mobile 390: ~48px / 10%).
+
+### 2026-10-14 — [Cursor] Cream polish verified at 5174
+
+- Cache-bust load of this repo on 5174 showed cream, not the stale dark theme. Computed page `rgb(248, 246, 241)`, charcoal type, accent `hsl(45 72% 48%)`.
+- Confirmed: no AI Builder nav; BuilderStats in the hero; About has no project plates; Projects still has Tableau / COVID / Power BI; sticky quote stays visible while scrolling; Contact footer has no quote duplicate; form fields fill (not submitted). `npm run build` succeeded.
+- Added `scroll-margin-top: var(--header-height)` so section jumps clear the sticky quote bar. Corrected customization.md monogram copy from “dark tile” to cream plate.
+
+### 2026-10-14 — [Cursor] Cream editorial polish
+
+- About is text-first: dropped Tableau / COVID / Power BI plates (those images stay in Projects only). Skills band uses `--secondary` cream.
+- Folded Building with AI (`BuilderStats`) into the hero under the name. Removed the later AI Builder section and nav item.
+- Pinned the data-oil quote in a sticky header bar; removed it from the Contact footer.
+- Retokened to cream / charcoal / pale yellow (`src/index.css`). Swept hardcoded dark classes. Grain uses multiply at low opacity.
+
+### 2026-10-13 — [Cursor] Restyle preview back up
+
+- Started `npm run dev` for this repo. Use **5174**, not 5173 (sibling `data-portfolio` clone holds 5173).
 
 ### 2026-10-11 — [Cursor] Saved restyle, stopped preview
 
@@ -98,11 +133,11 @@ Last updated: 2026-10-11
 
 ## Open next steps
 
-- Optional: add a real portrait under `public/` and wire it in `Hero.jsx` if a photo-hero is wanted later. Current hero is type-only on `bg.jpg`.
+- Optional: add a real portrait under `public/` and wire it in `Hero.jsx` if a photo-hero is wanted later. Current hero is type-only.
 - Optional: add `public/Snowflake.png` and a WorkVibe image (missing images use the monogram / plate fallback; `Snowflake.png` 404s in the network log).
 - Refresh `profile.js` / `aiStats.js` with `portfolio-sync` when LinkedIn or Cursor stats change. `cursor.com/@rithvikbuilds4u` returned 404 when signed out; confirm it's public before relying on the link.
 - Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
-- Restyle is uncommitted — commit / push / deploy only if the user asks.
+- After merge to `main`, confirm GitHub Pages at https://rithvikpanchumarthi.github.io/data-portfolio/.
 - After each meaningful change: append a short Session log entry and refresh Ground truth / Current workspace state if needed.
 
 ## Anti-hallucination rules

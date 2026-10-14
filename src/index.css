@@ -4,27 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    --background: 40 33% 96%;
+    --foreground: 30 10% 12%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
+    --card: 40 30% 98%;
+    --card-foreground: 30 10% 12%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 30 10% 12%;
+    --primary-foreground: 40 33% 96%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 40 25% 92%;
+    --secondary-foreground: 30 10% 12%;
 
-    --muted: 0 0% 40%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 30 12% 72%;
+    --muted-foreground: 30 8% 40%;
 
-    --accent: 0 0% 53%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 45 72% 48%;
+    --accent-foreground: 30 10% 12%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 98%;
+    --border: 36 20% 85%;
+    --input: 36 20% 80%;
+    --ring: 45 72% 48%;
+
+    --header-height: 7.25rem;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --header-height: 3.5rem;
+    }
   }
 
   * {
@@ -34,7 +42,11 @@
 
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
+  }
+
+  section[id] {
+    scroll-margin-top: var(--header-height);
   }
 
   body {
@@ -45,12 +57,11 @@
   }
 
   ::selection {
-    background-color: rgba(156, 163, 175, 0.3);
-    color: #fafafa;
+    background-color: hsl(var(--accent) / 0.28);
+    color: hsl(var(--foreground));
   }
 }
 
-/* Grain/Noise Overlay */
 .grain-overlay {
   position: fixed;
   top: 0;
@@ -59,8 +70,8 @@
   height: 100%;
   pointer-events: none;
   z-index: 30;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
+  opacity: 0.02;
+  mix-blend-mode: multiply;
 }
 
 .grain-overlay::before {
@@ -99,16 +110,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: hsl(var(--secondary));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: hsl(var(--muted));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: hsl(var(--muted-foreground));
 }
 
 .section-padding {
@@ -129,17 +140,17 @@
 
 .img-plate {
   overflow: hidden;
-  background-color: #111;
+  background-color: hsl(var(--secondary));
   border: 1px solid hsl(var(--border));
 }
 
 .img-editorial {
-  filter: grayscale(100%) brightness(0.72);
+  filter: grayscale(100%) brightness(0.92);
   transition: filter 0.6s ease;
 }
 
 .img-editorial:hover {
-  filter: grayscale(40%) brightness(0.85);
+  filter: grayscale(20%) brightness(1);
 }
 
 @media (prefers-reduced-motion: reduce) {

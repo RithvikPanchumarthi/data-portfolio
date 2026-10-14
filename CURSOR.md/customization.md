@@ -25,7 +25,7 @@ Rules:
 - `featured: true` surfaces the project as featured in the UI.
 - Keep descriptions concrete: stack, what was built, outcome when possible.
 
-- `image` is optional. Missing or broken images show a dark monogram tile, so never point `image` at a file that isn't in `public/`.
+- `image` is optional. Missing or broken images show a cream monogram plate, so never point `image` at a file that isn't in `public/`.
 - Featured projects render as editorial image+text rows; others as hairline list rows. Full text shows in the Details modal.
 
 ## Synced data (see the `portfolio-sync` skill)
@@ -39,6 +39,14 @@ Rules:
 
 Never invent values: a `null` stat or empty list keeps its tile or section hidden.
 
+## Header identity / hero / about
+
+- Site identity lives in `src/components/Header.jsx` (`IDENTITY`): “Rithvik Panchumarthi | Agentic Data Engineer”. That control is the page H1 and scrolls to `#hero`. Do not restore a giant name H1 in Hero.
+- Hero (`src/components/Hero.jsx`): LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI (`BuilderStats`). No portrait.
+- About (`src/components/About.jsx`) is text + skills. Project screenshots belong in `Projects.jsx` only.
+- The data-oil quote is sticky in the header, not the Contact footer.
+- Nav is the `sections` list in `src/App.jsx` (no AI Builder item).
+
 ## Contact information
 
 Update details in:
@@ -48,11 +56,12 @@ Update details in:
 
 ## Colors / type
 
-The site is **dark-only**. Tokens live in `src/index.css` (`:root` HSL variables) and are mapped in `tailwind.config.js` (`background`, `foreground`, `muted`, `border`, plus `font-display` / `font-body`).
+The site is **cream-light editorial**. Tokens live in `src/index.css` (`:root` HSL variables) and are mapped in `tailwind.config.js` (`background`, `foreground`, `muted`, `accent`, `border`, plus `font-display` / `font-body`).
 
+- Page: warm cream; type: charcoal; accent: pale Power BI yellow
 - Display: Bebas Neue (`font-display`)
 - Body: Inter
-- Do not reintroduce a light theme or `ThemeToggle` unless the user asks.
+- No `ThemeToggle` / `themeConfig`. Do not reintroduce a dual light/dark toggle unless the user asks.
 
 ## Responsive breakpoints
 

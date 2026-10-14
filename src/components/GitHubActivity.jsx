@@ -47,8 +47,8 @@ const GitHubActivity = () => {
               aria-pressed={language === lang}
               className={`text-sm tracking-widest uppercase transition-colors ${
                 language === lang
-                  ? 'text-white underline underline-offset-8'
-                  : 'text-gray-500 hover:text-white'
+                  ? 'text-foreground underline decoration-accent underline-offset-8'
+                  : 'text-muted-foreground hover:text-accent'
               }`}
             >
               {lang}
@@ -61,7 +61,7 @@ const GitHubActivity = () => {
             <Reveal
               key={repo.name}
               delay={index * 0.05}
-              className="border-t border-gray-800 py-6 md:py-8 group hover:bg-gray-900/30 transition-colors px-4 -mx-4"
+              className="border-t border-border py-6 md:py-8 group hover:bg-secondary transition-colors px-4 -mx-4"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
                 <button
@@ -69,10 +69,10 @@ const GitHubActivity = () => {
                   onClick={() => setSelected(toModalItem(repo))}
                   className="text-left"
                 >
-                  <h3 className="text-lg md:text-xl lg:text-2xl text-white font-light break-all group-hover:text-gray-300 transition-colors">
+                  <h3 className="text-lg md:text-xl lg:text-2xl text-foreground font-light break-all group-hover:text-accent transition-colors">
                     {repo.name}
                   </h3>
-                  <p className="text-sm text-gray-500 mt-1 md:mt-2">
+                  <p className="text-sm text-muted-foreground mt-1 md:mt-2">
                     {repo.language ?? 'No primary language'}
                     {' · '}
                     <time dateTime={repo.pushedAt} title={formatDate(repo.pushedAt)}>
@@ -80,11 +80,11 @@ const GitHubActivity = () => {
                     </time>
                   </p>
                 </button>
-                <div className="flex items-center gap-6 shrink-0 text-sm tracking-widest uppercase text-gray-500">
+                <div className="flex items-center gap-6 shrink-0 text-sm tracking-widest uppercase text-muted-foreground">
                   <button
                     type="button"
                     onClick={() => setSelected(toModalItem(repo))}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-accent transition-colors"
                   >
                     Details
                   </button>
@@ -92,7 +92,7 @@ const GitHubActivity = () => {
                     href={repo.htmlUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-accent transition-colors"
                   >
                     Repo ↗
                   </a>
@@ -100,7 +100,7 @@ const GitHubActivity = () => {
               </div>
             </Reveal>
           ))}
-          <div className="border-t border-gray-800" />
+          <div className="border-t border-border" />
         </div>
 
         <div className="mt-10 flex flex-col items-start gap-3">
@@ -108,18 +108,18 @@ const GitHubActivity = () => {
             <button
               type="button"
               onClick={() => setShowAll((value) => !value)}
-              className="text-sm tracking-widest uppercase text-white hover:opacity-60 transition-opacity underline underline-offset-4"
+              className="text-sm tracking-widest uppercase text-foreground hover:text-accent transition-colors underline underline-offset-4"
             >
               {showAll ? 'Show fewer' : `Show all ${filtered.length} repositories`}
             </button>
           )}
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-muted-foreground">
             Synced {formatDate(github.syncedAt)} from{' '}
             <a
               href={github.user.htmlUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-gray-400"
+              className="underline underline-offset-2 hover:text-accent"
             >
               github.com/{github.user.login}
             </a>

@@ -10,15 +10,15 @@ data-portfolio/
 │   └── sync-github.mjs      # Writes src/data/github.json (run in CI before build)
 ├── src/
 │   ├── components/
-│   │   ├── Header.jsx       # Corner nav driven by the `sections` list in App.jsx
+│   │   ├── Header.jsx       # Sticky identity + quote bar + corner nav from `sections` in App.jsx
 │   │   ├── GrainOverlay.jsx # Film-grain overlay
-│   │   ├── Hero.jsx
-│   │   ├── About.jsx        # Editorial about + skills list
+│   │   ├── Hero.jsx         # LinkedIn headline, location, Resume & Links + Building with AI stats (no name H1)
+│   │   ├── About.jsx        # Editorial about + skills list (no project plates)
 │   │   ├── Experience.jsx   # LinkedIn data; hidden until profile.js is filled
 │   │   ├── Projects.jsx
 │   │   ├── GitHubActivity.jsx
 │   │   ├── LearningJourney.jsx
-│   │   ├── BuilderStats.jsx # Cursor / AI stats + workflow
+│   │   ├── BuilderStats.jsx # Cursor / AI stats; rendered inside Hero
 │   │   ├── Contact.jsx      # Formspree form + footer
 │   │   ├── DetailModal.jsx  # Shared accessible modal
 │   │   ├── Reveal.jsx       # Framer Motion scroll-reveal wrapper
@@ -37,7 +37,7 @@ data-portfolio/
 │   │   └── format.js        # Compact numbers, relative dates
 │   ├── App.jsx
 │   ├── main.jsx
-│   └── index.css            # Dark-only tokens, grain, editorial type
+│   └── index.css            # Cream-light tokens, grain, editorial type
 ├── package.json
 ├── tailwind.config.js
 ├── vite.config.js

@@ -8,7 +8,6 @@ import { hasExperience } from './data/profile.js';
 import Projects from './components/Projects';
 import GitHubActivity from './components/GitHubActivity';
 import LearningJourney from './components/LearningJourney';
-import BuilderStats from './components/BuilderStats';
 import Contact from './components/Contact';
 
 // Nav order matches render order. Experience appears once LinkedIn data is filled in.
@@ -18,7 +17,6 @@ const sections = [
   { id: 'projects', label: 'Projects' },
   { id: 'github', label: 'GitHub' },
   { id: 'learning', label: 'Learning' },
-  { id: 'builder', label: 'AI Builder' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -34,7 +32,6 @@ function App() {
         <Projects />
         <GitHubActivity />
         <LearningJourney />
-        <BuilderStats />
         <Contact />
       </main>
     </div>

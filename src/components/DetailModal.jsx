@@ -46,7 +46,7 @@ const DetailModal = ({ item, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/80 animate-fade-in"
+      className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-foreground/40 animate-fade-in"
       onClick={onClose}
     >
       <div
@@ -54,33 +54,33 @@ const DetailModal = ({ item, onClose }) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="detail-modal-title"
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-[#0a0a0a] border border-gray-800 p-6 sm:p-10"
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-card border border-border p-6 sm:p-10"
         onClick={(event) => event.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Close details"
-          className="absolute top-4 right-4 text-sm text-gray-500 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-sm text-muted-foreground hover:text-accent transition-colors"
         >
           Close
         </button>
 
-        <h3 id="detail-modal-title" className="text-2xl md:text-3xl font-light text-white pr-16">
+        <h3 id="detail-modal-title" className="text-2xl md:text-3xl font-light text-foreground pr-16">
           {item.title}
         </h3>
         {item.subtitle && (
-          <p className="mt-2 text-sm text-gray-500">{item.subtitle}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{item.subtitle}</p>
         )}
 
-        <p className="mt-6 leading-relaxed text-gray-400">{item.body}</p>
+        <p className="mt-6 leading-relaxed text-muted-foreground">{item.body}</p>
 
         {item.tags?.length > 0 && (
           <div className="mt-6 flex flex-wrap gap-2">
             {item.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-xs text-gray-500 border border-gray-800 rounded-full"
+                className="px-3 py-1 text-xs text-muted-foreground border border-border rounded-full"
               >
                 {tag}
               </span>
@@ -89,14 +89,14 @@ const DetailModal = ({ item, onClose }) => {
         )}
 
         {item.links?.length > 0 && (
-          <div className="mt-8 flex flex-col gap-0 border-t border-gray-800">
+          <div className="mt-8 flex flex-col gap-0 border-t border-border">
             {item.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between border-b border-gray-800 py-4 text-sm text-gray-400 hover:text-white hover:bg-gray-900/30 transition-colors px-2 -mx-2"
+                className="flex items-center justify-between border-b border-border py-4 text-sm text-muted-foreground hover:text-accent hover:bg-secondary transition-colors px-2 -mx-2"
               >
                 <span className="tracking-widest uppercase">{link.label}</span>
                 <span aria-hidden="true">↗</span>

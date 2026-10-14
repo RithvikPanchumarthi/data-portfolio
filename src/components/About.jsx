@@ -28,22 +28,9 @@ const About = () => (
       <div className="container-max">
         <SectionHeader label="About" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
-          <Reveal className="order-2 lg:order-1">
-            <div className="img-plate">
-              <img
-                src="/data-portfolio/TABLEAU.jpg"
-                alt="Marketing Campaign Analytics Platform"
-                className="w-full h-auto img-editorial"
-              />
-            </div>
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              Marketing Campaign Analytics Platform
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2} className="order-1 lg:order-2 flex items-center">
-            <div className="text-base lg:text-lg text-gray-300 leading-relaxed space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-24 lg:mb-32">
+          <Reveal className="flex items-center">
+            <div className="text-base lg:text-lg text-muted-foreground leading-relaxed space-y-6">
               <p>
                 I&apos;m a Senior Data Engineer with expertise in designing scalable data
                 solutions and transforming complex datasets into actionable business insights.
@@ -57,26 +44,28 @@ const About = () => (
               </p>
             </div>
           </Reveal>
+
+          <Reveal delay={0.2} className="flex flex-col justify-center">
+            <h2 className="font-display text-[8vw] lg:text-section leading-none tracking-tight text-muted-foreground">
+              &quot;DELIVERED 30% EFFICIENCY
+              <br />
+              <span className="text-foreground underline decoration-accent underline-offset-8">
+                IMPROVEMENTS AND 25%
+              </span>
+              <br />
+              QUERY PERFORMANCE
+              <br />
+              ENHANCEMENTS.&quot;
+            </h2>
+            <p className="mt-6 text-sm text-muted-foreground tracking-widest uppercase">
+              Performance Optimization
+            </p>
+          </Reveal>
         </div>
 
-        <Reveal className="mb-24 lg:mb-32">
-          <h2 className="font-display text-[8vw] lg:text-section leading-none tracking-tight text-gray-300">
-            &quot;DELIVERED 30% EFFICIENCY
-            <br />
-            <span className="text-white underline underline-offset-8">IMPROVEMENTS AND 25%</span>
-            <br />
-            QUERY PERFORMANCE
-            <br />
-            ENHANCEMENTS.&quot;
-          </h2>
-          <p className="mt-6 text-sm text-gray-500 tracking-widest uppercase">
-            Performance Optimization
-          </p>
-        </Reveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           <Reveal className="flex items-center lg:text-right">
-            <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+            <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">
               I&apos;ve successfully delivered end-to-end data solutions that improved processing efficiency
               by 30%, reduced query latency by 25%, and enhanced stakeholder engagement through intuitive
               dashboards and reports. Currently pursuing opportunities where I can leverage both my
@@ -84,53 +73,25 @@ const About = () => (
             </p>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="img-plate">
-              <img
-                src="/data-portfolio/Data-Exploration.jpg"
-                alt="COVID-19 Data Intelligence System"
-                className="w-full h-auto img-editorial"
-              />
-            </div>
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              COVID-19 Data Intelligence System
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-          <Reveal>
-            <div className="img-plate">
-              <img
-                src="/data-portfolio/Power_BI.jpg"
-                alt="Sales Performance Analytics Dashboard"
-                className="w-full h-auto img-editorial"
-              />
-            </div>
-            <p className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-              Sales Performance Analytics Dashboard
-            </p>
-          </Reveal>
-
           <Reveal delay={0.2} className="flex items-center">
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-3">
+                <h3 className="text-xl lg:text-2xl font-light text-foreground mb-3">
                   Data &amp; Analytics Engineering
                 </h3>
-                <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
+                <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
                   End-to-end data solutions from pipeline engineering to analytical insights.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl lg:text-2xl font-light text-white mb-3">
+                <h3 className="text-xl lg:text-2xl font-light text-foreground mb-3">
                   Cloud Architecture Expertise
                 </h3>
-                <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
+                <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
                   Azure certified with hands-on experience in Snowflake, GCP, and multi-cloud solutions.
                 </p>
               </div>
-              <p className="text-sm text-gray-500 tracking-widest uppercase">
+              <p className="text-sm text-muted-foreground tracking-widest uppercase">
                 Minneapolis, MN, USA (Open to Relocation)
               </p>
             </div>
@@ -139,7 +100,7 @@ const About = () => (
       </div>
     </div>
 
-    <div id="skills" className="section-padding bg-[#0d0d0d]">
+    <div id="skills" className="section-padding bg-secondary">
       <div className="container-max">
         <SectionHeader
           label="Expertise"
@@ -151,9 +112,9 @@ const About = () => (
             <Reveal
               key={skill}
               delay={index * 0.05}
-              className="border-b border-gray-800 pb-4"
+              className="border-b border-border pb-4"
             >
-              <span className="text-lg md:text-xl lg:text-2xl text-gray-300 font-light">
+              <span className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light">
                 {skill}
               </span>
             </Reveal>
