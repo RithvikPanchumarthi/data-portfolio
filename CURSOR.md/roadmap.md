@@ -2,7 +2,7 @@
 
 Goal: keep the portfolio concentrated on Rithvik's actual data engineering work, and keep it fresh as he pushes code to GitHub and posts on LinkedIn — with minimal manual upkeep.
 
-**Status (2026-10-11):** Phase 2 shipped as a build-time sync (`scripts/sync-github.mjs` → `src/data/github.json`, refreshed by the deploy workflow weekly) instead of a client-side fetch. Phase 3 shipped as a footer LinkedIn callout. Phase 1 (re-ranking) is still open. See `memory.md`.
+**Status (2026-10-11):** Phase 2 shipped as a build-time sync (`scripts/sync-github.mjs` → `src/data/github.json`, refreshed by the deploy workflow weekly) instead of a client-side fetch. Phase 3 shipped as a footer LinkedIn callout. Phase 1 (re-ranking) shipped 2026-11-04 (order 7, 5, 2, 1, 4, 6, 8; Excel 3 not featured). See `memory.md`.
 
 This is a planning document. Phases were originally unimplemented; each one lists concrete file-level actions for a future session (use `portfolio-content` for Phase 1/3 content edits, `portfolio-dev` for anything touching build/deploy).
 
@@ -22,7 +22,7 @@ No existing projects are removed. All eight current entries in `projects.js` sta
 - Re-rank `featured` flags / array order in [src/data/projects.js](src/data/projects.js) so pipeline, cloud, and orchestration work leads, ahead of Excel/Tableau-only pieces.
 - Cross-check [src/components/Hero.jsx](src/components/Hero.jsx) tagline and [src/components/About.jsx](src/components/About.jsx) copy/proficiency bars against what's actually featured — adjust only if they drift from reality; do not invent new claims or metrics not already stated in the repo.
 - No deletions. Current entries (id): Python Data Engineering Suite (1), Advanced SQL Data Processing (2), Enterprise Excel Analytics Solutions (3), Marketing Campaign Analytics Platform (4, featured), COVID-19 Data Intelligence System (5, featured), Sales Performance Analytics Dashboard (6, featured), Snowflake Cloud Data Warehouse & Governance (7, featured), WorkVibe — Talent Matching SaaS (8, featured).
-- Proposed order (2026-11-04, see `memory.md` Open next steps): 7 → 5 → 2 → 1 featured first; 4, 6, 8 next; 3 non-featured.
+- Shipped order (2026-11-04): 7 → 5 → 2 → 1 → 4 → 6 → 8 featured; 3 non-featured.
 
 ## Phase 2 — "Recent GitHub Activity" auto-feed
 

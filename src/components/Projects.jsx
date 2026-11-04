@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { projects } from '../data/projects.js';
+import { logos } from '../data/logos.js';
 import DetailModal from './DetailModal';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
@@ -15,6 +16,36 @@ const monogram = (title) =>
 
 const ProjectImage = ({ project }) => {
   const [failed, setFailed] = useState(false);
+
+  const projectLogos = (project.logos ?? []).map((key) => logos[key]).filter(Boolean);
+
+  if ((!project.image || failed) && projectLogos.length > 0) {
+    const single = projectLogos.length === 1;
+    return (
+      <div
+        role="img"
+        aria-label={project.title}
+        className="img-plate w-full aspect-[16/10] flex items-center justify-center"
+      >
+        <div className={`flex items-center justify-center ${single ? '' : 'flex-wrap gap-6 md:gap-10 px-8'}`}>
+          {projectLogos.map((src) => (
+            <span
+              key={src}
+              className={`flex items-center justify-center rounded-full border border-border bg-card ${
+                single ? 'h-32 w-32 md:h-44 md:w-44' : 'h-16 w-16 md:h-24 md:w-24'
+              }`}
+            >
+              <img
+                src={src}
+                alt=""
+                className={single ? 'h-16 w-16 md:h-24 md:w-24' : 'h-8 w-8 md:h-12 md:w-12'}
+              />
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (!project.image || failed) {
     return (

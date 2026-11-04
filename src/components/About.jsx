@@ -10,39 +10,28 @@ import {
   Sigma,
   Workflow,
 } from 'lucide-react';
-import azureLogo from '../assets/skills/azure.svg';
-import databricksLogo from '../assets/skills/databricks.svg';
-import snowflakeLogo from '../assets/skills/snowflake.svg';
-import gcpLogo from '../assets/skills/gcp.svg';
-import awsLogo from '../assets/skills/aws.svg';
-import sparkLogo from '../assets/skills/spark.svg';
-import airflowLogo from '../assets/skills/airflow.svg';
-import pythonLogo from '../assets/skills/python.svg';
-import powerbiLogo from '../assets/skills/powerbi.svg';
-import tableauLogo from '../assets/skills/tableau.svg';
-import excelLogo from '../assets/skills/excel.svg';
-import jupyterLogo from '../assets/skills/jupyter.svg';
+import { logos } from '../data/logos.js';
 
-// Tools show their brand logo (src/assets/skills, see README there); general
+// Tools show their brand logo (src/data/logos.js); general
 // skills use a lucide-react line icon. `color` overrides the accent tint.
 const skills = [
-  { name: 'Azure (Data Factory, Synapse, Databricks)', logos: [azureLogo, databricksLogo] },
-  { name: 'Snowflake', logos: [snowflakeLogo] },
-  { name: 'GCP (BigQuery, Cloud Storage)', logos: [gcpLogo] },
-  { name: 'AWS S3', logos: [awsLogo] },
+  { name: 'Azure (Data Factory, Synapse, Databricks)', logos: [logos.azure, logos.databricks] },
+  { name: 'Snowflake', logos: [logos.snowflake] },
+  { name: 'GCP (BigQuery, Cloud Storage)', logos: [logos.gcp] },
+  { name: 'AWS S3', logos: [logos.aws] },
   { name: 'ETL/ELT Pipelines', Icon: Workflow },
-  { name: 'Apache Spark', logos: [sparkLogo] },
+  { name: 'Apache Spark', logos: [logos.spark] },
   { name: 'Data Modeling', Icon: Boxes },
-  { name: 'Apache Airflow', logos: [airflowLogo] },
+  { name: 'Apache Airflow', logos: [logos.airflow] },
   { name: 'dbt', Icon: GitMerge, color: '#FF694B' },
   { name: 'SQL (Advanced)', Icon: Database },
-  { name: 'Python', logos: [pythonLogo] },
+  { name: 'Python', logos: [logos.python] },
   { name: 'Statistical Analysis', Icon: Sigma },
   { name: 'Data Validation', Icon: ShieldCheck },
-  { name: 'Power BI', logos: [powerbiLogo] },
-  { name: 'Tableau', logos: [tableauLogo] },
-  { name: 'Excel (Advanced)', logos: [excelLogo] },
-  { name: 'Jupyter Notebooks', logos: [jupyterLogo] },
+  { name: 'Power BI', logos: [logos.powerbi] },
+  { name: 'Tableau', logos: [logos.tableau] },
+  { name: 'Excel (Advanced)', logos: [logos.excel] },
+  { name: 'Jupyter Notebooks', logos: [logos.jupyter] },
 ];
 
 const plate =
