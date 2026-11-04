@@ -15,13 +15,14 @@ Two layers of content, so narrative control and freshness don't conflict:
 
 LinkedIn has no free public API for post feeds, so it gets a lightweight, static treatment (a follow link/badge) rather than a synced feed.
 
-No existing projects are removed. All six current entries in `projects.js` stay; only their `featured` flag / ordering may change.
+No existing projects are removed. All eight current entries in `projects.js` stay; only their `featured` flag / ordering may change.
 
 ## Phase 1 — Content re-prioritization (curated layer)
 
 - Re-rank `featured` flags / array order in [src/data/projects.js](src/data/projects.js) so pipeline, cloud, and orchestration work leads, ahead of Excel/Tableau-only pieces.
 - Cross-check [src/components/Hero.jsx](src/components/Hero.jsx) tagline and [src/components/About.jsx](src/components/About.jsx) copy/proficiency bars against what's actually featured — adjust only if they drift from reality; do not invent new claims or metrics not already stated in the repo.
-- No deletions. Current entries: `Python Data Engineering Suite`, `Advanced SQL Data Processing`, `Enterprise Excel Analytics Solutions`, `Marketing Campaign Analytics Platform`, `COVID-19 Data Intelligence System`, `Sales Performance Analytics Dashboard`.
+- No deletions. Current entries (id): Python Data Engineering Suite (1), Advanced SQL Data Processing (2), Enterprise Excel Analytics Solutions (3), Marketing Campaign Analytics Platform (4, featured), COVID-19 Data Intelligence System (5, featured), Sales Performance Analytics Dashboard (6, featured), Snowflake Cloud Data Warehouse & Governance (7, featured), WorkVibe — Talent Matching SaaS (8, featured).
+- Proposed order (2026-11-04, see `memory.md` Open next steps): 7 → 5 → 2 → 1 featured first; 4, 6, 8 next; 3 non-featured.
 
 ## Phase 2 — "Recent GitHub Activity" auto-feed
 
@@ -32,7 +33,7 @@ Data source — GitHub's public REST API, no auth required for public data:
 - `GET https://api.github.com/users/RithvikPanchumarthi/repos?sort=pushed&per_page=6` — most recently pushed repos.
 - Optionally `GET https://api.github.com/users/RithvikPanchumarthi/events/public` — a commit/push activity timeline.
 
-Display per item: repo name, description, primary language, last-pushed date, link out. Style consistently with the dark editorial `Projects.jsx` / `GitHubActivity.jsx` list rows.
+Display per item: repo name, description, primary language, last-pushed date, link out. Style consistently with the cream editorial `Projects.jsx` / `GitHubActivity.jsx` list rows.
 
 Operational notes:
 
