@@ -3,45 +3,66 @@ import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
 
 import {
-  BarChart3,
-  BookOpen,
   Boxes,
-  Cloud,
-  CloudCog,
-  Code2,
   Database,
   GitMerge,
-  HardDrive,
-  PieChart,
-  Sheet,
   ShieldCheck,
   Sigma,
-  Snowflake,
-  Wind,
   Workflow,
-  Zap,
 } from 'lucide-react';
+import azureLogo from '../assets/skills/azure.svg';
+import databricksLogo from '../assets/skills/databricks.svg';
+import snowflakeLogo from '../assets/skills/snowflake.svg';
+import gcpLogo from '../assets/skills/gcp.svg';
+import awsLogo from '../assets/skills/aws.svg';
+import sparkLogo from '../assets/skills/spark.svg';
+import airflowLogo from '../assets/skills/airflow.svg';
+import pythonLogo from '../assets/skills/python.svg';
+import powerbiLogo from '../assets/skills/powerbi.svg';
+import tableauLogo from '../assets/skills/tableau.svg';
+import excelLogo from '../assets/skills/excel.svg';
+import jupyterLogo from '../assets/skills/jupyter.svg';
 
-// Small line icons from lucide-react; they inherit text color, so they follow the theme tokens.
+// Tools show their brand logo (src/assets/skills, see README there); general
+// skills use a lucide-react line icon. `color` overrides the accent tint.
 const skills = [
-  { name: 'Azure (Data Factory, Synapse, Databricks)', Icon: Cloud },
-  { name: 'Snowflake', Icon: Snowflake },
-  { name: 'GCP (BigQuery, Cloud Storage)', Icon: CloudCog },
-  { name: 'AWS S3', Icon: HardDrive },
+  { name: 'Azure (Data Factory, Synapse, Databricks)', logos: [azureLogo, databricksLogo] },
+  { name: 'Snowflake', logos: [snowflakeLogo] },
+  { name: 'GCP (BigQuery, Cloud Storage)', logos: [gcpLogo] },
+  { name: 'AWS S3', logos: [awsLogo] },
   { name: 'ETL/ELT Pipelines', Icon: Workflow },
-  { name: 'Apache Spark', Icon: Zap },
+  { name: 'Apache Spark', logos: [sparkLogo] },
   { name: 'Data Modeling', Icon: Boxes },
-  { name: 'Apache Airflow', Icon: Wind },
-  { name: 'dbt', Icon: GitMerge },
+  { name: 'Apache Airflow', logos: [airflowLogo] },
+  { name: 'dbt', Icon: GitMerge, color: '#FF694B' },
   { name: 'SQL (Advanced)', Icon: Database },
-  { name: 'Python', Icon: Code2 },
+  { name: 'Python', logos: [pythonLogo] },
   { name: 'Statistical Analysis', Icon: Sigma },
   { name: 'Data Validation', Icon: ShieldCheck },
-  { name: 'Power BI', Icon: BarChart3 },
-  { name: 'Tableau', Icon: PieChart },
-  { name: 'Excel (Advanced)', Icon: Sheet },
-  { name: 'Jupyter Notebooks', Icon: BookOpen },
+  { name: 'Power BI', logos: [powerbiLogo] },
+  { name: 'Tableau', logos: [tableauLogo] },
+  { name: 'Excel (Advanced)', logos: [excelLogo] },
+  { name: 'Jupyter Notebooks', logos: [jupyterLogo] },
 ];
+
+const plate =
+  'flex h-9 w-9 lg:h-10 lg:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-card';
+
+const SkillMark = ({ logos, Icon, color }) => (
+  <span aria-hidden="true" className="flex shrink-0 -space-x-2">
+    {logos
+      ? logos.map((src) => (
+          <span key={src} className={plate}>
+            <img src={src} alt="" className="h-5 w-5 lg:h-6 lg:w-6 object-contain" loading="lazy" />
+          </span>
+        ))
+      : (
+        <span className={`${plate} text-accent`} style={color ? { color } : undefined}>
+          <Icon className="h-4 w-4 lg:h-5 lg:w-5" strokeWidth={1.75} />
+        </span>
+      )}
+  </span>
+);
 
 const About = () => (
   <section id="about">
@@ -129,20 +150,15 @@ const About = () => (
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 lg:gap-y-6">
-          {skills.map(({ name, Icon }, index) => (
+          {skills.map((skill, index) => (
             <Reveal
-              key={name}
+              key={skill.name}
               delay={index * 0.05}
               className="border-b border-border pb-4 flex items-center gap-4"
             >
-              <span
-                aria-hidden="true"
-                className="flex h-9 w-9 lg:h-10 lg:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-accent"
-              >
-                <Icon className="h-4 w-4 lg:h-5 lg:w-5" strokeWidth={1.5} />
-              </span>
+              <SkillMark {...skill} />
               <span className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light">
-                {name}
+                {skill.name}
               </span>
             </Reveal>
           ))}

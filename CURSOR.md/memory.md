@@ -24,17 +24,22 @@ Last updated: 2026-11-04
 | Docs hub | `CURSOR.md/` |
 | Skills | `.cursor/skills/portfolio-init`, `portfolio-dev`, `portfolio-content`, `portfolio-sync` |
 | Claude Code | `CLAUDE.md` (imports `AGENTS.md` + this file); `.claude/skills/*` symlink to `.cursor/skills/*`; `.claude/settings.json` |
-| Skills icons | About → `#skills`: each skill has a small `lucide-react` line icon in a round plate (`text-accent`). Mapping lives in the `skills` array in `About.jsx`. |
+| Skills icons | About → `#skills`: brand logos (SVG in `src/assets/skills/`, sources in its README) for Azure (+ Databricks), Snowflake, GCP, AWS, Spark, Airflow, Python, Power BI, Tableau, Excel, Jupyter; `lucide-react` line icons for general skills (ETL, Data Modeling, SQL, Stats, Validation) and dbt (tinted dbt orange). Mapping in the `skills` array in `About.jsx`. |
 | Roadmap | `CURSOR.md/roadmap.md` — Phase 1 featured re-rank still open; Phases 2–3 shipped earlier |
 
 ## Current workspace state
 
-- PR #3 (`cursor` → `main`, cream restyle + header identity) is **merged** (`623a083`). `main` holds the cream-light site, so GitHub Pages should be serving it; confirming the live site is still an open step.
+- PR #3 (cream restyle) and PR #4 (`claude-cloud-session`, first skill icons + memory refresh) are **merged**; PR #4 deployed 2026-11-04 22:34 UTC.
 - Cream-light editorial with identity in the sticky header, no Hero name H1, AI stats in the hero, sticky quote, About without project plates, no AI Builder nav.
-- Cloud sessions run on `claude/*` branches. As of 2026-11-04, pushes from Claude cloud sessions fail with 403 (Claude GitHub App has no access to this repo). Fix at https://claude.ai/connect-github before expecting cloud work to reach GitHub.
+- GitHub access for Claude cloud sessions works again (2026-11-04). A remote branch named `claude` blocks creating any `claude/*` branch, so Claude pushes go to `claude-cloud-session`. Deleting the remote `claude` branch (identical to old `main`) would remove the conflict.
 - Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
+
+### 2026-11-04 — [Claude] Brand logos in Skills
+
+- Replaced generic icons with brand logos where they exist: Devicon (Azure, AWS, GCP, Spark, Airflow, Python, Jupyter) and Simple Icons (Databricks, Snowflake), copied into `src/assets/skills/` (no new runtime dependency). Power BI, Excel and Tableau are hand-drawn simple marks (neither library ships them); dbt keeps a lucide icon in dbt orange. The Azure row shows Azure + Databricks logos.
+- Before/after Playwright check at 1440 and 390: 12/12 logo images load, no errors, no horizontal scroll. `npm run build` passed.
 
 ### 2026-11-04 — [Claude] Skill icons + memory refresh
 
@@ -142,8 +147,8 @@ Last updated: 2026-11-04
 
 Ordered by impact per effort. Do them top-down; each is one short session.
 
-1. **Unblock pushes** (owner, ~5 min): reconnect GitHub / install the Claude GitHub App at https://claude.ai/connect-github so cloud sessions can push.
-2. **Verify live site** (~5 min): open https://rithvikpanchumarthi.github.io/data-portfolio/ and confirm the cream design, header identity, and skill icons after the next merge. If stale, check the latest `deploy.yml` run.
+1. **Merge the brand-logo PR**, then verify https://rithvikpanchumarthi.github.io/data-portfolio/ (hard refresh). Optional: delete the remote `claude` branch so `claude/*` session branches can push.
+2. **Optional — real dbt logo**: add an official dbt SVG to `src/assets/skills/` if wanted (not in Devicon or Simple Icons).
 3. **Roadmap Phase 1 — re-rank projects** (`portfolio-content`, ~20 min): in `src/data/projects.js` lead with Snowflake (7), then COVID pipeline (5), Advanced SQL (2), Python suite (1); move Excel (3) to non-featured. Decide whether WorkVibe (8) stays featured. Order/`featured` only — no deletions, no new claims.
 4. **Fix missing images** (~15 min): add `public/Snowflake.png` (currently 404s) and a WorkVibe image, or drop the `image` field so the monogram plate is intentional.
 5. **Optional — Pipeline Architecture section** (~1 session): the reverted Medallion / AutoSys → Airflow showcase. Needs owner-confirmed facts for Microsoft Fabric and AutoSys work (neither is in `profile.js`) before rebuilding.
