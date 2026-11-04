@@ -2,7 +2,7 @@
 
 Durable context for Cursor agents. **Read this at session start. Update it after meaningful work.** Prefer facts written here over chat memory or guesses.
 
-Last updated: 2026-10-14
+Last updated: 2026-11-04
 
 ## Ground truth (do not invent)
 
@@ -12,7 +12,7 @@ Last updated: 2026-10-14
 | Owner | Rithvik Panchumarthi |
 | Live site | https://rithvikpanchumarthi.github.io/data-portfolio/ |
 | Vite base | `/data-portfolio/` |
-| Local URL | http://localhost:5174/data-portfolio/ (5173 is the sibling `data-portfolio` clone) |
+| Local URL | Vite default http://localhost:5173/data-portfolio/. On the owner's machine this clone uses **5174** because a sibling clone holds 5173. Cloud sessions use 5173. |
 | Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. No `ThemeToggle`, `useTheme`, or `themeConfig`. |
 | Hero | LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI stats from `aiStats.js`. No name H1 and no portrait photo. |
 | Header | Sticky bar: site identity “Rithvik Panchumarthi \| Agentic Data Engineer” (scrolls to `#hero`); data-oil quote; GitHub / LinkedIn / Email; corner section nav. |
@@ -24,16 +24,23 @@ Last updated: 2026-10-14
 | Docs hub | `CURSOR.md/` |
 | Skills | `.cursor/skills/portfolio-init`, `portfolio-dev`, `portfolio-content`, `portfolio-sync` |
 | Claude Code | `CLAUDE.md` (imports `AGENTS.md` + this file); `.claude/skills/*` symlink to `.cursor/skills/*`; `.claude/settings.json` |
+| Skills icons | About → `#skills`: each skill has a small `lucide-react` line icon in a round plate (`text-accent`). Mapping lives in the `skills` array in `About.jsx`. |
 | Roadmap | `CURSOR.md/roadmap.md` — Phase 1 featured re-rank still open; Phases 2–3 shipped earlier |
 
 ## Current workspace state
 
-- Cream-light editorial + header identity is the live local site. Identity is “Rithvik Panchumarthi | Agentic Data Engineer” in the sticky header (desktop: left; mobile: with Menu + socials). Hero has no name H1. Quote is sticky. About has no project plates. No AI Builder nav. Verified at `http://localhost:5174/data-portfolio/` (desktop 1440 + mobile 390).
-- Shipping on branch `cursor` via PR into `main`. GitHub Pages still deploys from `main` — live site updates only after merge.
-- This workspace's Vite is at `http://localhost:5174/data-portfolio/`. Do not use 5173 (sibling `data-portfolio` clone).
-- `src/data/*` was not changed. Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
+- PR #3 (`cursor` → `main`, cream restyle + header identity) is **merged** (`623a083`). `main` holds the cream-light site, so GitHub Pages should be serving it; confirming the live site is still an open step.
+- Cream-light editorial with identity in the sticky header, no Hero name H1, AI stats in the hero, sticky quote, About without project plates, no AI Builder nav.
+- Cloud sessions run on `claude/*` branches. As of 2026-11-04, pushes from Claude cloud sessions fail with 403 (Claude GitHub App has no access to this repo). Fix at https://claude.ai/connect-github before expecting cloud work to reach GitHub.
+- Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
+
+### 2026-11-04 — [Claude] Skill icons + memory refresh
+
+- Added a small `lucide-react` icon beside each of the 17 skills in About → Skills (no new dependency; icons use `currentColor` / `text-accent`). Checked with Playwright at 1440 and 390: 17 icons, no errors, no horizontal scroll. `npm run build` passed.
+- Earlier this session: built a Pipeline Architecture section (Medallion + AutoSys → Airflow), then **reverted it at the owner's request**. It was never pushed (403). Not in the codebase.
+- Memory: marked PR #3 as merged, clarified 5173 vs 5174, recorded the cloud push 403, and replaced Open next steps with a prioritized plan. Roadmap Phase 1 project list updated to the current 8 entries.
 
 ### 2026-10-14 — [Cursor] Commit cream restyle + agent context
 
@@ -133,12 +140,15 @@ Last updated: 2026-10-14
 
 ## Open next steps
 
-- Optional: add a real portrait under `public/` and wire it in `Hero.jsx` if a photo-hero is wanted later. Current hero is type-only.
-- Optional: add `public/Snowflake.png` and a WorkVibe image (missing images use the monogram / plate fallback; `Snowflake.png` 404s in the network log).
-- Refresh `profile.js` / `aiStats.js` with `portfolio-sync` when LinkedIn or Cursor stats change. `cursor.com/@rithvikbuilds4u` returned 404 when signed out; confirm it's public before relying on the link.
-- Execute roadmap Phase 1: re-rank `featured` flags / order in `src/data/projects.js` toward pipeline/cloud/orchestration work (see `CURSOR.md/roadmap.md`).
-- After merge to `main`, confirm GitHub Pages at https://rithvikpanchumarthi.github.io/data-portfolio/.
-- After each meaningful change: append a short Session log entry and refresh Ground truth / Current workspace state if needed.
+Ordered by impact per effort. Do them top-down; each is one short session.
+
+1. **Unblock pushes** (owner, ~5 min): reconnect GitHub / install the Claude GitHub App at https://claude.ai/connect-github so cloud sessions can push.
+2. **Verify live site** (~5 min): open https://rithvikpanchumarthi.github.io/data-portfolio/ and confirm the cream design, header identity, and skill icons after the next merge. If stale, check the latest `deploy.yml` run.
+3. **Roadmap Phase 1 — re-rank projects** (`portfolio-content`, ~20 min): in `src/data/projects.js` lead with Snowflake (7), then COVID pipeline (5), Advanced SQL (2), Python suite (1); move Excel (3) to non-featured. Decide whether WorkVibe (8) stays featured. Order/`featured` only — no deletions, no new claims.
+4. **Fix missing images** (~15 min): add `public/Snowflake.png` (currently 404s) and a WorkVibe image, or drop the `image` field so the monogram plate is intentional.
+5. **Optional — Pipeline Architecture section** (~1 session): the reverted Medallion / AutoSys → Airflow showcase. Needs owner-confirmed facts for Microsoft Fabric and AutoSys work (neither is in `profile.js`) before rebuilding.
+6. **Recurring** (`portfolio-sync`): refresh `profile.js` / `aiStats.js` when LinkedIn or Cursor stats change. `cursor.com/@rithvikbuilds4u` returned 404 signed out — confirm it is public.
+7. **Optional**: real portrait in `public/` wired into `Hero.jsx` if a photo hero is wanted.
 
 ## Anti-hallucination rules
 

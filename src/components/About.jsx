@@ -2,24 +2,45 @@ import React from 'react';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
 
+import {
+  BarChart3,
+  BookOpen,
+  Boxes,
+  Cloud,
+  CloudCog,
+  Code2,
+  Database,
+  GitMerge,
+  HardDrive,
+  PieChart,
+  Sheet,
+  ShieldCheck,
+  Sigma,
+  Snowflake,
+  Wind,
+  Workflow,
+  Zap,
+} from 'lucide-react';
+
+// Small line icons from lucide-react; they inherit text color, so they follow the theme tokens.
 const skills = [
-  'Azure (Data Factory, Synapse, Databricks)',
-  'Snowflake',
-  'GCP (BigQuery, Cloud Storage)',
-  'AWS S3',
-  'ETL/ELT Pipelines',
-  'Apache Spark',
-  'Data Modeling',
-  'Apache Airflow',
-  'dbt',
-  'SQL (Advanced)',
-  'Python',
-  'Statistical Analysis',
-  'Data Validation',
-  'Power BI',
-  'Tableau',
-  'Excel (Advanced)',
-  'Jupyter Notebooks',
+  { name: 'Azure (Data Factory, Synapse, Databricks)', Icon: Cloud },
+  { name: 'Snowflake', Icon: Snowflake },
+  { name: 'GCP (BigQuery, Cloud Storage)', Icon: CloudCog },
+  { name: 'AWS S3', Icon: HardDrive },
+  { name: 'ETL/ELT Pipelines', Icon: Workflow },
+  { name: 'Apache Spark', Icon: Zap },
+  { name: 'Data Modeling', Icon: Boxes },
+  { name: 'Apache Airflow', Icon: Wind },
+  { name: 'dbt', Icon: GitMerge },
+  { name: 'SQL (Advanced)', Icon: Database },
+  { name: 'Python', Icon: Code2 },
+  { name: 'Statistical Analysis', Icon: Sigma },
+  { name: 'Data Validation', Icon: ShieldCheck },
+  { name: 'Power BI', Icon: BarChart3 },
+  { name: 'Tableau', Icon: PieChart },
+  { name: 'Excel (Advanced)', Icon: Sheet },
+  { name: 'Jupyter Notebooks', Icon: BookOpen },
 ];
 
 const About = () => (
@@ -108,14 +129,20 @@ const About = () => (
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 lg:gap-y-6">
-          {skills.map((skill, index) => (
+          {skills.map(({ name, Icon }, index) => (
             <Reveal
-              key={skill}
+              key={name}
               delay={index * 0.05}
-              className="border-b border-border pb-4"
+              className="border-b border-border pb-4 flex items-center gap-4"
             >
+              <span
+                aria-hidden="true"
+                className="flex h-9 w-9 lg:h-10 lg:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-accent"
+              >
+                <Icon className="h-4 w-4 lg:h-5 lg:w-5" strokeWidth={1.5} />
+              </span>
               <span className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light">
-                {skill}
+                {name}
               </span>
             </Reveal>
           ))}
