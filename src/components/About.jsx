@@ -97,10 +97,11 @@ const About = () => (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           <Reveal className="flex items-center lg:text-right">
             <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">
-              I&apos;ve successfully delivered end-to-end data solutions that improved processing efficiency
-              by 30%, reduced query latency by 25%, and enhanced stakeholder engagement through intuitive
-              dashboards and reports. Currently pursuing opportunities where I can leverage both my
-              engineering expertise and analytical acumen to solve complex business challenges.
+              Today I&apos;m a Senior Data Engineer at Curi, building an analytical platform on
+              Databricks and AWS with Apache Spark and Airflow: silver-layer Delta tables in a medallion
+              architecture, guarded by uniqueness, orphan and row-count reconciliation checks before data
+              reaches gold. Earlier roles spanned Azure pipelines, Snowflake and Redshift warehousing, and
+              Power BI and Tableau reporting.
             </p>
           </Reveal>
 

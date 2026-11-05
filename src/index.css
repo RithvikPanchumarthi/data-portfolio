@@ -26,6 +26,11 @@
     --input: 36 20% 80%;
     --ring: 45 72% 48%;
 
+    /* Medallion layer swatches (PipelineArchitecture) */
+    --bronze: 26 52% 46%;
+    --silver: 30 6% 62%;
+    --gold: 45 72% 48%;
+
     --header-height: 7.25rem;
   }
 
