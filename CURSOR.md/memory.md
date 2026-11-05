@@ -25,7 +25,7 @@ Last updated: 2026-11-04
 | Skills | `.cursor/skills/portfolio-init`, `portfolio-dev`, `portfolio-content`, `portfolio-sync` |
 | Claude Code | `CLAUDE.md` (imports `AGENTS.md` + this file); `.claude/skills/*` symlink to `.cursor/skills/*`; `.claude/settings.json` |
 | Logos | Brand SVGs in `src/assets/logos/` (sources in its README), registered in `src/data/logos.js`. Used by About → Skills (logo per tool; `lucide-react` line icons for general skills and dbt) and by Projects: a project with `logos: [...]` and no `image` shows those logos on a plate (Snowflake id 7, WorkVibe id 8). |
-| Roadmap | `CURSOR.md/roadmap.md` — Phase 1 featured re-rank still open; Phases 2–3 shipped earlier |
+| Roadmap | `CURSOR.md/roadmap.md` — Phases 1–3 shipped (Phase 1 re-rank 2026-11-04); Phase 4 is the ongoing low-maintenance cadence |
 
 ## Current workspace state
 
