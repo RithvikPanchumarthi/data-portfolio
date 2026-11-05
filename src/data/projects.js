@@ -1,5 +1,5 @@
 // Order is display order (roadmap Phase 1, 2026-11-04): pipeline / warehouse
-// work leads, BI and app work follow. `logos` (keys in src/data/logos.js) is
+// work leads, BI and app work follow. Featured (large rows) is capped at four. `logos` (keys in src/data/logos.js) is
 // shown on a plate when a project has no `image`.
 export const projects = [
   {
@@ -9,6 +9,20 @@ export const projects = [
     technologies: ["Snowflake", "Data Warehousing", "RBAC", "Data Masking", "Resource Monitors", "Cost Governance", "SQL", "Cloud Architecture"],
     github: "https://github.com/RithvikPanchumarthi/Snowflake",
     logos: ["snowflake"],
+    // Shown as a diagram in the Details dialog. Restates the description above.
+    architecture: {
+      flow: [
+        { label: "S3 stages", note: "Raw POS and customer files" },
+        { label: "RAW", note: "Landed tables" },
+        { label: "HARMONIZED", note: "Orders, menu, location and loyalty joined" },
+        { label: "ANALYTICS", note: "Analytics views" },
+      ],
+      controls: [
+        { label: "RBAC", note: "Admin, data engineer, data scientist, BI and dev roles with current and future grants" },
+        { label: "Data masking", note: "Dynamic masking policies with tag-based PII classification" },
+        { label: "Cost governance", note: "Resource monitors with tiered credit alerts, auto-suspend/resume, timeouts and on-demand scaling" },
+      ],
+    },
     featured: true
   },
   {
@@ -46,7 +60,7 @@ export const projects = [
     github: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
     demo: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
     image: "/data-portfolio/TABLEAU.jpg",
-    featured: true
+    featured: false
   },
   {
     id: 6,
@@ -55,7 +69,7 @@ export const projects = [
     technologies: ["Power BI", "Excel", "DAX", "Data Modeling", "KPI Dashboards", "Financial Analysis", "Visualization"],
     github: "https://github.com/RithvikPanchumarthi/Visualization_with_PowerBI",
     image: "/data-portfolio/Power_BI.jpg",
-    featured: true
+    featured: false
   },
   {
     id: 8,
@@ -65,7 +79,7 @@ export const projects = [
     github: "https://github.com/RithvikPanchumarthi/Vibing-with-ZACH-LI",
     demo: "https://vibing-with-zach-li-guvx.vercel.app/",
     logos: ["nextjs", "typescript", "supabase", "postgresql"],
-    featured: true
+    featured: false
   },
   {
     id: 3,

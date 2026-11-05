@@ -82,31 +82,31 @@ const toModalItem = (project) => ({
   body: project.description,
   tags: project.technologies,
   links: projectLinks(project),
+  architecture: project.architecture,
 });
+
+const techMatches = (pattern) => (project) =>
+  project.technologies.some((tech) => pattern.test(tech));
+
+const filters = [
+  { key: 'all', label: 'All Projects', match: () => true },
+  { key: 'featured', label: 'Featured', match: (project) => project.featured },
+  { key: 'pipelines', label: 'Pipelines & Warehousing', match: techMatches(/etl|warehous|snowflake|pipeline|data validation/i) },
+  { key: 'sql', label: 'SQL', match: techMatches(/sql/i) },
+  { key: 'python', label: 'Python', match: techMatches(/python/i) },
+  { key: 'visualization', label: 'Visualization', match: techMatches(/visualization/i) },
+];
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState(null);
   const closeModal = useCallback(() => setSelected(null), []);
 
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter((project) =>
-        filter === 'featured'
-          ? project.featured
-          : project.technologies.some((tech) => tech.toLowerCase().includes(filter.toLowerCase()))
-      );
+  const activeFilter = filters.find((option) => option.key === filter) ?? filters[0];
+  const filteredProjects = projects.filter(activeFilter.match);
 
   const featured = filteredProjects.filter((project) => project.featured);
   const rest = filteredProjects.filter((project) => !project.featured);
-
-  const filters = [
-    { key: 'all', label: 'All Projects' },
-    { key: 'featured', label: 'Featured' },
-    { key: 'sql', label: 'SQL' },
-    { key: 'python', label: 'Python' },
-    { key: 'visualization', label: 'Visualization' },
-  ];
 
   return (
     <section id="projects" className="section-padding">
