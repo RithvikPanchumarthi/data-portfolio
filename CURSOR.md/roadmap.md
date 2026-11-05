@@ -22,7 +22,7 @@ No existing projects are removed. All eight current entries in `projects.js` sta
 - Re-rank `featured` flags / array order in [src/data/projects.js](src/data/projects.js) so pipeline, cloud, and orchestration work leads, ahead of Excel/Tableau-only pieces.
 - Cross-check [src/components/Hero.jsx](src/components/Hero.jsx) tagline and [src/components/About.jsx](src/components/About.jsx) copy/proficiency bars against what's actually featured — adjust only if they drift from reality; do not invent new claims or metrics not already stated in the repo.
 - No deletions. Current entries (id): Python Data Engineering Suite (1), Advanced SQL Data Processing (2), Enterprise Excel Analytics Solutions (3), Marketing Campaign Analytics Platform (4, featured), COVID-19 Data Intelligence System (5, featured), Sales Performance Analytics Dashboard (6, featured), Snowflake Cloud Data Warehouse & Governance (7, featured), WorkVibe — Talent Matching SaaS (8, featured).
-- Shipped order (2026-11-04): 7 → 5 → 2 → 1 → 4 → 6 → 8 featured; 3 non-featured.
+- Shipped order (2026-11-04): 7 → 5 → 2 → 1 featured (capped at four); 4, 6, 8, 3 as list rows.
 
 ## Phase 2 — "Recent GitHub Activity" auto-feed
 
