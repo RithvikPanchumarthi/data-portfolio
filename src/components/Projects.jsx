@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { projects } from '../data/projects.js';
+import { logos } from '../data/logos.js';
 import DetailModal from './DetailModal';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
@@ -15,6 +16,36 @@ const monogram = (title) =>
 
 const ProjectImage = ({ project }) => {
   const [failed, setFailed] = useState(false);
+
+  const projectLogos = (project.logos ?? []).map((key) => logos[key]).filter(Boolean);
+
+  if ((!project.image || failed) && projectLogos.length > 0) {
+    const single = projectLogos.length === 1;
+    return (
+      <div
+        role="img"
+        aria-label={project.title}
+        className="img-plate w-full aspect-[16/10] flex items-center justify-center"
+      >
+        <div className={`flex items-center justify-center ${single ? '' : 'flex-wrap gap-6 md:gap-10 px-8'}`}>
+          {projectLogos.map((src) => (
+            <span
+              key={src}
+              className={`flex items-center justify-center rounded-full border border-border bg-card ${
+                single ? 'h-32 w-32 md:h-44 md:w-44' : 'h-16 w-16 md:h-24 md:w-24'
+              }`}
+            >
+              <img
+                src={src}
+                alt=""
+                className={single ? 'h-16 w-16 md:h-24 md:w-24' : 'h-8 w-8 md:h-12 md:w-12'}
+              />
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (!project.image || failed) {
     return (
@@ -51,31 +82,31 @@ const toModalItem = (project) => ({
   body: project.description,
   tags: project.technologies,
   links: projectLinks(project),
+  architecture: project.architecture,
 });
+
+const techMatches = (pattern) => (project) =>
+  project.technologies.some((tech) => pattern.test(tech));
+
+const filters = [
+  { key: 'all', label: 'All Projects', match: () => true },
+  { key: 'featured', label: 'Featured', match: (project) => project.featured },
+  { key: 'pipelines', label: 'Pipelines & Warehousing', match: techMatches(/etl|warehous|snowflake|pipeline|data validation/i) },
+  { key: 'sql', label: 'SQL', match: techMatches(/sql/i) },
+  { key: 'python', label: 'Python', match: techMatches(/python/i) },
+  { key: 'visualization', label: 'Visualization', match: techMatches(/visualization/i) },
+];
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState(null);
   const closeModal = useCallback(() => setSelected(null), []);
 
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter((project) =>
-        filter === 'featured'
-          ? project.featured
-          : project.technologies.some((tech) => tech.toLowerCase().includes(filter.toLowerCase()))
-      );
+  const activeFilter = filters.find((option) => option.key === filter) ?? filters[0];
+  const filteredProjects = projects.filter(activeFilter.match);
 
   const featured = filteredProjects.filter((project) => project.featured);
   const rest = filteredProjects.filter((project) => !project.featured);
-
-  const filters = [
-    { key: 'all', label: 'All Projects' },
-    { key: 'featured', label: 'Featured' },
-    { key: 'sql', label: 'SQL' },
-    { key: 'python', label: 'Python' },
-    { key: 'visualization', label: 'Visualization' },
-  ];
 
   return (
     <section id="projects" className="section-padding">

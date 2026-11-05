@@ -25,8 +25,18 @@ Rules:
 - `featured: true` surfaces the project as featured in the UI.
 - Keep descriptions concrete: stack, what was built, outcome when possible.
 
-- `image` is optional. Missing or broken images show a cream monogram plate, so never point `image` at a file that isn't in `public/`.
-- Featured projects render as editorial image+text rows; others as hairline list rows. Full text shows in the Details modal.
+- `image` is optional. Without one, `logos: ["snowflake", ...]` (keys in `src/data/logos.js`) shows brand logos on the plate; with neither, a cream monogram plate. Never point `image` at a file that isn't in `public/`.
+- Array order is display order. Keep `featured: true` to about four projects: featured render as editorial image+text rows, the rest as hairline list rows. Full text shows in the Details modal.
+- Optional `architecture: { flow: [{ label, note }], controls: [{ label, note }] }` draws a flow diagram in the Details modal (used by Snowflake, id 7). Only restate what the description already says.
+- Filters live in the `filters` array in `Projects.jsx` (each has a `match` function over `technologies`).
+
+## Pipelines section
+
+`src/components/PipelineArchitecture.jsx` renders `src/data/pipelines.js` (medallion layers from the Curi role in `profile.js`). Add a platform or tool there only when it is in `profile.js` or confirmed by the owner.
+
+## Link previews and favicon
+
+`index.html` holds the title, meta description, canonical URL, Open Graph and Twitter tags. The preview image is `public/og-image.png` (1200×630) and the tab icon is `public/favicon.svg`. Keep the description in step with `profile.headline`.
 
 ## Synced data (see the `portfolio-sync` skill)
 

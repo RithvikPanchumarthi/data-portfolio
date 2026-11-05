@@ -4,8 +4,44 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
 
 /**
  * Accessible detail dialog shared by project and repo cards.
- * item: { title, subtitle?, body, tags?: [], links?: [{ label, href, kind: 'github' | 'demo' }] }
+ * item: { title, subtitle?, body, tags?: [], links?: [{ label, href, kind: 'github' | 'demo' }],
+ *         architecture?: { flow: [{ label, note }], controls?: [{ label, note }] } }
  */
+/** Left-to-right data flow (top-to-bottom on phones) plus governance controls. */
+const Architecture = ({ flow, controls = [] }) => (
+  <figure className="mt-8 border border-border bg-background p-4 sm:p-6">
+    <figcaption className="text-xs text-muted-foreground tracking-widest uppercase mb-4">
+      Architecture
+    </figcaption>
+    <ol className="flex flex-col sm:flex-row sm:items-stretch gap-2">
+      {flow.map((step, index) => (
+        <React.Fragment key={step.label}>
+          {index > 0 && (
+            <li aria-hidden="true" className="flex items-center justify-center text-muted-foreground/70">
+              <span className="sm:hidden">↓</span>
+              <span className="hidden sm:inline">→</span>
+            </li>
+          )}
+          <li className="sm:flex-1 border border-border bg-card px-3 py-3">
+            <p className="font-mono text-xs text-foreground">{step.label}</p>
+            <p className="mt-1 text-xs text-muted-foreground leading-snug">{step.note}</p>
+          </li>
+        </React.Fragment>
+      ))}
+    </ol>
+    {controls.length > 0 && (
+      <dl className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {controls.map((control) => (
+          <div key={control.label} className="border-t-2 border-accent bg-card px-3 py-3">
+            <dt className="text-xs text-foreground tracking-widest uppercase">{control.label}</dt>
+            <dd className="mt-1 text-xs text-muted-foreground leading-snug">{control.note}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+  </figure>
+);
+
 const DetailModal = ({ item, onClose }) => {
   const dialogRef = useRef(null);
 
@@ -74,6 +110,8 @@ const DetailModal = ({ item, onClose }) => {
         )}
 
         <p className="mt-6 leading-relaxed text-muted-foreground">{item.body}</p>
+
+        {item.architecture && <Architecture {...item.architecture} />}
 
         {item.tags?.length > 0 && (
           <div className="mt-6 flex flex-wrap gap-2">

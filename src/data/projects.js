@@ -1,39 +1,28 @@
+// Order is display order (roadmap Phase 1, 2026-11-04): pipeline / warehouse
+// work leads, BI and app work follow. Featured (large rows) is capped at four. `logos` (keys in src/data/logos.js) is
+// shown on a plate when a project has no `image`.
 export const projects = [
   {
-    id: 1,
-    title: "Python Data Engineering Suite",
-    description: "Advanced data manipulation and web scraping projects featuring automated data collection, processing, and analysis. Implemented scalable Python solutions for Amazon price tracking and cryptocurrency analysis using modern data science libraries and best practices.",
-    technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Web Scraping", "API Integration"],
-    github: "https://github.com/RithvikPanchumarthi/python",
-    image: "/data-portfolio/Python.png",
-    featured: false
-  },
-  {
-    id: 2,
-    title: "Advanced SQL Data Processing",
-    description: "Comprehensive data cleaning and transformation pipeline using SQL Server with performance-optimized queries. Developed automated data validation routines and quality checks that improved data integrity and reduced processing time for analytical workloads.",
-    technologies: ["SQL Server", "Data Profiling", "ETL", "Data Validation", "Performance Optimization"],
-    github: "https://github.com/RithvikPanchumarthi/WorkwithSQL/blob/main/SQL2.ipynb",
-    image: "/data-portfolio/Data_Cleaning.png",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Enterprise Excel Analytics Solutions",
-    description: "Built comprehensive business analytics solutions using advanced Excel features including complex formulas, pivot tables, and automated reporting. Developed financial modeling templates and interactive dashboards that streamlined business decision-making processes.",
-    technologies: ["Microsoft Excel", "Financial Modeling", "Business Intelligence", "Automated Reporting"],
-    github: "https://github.com/RithvikPanchumarthi/WorkwithExcel",
-    image: "/data-portfolio/Excel.png",
-    featured: false
-  },
-  {
-    id: 4,
-    title: "Marketing Campaign Analytics Platform",
-    description: "Engineered an end-to-end analytics solution combining data pipeline development with advanced visualization capabilities. Built robust ETL processes to clean and transform Airbnb dataset, then created comprehensive Tableau dashboards that enabled marketing teams to identify high-value demographics and optimize campaign targeting strategies.",
-    technologies: ["Tableau", "ETL Pipelines", "Data Cleaning", "Business Intelligence", "Campaign Analytics", "Visualization"],
-    github: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
-    demo: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
-    image: "/data-portfolio/TABLEAU.jpg",
+    id: 7,
+    title: "Snowflake Cloud Data Warehouse & Governance",
+    description: "Architected a multi-layer Snowflake data warehouse (raw, harmonized, and analytics schemas) for the Tasty Bytes dataset, loading raw POS and customer data from S3 stages and building harmonized/analytics views that join orders, menu, location, and customer loyalty data. Designed a full RBAC role hierarchy (admin, data engineer, data scientist, BI, dev) with granular current and future object grants, and applied dynamic data masking policies with tag-based classification to protect PII. Implemented financial governance controls including resource monitors with tiered credit-quota alerts, warehouse auto-suspend/resume, statement and queued timeout limits, and on-demand warehouse scaling to balance query performance against compute cost.",
+    technologies: ["Snowflake", "Data Warehousing", "RBAC", "Data Masking", "Resource Monitors", "Cost Governance", "SQL", "Cloud Architecture"],
+    github: "https://github.com/RithvikPanchumarthi/Snowflake",
+    logos: ["snowflake"],
+    // Shown as a diagram in the Details dialog. Restates the description above.
+    architecture: {
+      flow: [
+        { label: "S3 stages", note: "Raw POS and customer files" },
+        { label: "RAW", note: "Landed tables" },
+        { label: "HARMONIZED", note: "Orders, menu, location and loyalty joined" },
+        { label: "ANALYTICS", note: "Analytics views" },
+      ],
+      controls: [
+        { label: "RBAC", note: "Admin, data engineer, data scientist, BI and dev roles with current and future grants" },
+        { label: "Data masking", note: "Dynamic masking policies with tag-based PII classification" },
+        { label: "Cost governance", note: "Resource monitors with tiered credit alerts, auto-suspend/resume, timeouts and on-demand scaling" },
+      ],
+    },
     featured: true
   },
   {
@@ -46,22 +35,41 @@ export const projects = [
     featured: true
   },
   {
+    id: 2,
+    title: "Advanced SQL Data Processing",
+    description: "Comprehensive data cleaning and transformation pipeline using SQL Server with performance-optimized queries. Developed automated data validation routines and quality checks that improved data integrity and reduced processing time for analytical workloads.",
+    technologies: ["SQL Server", "Data Profiling", "ETL", "Data Validation", "Performance Optimization"],
+    github: "https://github.com/RithvikPanchumarthi/WorkwithSQL/blob/main/SQL2.ipynb",
+    image: "/data-portfolio/Data_Cleaning.png",
+    featured: true
+  },
+  {
+    id: 1,
+    title: "Python Data Engineering Suite",
+    description: "Advanced data manipulation and web scraping projects featuring automated data collection, processing, and analysis. Implemented scalable Python solutions for Amazon price tracking and cryptocurrency analysis using modern data science libraries and best practices.",
+    technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Web Scraping", "API Integration"],
+    github: "https://github.com/RithvikPanchumarthi/python",
+    image: "/data-portfolio/Python.png",
+    featured: true
+  },
+  {
+    id: 4,
+    title: "Marketing Campaign Analytics Platform",
+    description: "Engineered an end-to-end analytics solution combining data pipeline development with advanced visualization capabilities. Built robust ETL processes to clean and transform Airbnb dataset, then created comprehensive Tableau dashboards that enabled marketing teams to identify high-value demographics and optimize campaign targeting strategies.",
+    technologies: ["Tableau", "ETL Pipelines", "Data Cleaning", "Business Intelligence", "Campaign Analytics", "Visualization"],
+    github: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
+    demo: "https://public.tableau.com/app/profile/rithvik.sai.panchumarthi",
+    image: "/data-portfolio/TABLEAU.jpg",
+    featured: false
+  },
+  {
     id: 6,
     title: "Sales Performance Analytics Dashboard",
     description: "Transformed raw customer data through comprehensive cleaning and validation processes in Excel, significantly improving data reliability for downstream financial analysis. Designed and deployed interactive Power BI dashboards that visualized sales performance across multiple dimensions, resulting in 25% increased stakeholder engagement.",
     technologies: ["Power BI", "Excel", "DAX", "Data Modeling", "KPI Dashboards", "Financial Analysis", "Visualization"],
     github: "https://github.com/RithvikPanchumarthi/Visualization_with_PowerBI",
     image: "/data-portfolio/Power_BI.jpg",
-    featured: true
-  },
-  {
-    id: 7,
-    title: "Snowflake Cloud Data Warehouse & Governance",
-    description: "Architected a multi-layer Snowflake data warehouse (raw, harmonized, and analytics schemas) for the Tasty Bytes dataset, loading raw POS and customer data from S3 stages and building harmonized/analytics views that join orders, menu, location, and customer loyalty data. Designed a full RBAC role hierarchy (admin, data engineer, data scientist, BI, dev) with granular current and future object grants, and applied dynamic data masking policies with tag-based classification to protect PII. Implemented financial governance controls including resource monitors with tiered credit-quota alerts, warehouse auto-suspend/resume, statement and queued timeout limits, and on-demand warehouse scaling to balance query performance against compute cost.",
-    technologies: ["Snowflake", "Data Warehousing", "RBAC", "Data Masking", "Resource Monitors", "Cost Governance", "SQL", "Cloud Architecture"],
-    github: "https://github.com/RithvikPanchumarthi/Snowflake",
-    image: "/data-portfolio/Snowflake.png",
-    featured: true
+    featured: false
   },
   {
     id: 8,
@@ -70,6 +78,16 @@ export const projects = [
     technologies: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Prisma", "Stripe", "Tailwind CSS"],
     github: "https://github.com/RithvikPanchumarthi/Vibing-with-ZACH-LI",
     demo: "https://vibing-with-zach-li-guvx.vercel.app/",
-    featured: true
+    logos: ["nextjs", "typescript", "supabase", "postgresql"],
+    featured: false
+  },
+  {
+    id: 3,
+    title: "Enterprise Excel Analytics Solutions",
+    description: "Built comprehensive business analytics solutions using advanced Excel features including complex formulas, pivot tables, and automated reporting. Developed financial modeling templates and interactive dashboards that streamlined business decision-making processes.",
+    technologies: ["Microsoft Excel", "Financial Modeling", "Business Intelligence", "Automated Reporting"],
+    github: "https://github.com/RithvikPanchumarthi/WorkwithExcel",
+    image: "/data-portfolio/Excel.png",
+    featured: false
   }
 ];

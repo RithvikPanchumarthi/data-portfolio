@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import { hasExperience } from './data/profile.js';
+import PipelineArchitecture from './components/PipelineArchitecture';
 import Projects from './components/Projects';
 import GitHubActivity from './components/GitHubActivity';
 import LearningJourney from './components/LearningJourney';
@@ -14,6 +15,7 @@ import Contact from './components/Contact';
 const sections = [
   { id: 'about', label: 'About' },
   ...(hasExperience ? [{ id: 'experience', label: 'Experience' }] : []),
+  { id: 'pipelines', label: 'Pipelines' },
   { id: 'projects', label: 'Projects' },
   { id: 'github', label: 'GitHub' },
   { id: 'learning', label: 'Learning' },
@@ -29,6 +31,7 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <PipelineArchitecture />
         <Projects />
         <GitHubActivity />
         <LearningJourney />
