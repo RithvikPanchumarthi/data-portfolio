@@ -22,9 +22,9 @@ npm run deploy
 
 Live: https://rithvikpanchumarthi.github.io/data-portfolio/
 
-## Netlify
+## Netlify (not active)
 
-See `netlify.toml`. Typical settings:
+No Netlify site deploys this repo (checked 2026-11-18: every GitHub deployment is `github-pages`, and there are no Netlify commit statuses). `netlify.toml` is kept as an unused fallback. If it is ever connected, note that Vite `base` is `/data-portfolio/`, so a Netlify site served at the root would 404 on assets unless the base is overridden. Typical settings:
 
 - Build command: `npm run build`
 - Publish directory: `dist`

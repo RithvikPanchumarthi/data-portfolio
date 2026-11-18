@@ -45,7 +45,7 @@ Edit both when relevant:
 ### Colors / type
 
 - Palette: `src/index.css` HSL tokens, mapped in `tailwind.config.js`
-- Cream-light editorial theme (warm cream page, charcoal type, pale yellow accent; Bebas Neue + Inter). No `ThemeToggle` / light-dark switch.
+- Cream-light editorial theme (warm cream page, charcoal type, pale yellow accent; Bebas Neue + Inter). No `ThemeToggle` / light-dark switch today (a toggle is planned in `.cursor/rules/portfolio-memory.mdc`; do not build it unless asked).
 
 ## Hard constraints
 
