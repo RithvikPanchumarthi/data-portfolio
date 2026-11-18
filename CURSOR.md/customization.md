@@ -71,7 +71,7 @@ The site is **cream-light editorial**. Tokens live in `src/index.css` (`:root` H
 - Page: warm cream; type: charcoal; accent: pale Power BI yellow
 - Display: Bebas Neue (`font-display`)
 - Body: Inter
-- No `ThemeToggle` / `themeConfig`. Do not reintroduce a dual light/dark toggle unless the user asks.
+- No `ThemeToggle` / `themeConfig` today. A dark-mode toggle (cream-light default) is **planned** in `.cursor/rules/portfolio-memory.mdc`; do not build it unless the owner asks.
 
 ## Responsive breakpoints
 
