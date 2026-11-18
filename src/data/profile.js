@@ -114,6 +114,7 @@ export const profile = {
   certifications: [
     { name: "Microsoft Azure DP-203", issuer: "Microsoft", date: null },
     { name: "Microsoft Azure DP-900", issuer: "Microsoft", date: null },
+    { name: "Microsoft DP-600", issuer: "Microsoft", date: null }, // owner-verified 2026-11-18; not in the LinkedIn export
     { name: "DataOps with Apache Iceberg using Spark, Nessie, and Dremio", issuer: null, date: null },
     { name: "Data Analytics and Visualization Virtual Experience", issuer: null, date: null },
     { name: "Microsoft Excel Skills Virtual Experience Program", issuer: null, date: null },

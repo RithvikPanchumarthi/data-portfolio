@@ -82,6 +82,29 @@ export const projects = [
     featured: false
   },
   {
+    // Owner-provided description (2026-11-18). Private repo: no `github` link.
+    // Demo on synthetic data, not a client engagement. Do not add a churn-model score.
+    id: 9,
+    title: "Martian Dynamics — Multi-Agent Data Team",
+    description: "A multi-agent data team: an orchestrator coordinates Architect, Engineer, Analyst, BI, Data Scientist, ML Engineer and QA bots that build a DuckDB medallion pipeline (bronze, silver and gold star schema) with automated QA gates. The showcase is the Mars Warehouse #88 demo on synthetic data: members, bulk products, sales, inventory, Earth-to-Mars supply shipments, an emergency-stock dashboard and a 30-day forecast.",
+    technologies: ["DuckDB", "Data Warehousing", "Medallion Architecture", "Star Schema", "Multi-Agent Orchestration", "Data Quality Gates", "Forecasting"],
+    // Shown as a diagram in the Details dialog. Restates the description above.
+    architecture: {
+      flow: [
+        { label: "Orchestrator", note: "Coordinates Architect, Engineer, Analyst, BI, Data Scientist, ML Engineer and QA bots" },
+        { label: "BRONZE", note: "Raw synthetic Mars Warehouse #88 data" },
+        { label: "SILVER", note: "Middle medallion layer" },
+        { label: "GOLD", note: "Star schema in DuckDB" },
+      ],
+      controls: [
+        { label: "QA gates", note: "Automated checks run by the QA bot" },
+        { label: "Outputs", note: "Emergency-stock dashboard and 30-day forecast" },
+        { label: "Data", note: "Synthetic demo: members, bulk products, sales, inventory, Earth-to-Mars shipments" },
+      ],
+    },
+    featured: false
+  },
+  {
     id: 3,
     title: "Enterprise Excel Analytics Solutions",
     description: "Built comprehensive business analytics solutions using advanced Excel features including complex formulas, pivot tables, and automated reporting. Developed financial modeling templates and interactive dashboards that streamlined business decision-making processes.",

@@ -73,7 +73,7 @@ const ProjectImage = ({ project }) => {
 };
 
 const projectLinks = (project) => [
-  { label: 'View Code', href: project.github, kind: 'github' },
+  ...(project.github ? [{ label: 'View Code', href: project.github, kind: 'github' }] : []),
   ...(project.demo ? [{ label: 'Live Demo', href: project.demo, kind: 'demo' }] : []),
 ];
 
@@ -171,14 +171,16 @@ const Projects = () => {
                   >
                     Details
                   </button>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-accent transition-colors"
-                  >
-                    View Code ↗
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-accent transition-colors"
+                    >
+                      View Code ↗
+                    </a>
+                  )}
                   {project.demo && (
                     <a
                       href={project.demo}
@@ -224,14 +226,17 @@ const Projects = () => {
                     >
                       Details
                     </button>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors"
-                    >
-                      ↗
-                    </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.title} on GitHub`}
+                        className="hover:text-accent transition-colors"
+                      >
+                        ↗
+                      </a>
+                    )}
                   </div>
                 </div>
               </Reveal>
