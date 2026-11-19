@@ -77,7 +77,9 @@ portfolio-react/
 │   │   ├── Projects.jsx # Projects showcase
 │   │   └── Contact.jsx  # Contact form
 │   ├── data/
-│   │   └── projects.js  # Project data
+│   │   ├── portfolioData.js  # Profile, projects, pipelines, copy
+│   │   ├── github.json       # Generated GitHub snapshot
+│   │   └── logos.js          # Brand SVG import map
 │   ├── App.jsx          # Main app component
 │   ├── main.jsx         # React entry point
 │   └── index.css        # Global styles
@@ -90,7 +92,7 @@ portfolio-react/
 
 ### Adding New Projects
 
-Edit `src/data/projects.js` to add or modify projects:
+Edit `portfolioData.projects` in `src/data/portfolioData.js` to add or modify projects:
 
 ```javascript
 {
@@ -106,7 +108,7 @@ Edit `src/data/projects.js` to add or modify projects:
 
 ### Updating Contact Information
 
-Modify the contact details in `src/components/Contact.jsx` and `src/components/Header.jsx`.
+Modify contact details in `portfolioData.site.contact` and `portfolioData.site.header` (`src/data/portfolioData.js`).
 
 ### Customizing Colors
 
@@ -135,32 +137,7 @@ This creates a `dist` folder with optimized production files.
 
 ### Deploy to GitHub Pages
 
-1. **Install gh-pages:**
-   ```bash
-   npm install --save-dev gh-pages
-   ```
-
-2. **Add deploy script to package.json:**
-   ```json
-   {
-     "scripts": {
-       "deploy": "gh-pages -d dist"
-     }
-   }
-   ```
-
-3. **Build and deploy:**
-   ```bash
-   npm run build
-   npm run deploy
-   ```
-
-### Deploy to Netlify
-
-1. Connect your GitHub repository to Netlify
-2. Set build command: `npm run build`
-3. Set publish directory: `dist`
-4. Deploy automatically on git push
+Pushes to `main` deploy through `.github/workflows/deploy.yml` (GitHub Actions, Pages `build_type: workflow`). The workflow also runs weekly and on manual dispatch. There is no `gh-pages` package or Netlify config.
 
 ## 📊 Analytics
 

@@ -1,15 +1,15 @@
 import React from 'react';
-import { learning } from '../data/learning.js';
-import { profile } from '../data/profile.js';
+import { portfolioData } from '../data/portfolioData.js';
 import github from '../data/github.json';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 
-const KIND = {
-  repo: { label: 'Built' },
-  course: { label: 'Studied' },
-  cert: { label: 'Certified' },
-};
+const { learning, profile, site } = portfolioData;
+const copy = site.learning;
+
+const KIND = Object.fromEntries(
+  Object.entries(copy.kinds).map(([key, label]) => [key, { label }]),
+);
 
 const repoUrl = Object.fromEntries(github.repos.map((repo) => [repo.name, repo.htmlUrl]));
 
@@ -31,9 +31,9 @@ const LearningJourney = () => (
   <section id="learning" className="section-padding bg-secondary">
     <div className="container-max">
       <SectionHeader
-        label="Timeline"
-        title="LEARNING"
-        subtitle="What I have studied and built along the way, newest first."
+        label={copy.label}
+        title={copy.title}
+        subtitle={copy.subtitle}
       />
 
       <div className="space-y-0">

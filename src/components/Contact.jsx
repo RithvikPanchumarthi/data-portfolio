@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { portfolioData } from '../data/portfolioData.js';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
+
+const copy = portfolioData.site.contact;
+const fields = copy.fields;
 
 const fieldClass =
   'w-full bg-transparent border-0 border-b border-border rounded-none px-0 py-3 text-foreground placeholder-muted-foreground/60 focus:outline-none focus:border-accent transition-colors';
@@ -28,7 +32,7 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('https://formspree.io/f/xgvlranb', {
+      const response = await fetch(copy.formspreeUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,9 +45,9 @@ const Contact = () => {
         setFormData({ name: '', email: '', subject: '', message: '' });
 
         if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submit', {
-            event_category: 'Contact',
-            event_label: 'Portfolio Contact Form',
+          gtag('event', copy.analytics.event, {
+            event_category: copy.analytics.category,
+            event_label: copy.analytics.label,
           });
         }
       } else {
@@ -56,43 +60,16 @@ const Contact = () => {
     }
   };
 
-  const contactRows = [
-    {
-      label: 'Email',
-      value: 'rithvikpanchumarthi@gmail.com',
-      href: 'mailto:rithvikpanchumarthi@gmail.com',
-    },
-    { label: 'Location', value: 'Minneapolis, MN, USA', href: null },
-    {
-      label: 'LinkedIn',
-      value: 'Connect with me',
-      href: 'https://www.linkedin.com/in/rithvikpanchumarthi/',
-    },
-    {
-      label: 'GitHub',
-      value: 'View my repositories',
-      href: 'https://github.com/RithvikPanchumarthi',
-    },
-    {
-      label: 'Training & Certifications',
-      value: 'Linktree',
-      href: 'https://linktr.ee/rithvikpanchumarthi',
-    },
-    {
-      label: 'Tableau Public',
-      value: 'Profile',
-      href: 'https://public.tableau.com/app/profile/rithvik.sai.panchumarthi',
-    },
-  ];
+  const contactRows = copy.rows;
 
   return (
     <section id="contact" className="section-padding">
       <div className="container-max">
-        <SectionHeader label="Contact" />
+        <SectionHeader label={copy.label} />
 
         <Reveal>
           <h2 className="font-display text-[12vw] lg:text-hero leading-none tracking-tight mb-8 text-foreground">
-            Get in touch
+            {copy.heading}
           </h2>
         </Reveal>
 
@@ -102,14 +79,15 @@ const Contact = () => {
 
         <Reveal className="mb-12 lg:mb-16 max-w-2xl">
           <h3 className="text-xl md:text-2xl lg:text-3xl text-foreground font-light leading-tight mb-4">
-            INTERESTED IN COLLABORATING
-            <br />
-            OR DISCUSSING DATA
-            <br />
-            ENGINEERING OPPORTUNITIES?
+            {copy.promptLines.map((line, index) => (
+              <span key={line}>
+                {index > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h3>
           <p className="text-sm text-muted-foreground tracking-widest uppercase">
-            Fill out the form and I&apos;ll get back to you as soon as possible.
+            {copy.promptNote}
           </p>
         </Reveal>
 
@@ -118,7 +96,7 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <label htmlFor="name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  Name *
+                  {fields.name.label}
                 </label>
                 <input
                   type="text"
@@ -128,12 +106,12 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className={fieldClass}
-                  placeholder="Your full name"
+                  placeholder={fields.name.placeholder}
                 />
               </div>
               <div>
                 <label htmlFor="email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  Email *
+                  {fields.email.label}
                 </label>
                 <input
                   type="email"
@@ -143,14 +121,14 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className={fieldClass}
-                  placeholder="your.email@example.com"
+                  placeholder={fields.email.placeholder}
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="subject" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                Subject *
+                {fields.subject.label}
               </label>
               <input
                 type="text"
@@ -160,13 +138,13 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className={fieldClass}
-                placeholder="What's this about?"
+                placeholder={fields.subject.placeholder}
               />
             </div>
 
             <div>
               <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                Message *
+                {fields.message.label}
               </label>
               <textarea
                 id="message"
@@ -176,7 +154,7 @@ const Contact = () => {
                 required
                 rows={5}
                 className={`${fieldClass} resize-none`}
-                placeholder="Tell me about your project or opportunity..."
+                placeholder={fields.message.placeholder}
               />
             </div>
 
@@ -185,18 +163,18 @@ const Contact = () => {
               disabled={isSubmitting}
               className="text-sm tracking-widest uppercase text-foreground hover:text-accent transition-colors underline underline-offset-8 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Sending…' : 'Send Message'}
+              {isSubmitting ? copy.sendingLabel : copy.submitLabel}
             </button>
 
             {submitStatus === 'success' && (
               <p className="text-sm text-muted-foreground border-l border-accent pl-4">
-                Thank you! Your message has been sent successfully. I&apos;ll get back to you soon!
+                {copy.successMessage}
               </p>
             )}
 
             {submitStatus === 'error' && (
               <p className="text-sm text-muted-foreground border-l border-muted-foreground pl-4">
-                Sorry, there was an error sending your message. Please try again or contact me directly.
+                {copy.errorMessage}
               </p>
             )}
           </form>
@@ -234,31 +212,19 @@ const Contact = () => {
 
         <Reveal className="mt-16 lg:mt-24 pt-12 lg:pt-16 border-t border-border">
           <p className="text-sm text-muted-foreground mb-6 lg:mb-8 tracking-widest uppercase">
-            Or reach me directly
+            {copy.directLabel}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 md:gap-16">
-            <a
-              href="mailto:rithvikpanchumarthi@gmail.com"
-              className="text-lg lg:text-xl text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
-            >
-              rithvikpanchumarthi@gmail.com
-            </a>
-            <a
-              href="https://www.linkedin.com/in/rithvikpanchumarthi/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg lg:text-xl text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/RithvikPanchumarthi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg lg:text-xl text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
-            >
-              GitHub
-            </a>
+            {copy.directLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="text-lg lg:text-xl text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </Reveal>
 
@@ -267,15 +233,15 @@ const Contact = () => {
           className="mt-24 lg:mt-32 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
         >
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Rithvik Panchumarthi. Built with React &amp; Tailwind CSS.
+            © {new Date().getFullYear()} {copy.footerName}. {copy.footerCredit}
           </p>
           <a
-            href="https://www.linkedin.com/in/rithvikpanchumarthi/"
+            href={portfolioData.site.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
           >
-            Follow me on LinkedIn for data engineering updates
+            {copy.linkedinCta}
           </a>
         </Reveal>
       </div>

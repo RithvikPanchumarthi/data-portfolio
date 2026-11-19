@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
+import { portfolioData } from '../data/portfolioData.js';
 import { useActiveSection } from '../hooks/useActiveSection.js';
 import { useScrollVisibility } from '../hooks/useScrollVisibility.js';
 
-const QUOTE =
-  'Data is the new oil, but unlike oil, data is reusable and grows more valuable with use.';
-
-const IDENTITY = 'Rithvik Panchumarthi | Agentic Data Engineer';
-
-const SOCIAL_LINKS = [
-  { href: 'https://github.com/RithvikPanchumarthi', label: 'GitHub', external: true },
-  { href: 'https://www.linkedin.com/in/rithvikpanchumarthi/', label: 'LinkedIn', external: true },
-  { href: 'mailto:rithvikpanchumarthi@gmail.com', label: 'Email', external: false },
-];
+const { identity: IDENTITY, quote: QUOTE, socialLinks: SOCIAL_LINKS } = portfolioData.site.header;
 
 const linkClass = 'text-sm text-foreground hover:text-accent transition-colors';
 

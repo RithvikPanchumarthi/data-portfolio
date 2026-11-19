@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { projects } from '../data/projects.js';
+import { portfolioData } from '../data/portfolioData.js';
 import { logos } from '../data/logos.js';
 import DetailModal from './DetailModal';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
+
+const { projects, site } = portfolioData;
+const copy = site.projects;
 
 const monogram = (title) =>
   title
@@ -73,8 +76,8 @@ const ProjectImage = ({ project }) => {
 };
 
 const projectLinks = (project) => [
-  ...(project.github ? [{ label: 'View Code', href: project.github, kind: 'github' }] : []),
-  ...(project.demo ? [{ label: 'Live Demo', href: project.demo, kind: 'demo' }] : []),
+  ...(project.github ? [{ label: copy.viewCodeLabel, href: project.github, kind: 'github' }] : []),
+  ...(project.demo ? [{ label: copy.liveDemoLabel, href: project.demo, kind: 'demo' }] : []),
 ];
 
 const toModalItem = (project) => ({
@@ -85,17 +88,19 @@ const toModalItem = (project) => ({
   architecture: project.architecture,
 });
 
-const techMatches = (pattern) => (project) =>
-  project.technologies.some((tech) => pattern.test(tech));
-
-const filters = [
-  { key: 'all', label: 'All Projects', match: () => true },
-  { key: 'featured', label: 'Featured', match: (project) => project.featured },
-  { key: 'pipelines', label: 'Pipelines & Warehousing', match: techMatches(/etl|warehous|snowflake|pipeline|data validation/i) },
-  { key: 'sql', label: 'SQL', match: techMatches(/sql/i) },
-  { key: 'python', label: 'Python', match: techMatches(/python/i) },
-  { key: 'visualization', label: 'Visualization', match: techMatches(/visualization/i) },
-];
+const filters = copy.filters.map((filter) => {
+  if (filter.key === 'featured') {
+    return { ...filter, match: (project) => project.featured };
+  }
+  if (filter.pattern) {
+    const pattern = new RegExp(filter.pattern, 'i');
+    return {
+      ...filter,
+      match: (project) => project.technologies.some((tech) => pattern.test(tech)),
+    };
+  }
+  return { ...filter, match: () => true };
+});
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -112,9 +117,9 @@ const Projects = () => {
     <section id="projects" className="section-padding">
       <div className="container-max">
         <SectionHeader
-          label="Selected work"
-          title="PROJECTS"
-          subtitle="A showcase of data engineering projects demonstrating expertise in ETL pipelines, data analysis, and business intelligence solutions."
+          label={copy.label}
+          title={copy.title}
+          subtitle={copy.subtitle}
         />
 
         <div className="flex flex-wrap gap-6 mb-16 lg:mb-24" role="group" aria-label="Filter projects">
@@ -147,7 +152,7 @@ const Projects = () => {
               </div>
               <div className={`flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                 {project.featured && (
-                  <p className="text-xs text-muted-foreground tracking-widest uppercase mb-4">Featured</p>
+                  <p className="text-xs text-muted-foreground tracking-widest uppercase mb-4">{copy.featuredLabel}</p>
                 )}
                 <h3 className="text-2xl md:text-3xl font-light text-foreground mb-4">{project.title}</h3>
                 <p className="text-muted-foreground leading-relaxed text-sm lg:text-base mb-6">
@@ -169,7 +174,7 @@ const Projects = () => {
                     onClick={() => setSelected(toModalItem(project))}
                     className="text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
                   >
-                    Details
+                    {copy.detailsLabel}
                   </button>
                   {project.github && (
                     <a
@@ -178,7 +183,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-accent transition-colors"
                     >
-                      View Code ↗
+                      {copy.viewCodeLabel} ↗
                     </a>
                   )}
                   {project.demo && (
@@ -188,7 +193,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-accent transition-colors"
                     >
-                      Live Demo ↗
+                      {copy.liveDemoLabel} ↗
                     </a>
                   )}
                 </div>
@@ -224,7 +229,7 @@ const Projects = () => {
                       onClick={() => setSelected(toModalItem(project))}
                       className="hover:text-accent transition-colors tracking-widest uppercase"
                     >
-                      Details
+                      {copy.detailsLabel}
                     </button>
                     {project.github && (
                       <a
@@ -247,15 +252,15 @@ const Projects = () => {
 
         <div className="mt-16 lg:mt-24">
           <p className="text-muted-foreground mb-6">
-            Interested in seeing more of my work or discussing a collaboration?
+            {copy.morePrompt}
           </p>
           <a
-            href="https://github.com/RithvikPanchumarthi"
+            href={site.links.github}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm tracking-widest uppercase text-foreground hover:text-accent transition-colors underline underline-offset-4"
           >
-            View All on GitHub ↗
+            {copy.githubCta} ↗
           </a>
         </div>
       </div>

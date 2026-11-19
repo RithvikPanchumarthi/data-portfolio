@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { profile } from '../data/profile.js';
+import { portfolioData } from '../data/portfolioData.js';
 import BuilderStats from './BuilderStats';
+
+const { profile, site } = portfolioData;
+const { location, resume } = site.hero;
 
 const Hero = () => {
   const reduceMotion = useReducedMotion();
@@ -30,11 +33,11 @@ const Hero = () => {
               transition={{ delay: 0.7, duration: 0.8 }}
               className="mt-4 text-xs text-muted-foreground tracking-widest uppercase"
             >
-              Minneapolis, MN, USA (Open to Relocation)
+              {location}
             </motion.p>
 
             <motion.a
-              href="https://linktr.ee/rithvikpanchumarthi"
+              href={resume.href}
               target="_blank"
               rel="noopener noreferrer"
               initial={reduceMotion ? false : { opacity: 0 }}
@@ -42,7 +45,7 @@ const Hero = () => {
               transition={{ delay: 0.85, duration: 0.8 }}
               className="inline-block mt-4 text-sm text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
             >
-              Resume & Links
+              {resume.label}
             </motion.a>
           </motion.div>
         </div>
