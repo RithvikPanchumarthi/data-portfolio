@@ -1,6 +1,16 @@
 import React from 'react';
 import Reveal from './Reveal';
 
+const TitleLines = ({ title }) => {
+  if (!Array.isArray(title)) return title;
+  return title.map((line, index) => (
+    <span key={`${line}-${index}`}>
+      {index > 0 && <br />}
+      {line}
+    </span>
+  ));
+};
+
 const SectionHeader = ({ label, title, subtitle }) => (
   <>
     {label && (
@@ -12,7 +22,7 @@ const SectionHeader = ({ label, title, subtitle }) => (
     {title && (
       <Reveal>
         <h2 className="font-display text-[10vw] lg:text-section leading-none tracking-tight text-foreground">
-          {title}
+          <TitleLines title={title} />
         </h2>
       </Reveal>
     )}

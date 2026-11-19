@@ -2,7 +2,7 @@
 name: portfolio-content
 description: >-
   Add or update portfolio projects, contact details, hero/about copy, colors,
-  and theme settings. Use when the user asks to edit projects.js, add a project
+  and theme settings. Use when the user asks to edit portfolioData.js, add a project
   card, change featured projects, update email/LinkedIn/GitHub links, tweak
   Tailwind primary colors, or customize portfolio content.
 ---
@@ -21,7 +21,7 @@ description: >-
 
 ### Add / edit a project
 
-1. Open `src/data/projects.js`.
+1. Open `portfolioData.projects` in `src/data/portfolioData.js`.
 2. Add or update an entry with: `id`, `title`, `description`, `technologies`, `github`, optional `demo`, `image`, `featured`.
 3. Place new images in `public/` and set `image` to `/data-portfolio/<filename>`.
 4. Use the next unused numeric `id`.
@@ -36,9 +36,9 @@ Edit both when relevant:
 
 ### Update header / hero / about copy
 
-- **Identity lives in the header**, not the hero. Edit `IDENTITY` in `src/components/Header.jsx` (currently “Rithvik Panchumarthi | Agentic Data Engineer”). That button is the site H1 and scrolls to `#hero`. Do not put a giant name H1 back in Hero.
-- Hero (`src/components/Hero.jsx`): LinkedIn `profile.headline`, Minneapolis, Resume & Links, then Building with AI stats (`BuilderStats` / `aiStats.js`). No portrait.
-- About (`src/components/About.jsx`): text + skills only. **No project screenshot plates** — Tableau / COVID / Power BI images stay in `Projects.jsx`.
+- **Identity lives in the header**, not the hero. Edit `portfolioData.site.header.identity` (currently “Rithvik Panchumarthi | Agentic Data Engineer”). That button is the site H1 and scrolls to `#hero`. Do not put a giant name H1 back in Hero.
+- Hero: LinkedIn `portfolioData.profile.headline`, `site.hero.location`, Resume & Links, then Building with AI stats (`BuilderStats` / `portfolioData.aiStats`). No portrait.
+- About: text + skills from `portfolioData.site.about` only. **No project screenshot plates** — Tableau / COVID / Power BI images stay in `Projects.jsx`. The unverified 30% / 25% pull quote stays removed.
 - Sticky data-oil quote lives in `Header.jsx`. Do not re-add it to the Contact footer.
 - Nav comes from `sections` in `src/App.jsx`. There is no AI Builder nav item.
 
@@ -51,7 +51,7 @@ Edit both when relevant:
 
 - Image and public asset URLs must include `/data-portfolio/`.
 - Do not invent new project schema fields unless the UI already consumes them (`Projects.jsx`).
-- Prefer data edits in `projects.js` over hardcoding project cards in components.
+- Prefer data edits in `portfolioData.js` over hardcoding project cards or section copy in components.
 - Preserve Formspree / analytics integrations unless the user asks to change them.
 
 ## Verify

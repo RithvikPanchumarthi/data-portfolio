@@ -46,8 +46,7 @@ npm run preview
 
 ### Deploy
 
-- GitHub Pages: `npm run deploy` (runs build via `predeploy`)
-- Netlify: use `netlify.toml` (`npm run build` → `dist`)
+- GitHub Pages: `.github/workflows/deploy.yml` on push to `main` (also weekly and manual). There is no `gh-pages` script and no `netlify.toml`.
 
 ## Hard constraints
 

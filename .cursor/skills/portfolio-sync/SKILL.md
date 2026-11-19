@@ -23,20 +23,20 @@ description: >-
 - The script keeps the old snapshot if the API fails; read its console output to confirm `wrote N repos`.
 - Never hand-edit `github.json`. To change how a repo appears, edit its README or GitHub description.
 
-## LinkedIn → `src/data/profile.js` (manual)
+## LinkedIn → `portfolioData.profile` (manual)
 
 LinkedIn has no public profile API and blocks signed-out reads. Do not scrape it.
 
 1. Ask the user for a LinkedIn "Save to PDF" export (Profile → More → Save to PDF), or pasted text.
-2. Copy into `profile.js` only what the export states: `experience`, `education`, `certifications`. Keep dates in the export's format.
+2. Copy into `src/data/portfolioData.js` (`profile`) only what the export states: `experience`, `education`, `certifications`. Keep dates in the export's format.
 3. Set `asOf` to the export date (`YYYY-MM-DD`).
 4. Do not commit the PDF itself.
 5. The Experience section and nav item appear automatically once `experience` or `education` is non-empty. Certifications also show in the Learning Journey.
 
-## Cursor stats → `src/data/aiStats.js` (manual)
+## Cursor stats → `portfolioData.aiStats` (manual)
 
 1. Ask the user for the numbers or a screenshot of their Cursor profile/stats page (tokens, agents, longest-running agent).
-2. Fill `cursor.tokens`, `cursor.agents`, `cursor.longestRunningAgent`. Numbers are compacted on screen (1284 → 1.3K); strings show as-is.
+2. Fill `cursor.tokens`, `cursor.agents`, `cursor.longestRunningAgent` in `src/data/portfolioData.js`. Numbers are compacted on screen (1284 → 1.3K); strings show as-is.
 3. Set `cursor.asOf`. The "as of" line and profile link only show once `asOf` is set.
 
 ## Hard constraints
