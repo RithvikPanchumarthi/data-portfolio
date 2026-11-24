@@ -1,9 +1,12 @@
 import React from 'react';
-import { profile, hasExperience } from '../data/profile.js';
+import { hasExperience, portfolioData } from '../data/portfolioData.js';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 
-const formatPeriod = (start, end) => `${start} — ${end ?? 'Present'}`;
+const { profile, site } = portfolioData;
+const copy = site.experience;
+
+const formatPeriod = (start, end) => `${start} — ${end ?? copy.presentLabel}`;
 
 const Experience = () => {
   if (!hasExperience) return null;
@@ -13,9 +16,9 @@ const Experience = () => {
       <div className="section-padding">
         <div className="container-max">
           <SectionHeader
-            label="Career"
-            title={<>WORK<br />EXPERIENCE</>}
-            subtitle="Roles, education and certifications, from my LinkedIn profile."
+            label={copy.label}
+            title={copy.title}
+            subtitle={copy.subtitle}
           />
 
           <div className="space-y-0">
@@ -62,7 +65,7 @@ const Experience = () => {
 
       <div id="education" className="section-padding bg-secondary">
         <div className="container-max">
-          <SectionHeader label="Background" title="EDUCATION" />
+          <SectionHeader label={copy.educationLabel} title={copy.educationTitle} />
 
           <div className="space-y-0 mb-24">
             {profile.education.map((edu) => (
@@ -94,7 +97,7 @@ const Experience = () => {
 
           {profile.certifications.length > 0 && (
             <>
-              <SectionHeader label="Credentials" title="CERTIFICATIONS" />
+              <SectionHeader label={copy.certificationsLabel} title={copy.certificationsTitle} />
               <div className="space-y-0">
                 {profile.certifications.map((cert, index) => (
                   <Reveal
@@ -109,7 +112,7 @@ const Experience = () => {
                         </h3>
                         {cert.issuer && (
                           <p className="text-sm text-muted-foreground mt-1 md:mt-2">
-                            Certified — {cert.issuer}
+                            {copy.certifiedPrefix} — {cert.issuer}
                           </p>
                         )}
                       </div>
@@ -130,7 +133,7 @@ const Experience = () => {
             rel="noopener noreferrer"
             className="inline-block mt-12 text-sm text-muted-foreground hover:text-accent transition-colors underline underline-offset-4"
           >
-            Full profile on LinkedIn
+            {copy.linkedinCta}
           </a>
         </div>
       </div>

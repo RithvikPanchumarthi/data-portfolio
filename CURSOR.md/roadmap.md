@@ -10,7 +10,7 @@ This is a planning document. Phases were originally unimplemented; each one list
 
 Two layers of content, so narrative control and freshness don't conflict:
 
-- **Curated layer** (manual, intentional) — `src/data/projects.js`. He edits this only when he wants to promote a specific flagship project.
+- **Curated layer** (manual, intentional) — `portfolioData.projects` in `src/data/portfolioData.js`. He edits this only when he wants to promote a specific flagship project.
 - **Automatic layer** (zero maintenance) — a live GitHub feed that reflects whatever he last pushed, with no edits required.
 
 LinkedIn has no free public API for post feeds, so it gets a lightweight, static treatment (a follow link/badge) rather than a synced feed.
@@ -19,7 +19,7 @@ No existing projects are removed. All eight current entries in `projects.js` sta
 
 ## Phase 1 — Content re-prioritization (curated layer)
 
-- Re-rank `featured` flags / array order in [src/data/projects.js](src/data/projects.js) so pipeline, cloud, and orchestration work leads, ahead of Excel/Tableau-only pieces.
+- Re-rank `featured` flags / array order in `portfolioData.projects` (`src/data/portfolioData.js`) so pipeline, cloud, and orchestration work leads, ahead of Excel/Tableau-only pieces.
 - Cross-check [src/components/Hero.jsx](src/components/Hero.jsx) tagline and [src/components/About.jsx](src/components/About.jsx) copy/proficiency bars against what's actually featured — adjust only if they drift from reality; do not invent new claims or metrics not already stated in the repo.
 - No deletions. Current entries (id): Python Data Engineering Suite (1), Advanced SQL Data Processing (2), Enterprise Excel Analytics Solutions (3), Marketing Campaign Analytics Platform (4, featured), COVID-19 Data Intelligence System (5, featured), Sales Performance Analytics Dashboard (6, featured), Snowflake Cloud Data Warehouse & Governance (7, featured), WorkVibe — Talent Matching SaaS (8, featured).
 - Shipped order (2026-11-04): 7 → 5 → 2 → 1 featured (capped at four); 4, 6, 8, 3 as list rows.
@@ -48,7 +48,7 @@ Operational notes:
 
 ## Phase 4 — Low-maintenance freshness loop
 
-- Ongoing cadence for him: only touch `projects.js` (curated layer) when promoting a new flagship project. GitHub Activity and the LinkedIn badge require zero maintenance.
+- Ongoing cadence for him: only touch `portfolioData.projects` (curated layer) when promoting a new flagship project. GitHub Activity and the LinkedIn badge require zero maintenance.
 - Once Phases 1–3 are implemented, log the change in [memory.md](memory.md) and clear the corresponding "Open next steps" items.
 
 ## Content layers after roadmap execution
@@ -56,7 +56,7 @@ Operational notes:
 ```mermaid
 flowchart TD
     subgraph curated [Curated Layer - manual]
-        ProjectsData[projects.js] --> FeaturedSection[Featured Projects Section]
+        ProjectsData[portfolioData.js] --> FeaturedSection[Featured Projects Section]
     end
     subgraph automatic [Automatic Layer - zero maintenance]
         GitHubAPI["GitHub public REST API"] --> ActivityComponent[GitHubActivity.jsx]
@@ -71,7 +71,7 @@ flowchart TD
 
 | File | Change |
 | --- | --- |
-| [src/data/projects.js](src/data/projects.js) | Reorder / re-flag featured projects |
+| [src/data/portfolioData.js](src/data/portfolioData.js) | Reorder / re-flag featured projects |
 | [src/components/Hero.jsx](src/components/Hero.jsx) | Copy check only |
 | [src/components/About.jsx](src/components/About.jsx) | Copy check only |
 | `src/components/GitHubActivity.jsx` | New — live GitHub feed component |

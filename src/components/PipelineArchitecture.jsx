@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { pipelineContext, pipelineStages, pipelineRails } from '../data/pipelines.js';
+import { portfolioData } from '../data/portfolioData.js';
 import Reveal from './Reveal';
 import SectionHeader from './SectionHeader';
+
+const { context: pipelineContext, stages: pipelineStages, rails: pipelineRails, defaultStageKey } =
+  portfolioData.pipelines;
+const copy = portfolioData.site.pipelines;
 
 const toneBar = {
   neutral: 'bg-muted',
@@ -18,21 +22,21 @@ const Connector = () => (
 );
 
 const PipelineArchitecture = () => {
-  const [activeKey, setActiveKey] = useState('silver');
+  const [activeKey, setActiveKey] = useState(defaultStageKey);
   const active = pipelineStages.find((stage) => stage.key === activeKey) ?? pipelineStages[0];
 
   return (
     <section id="pipelines" className="section-padding">
       <div className="container-max">
         <SectionHeader
-          label="How I build"
-          title={<>MEDALLION<br />PIPELINES</>}
+          label={copy.label}
+          title={copy.title}
           subtitle={pipelineContext.summary}
         />
 
         <Reveal>
           <p className="text-xs text-muted-foreground tracking-widest uppercase mb-8">
-            {pipelineContext.role} · select a layer
+            {pipelineContext.role} · {copy.selectHint}
           </p>
 
           <ol className="flex flex-col lg:flex-row lg:items-stretch gap-3 lg:gap-2">
@@ -65,7 +69,7 @@ const PipelineArchitecture = () => {
             aria-live="polite"
           >
             <div className="lg:col-span-4">
-              <p className="text-xs text-muted-foreground tracking-widest uppercase mb-3">Layer</p>
+              <p className="text-xs text-muted-foreground tracking-widest uppercase mb-3">{copy.layerLabel}</p>
               <p className="font-display text-5xl text-foreground">{active.name}</p>
               <div className="flex flex-wrap gap-2 mt-6">
                 {active.tech.map((tech) => (

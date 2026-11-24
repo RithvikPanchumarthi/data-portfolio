@@ -1,27 +1,32 @@
 import React from 'react';
-import { aiStats } from '../data/aiStats.js';
+import { portfolioData } from '../data/portfolioData.js';
 import github from '../data/github.json';
 import { formatCompact, formatDate } from '../utils/format.js';
 import Reveal from './Reveal';
 
+const { aiStats, site } = portfolioData;
 const { cursor } = aiStats;
+const copy = site.builder;
 
-// Only real values become tiles; a null stat is simply not shown.
-const tiles = [
-  { label: 'Cursor tokens', value: cursor.tokens },
-  { label: 'Cursor agents run', value: cursor.agents },
-  { label: 'Longest-running agent', value: cursor.longestRunningAgent },
-  { label: 'Public GitHub repos', value: github.repos.filter((repo) => !repo.fork).length },
-].filter((tile) => tile.value !== null && tile.value !== undefined);
+const tileValues = {
+  tokens: cursor.tokens,
+  agents: cursor.agents,
+  longestRunningAgent: cursor.longestRunningAgent,
+  publicRepos: github.repos.filter((repo) => !repo.fork).length,
+};
+
+const tiles = copy.tiles
+  .map((tile) => ({ label: tile.label, value: tileValues[tile.key] }))
+  .filter((tile) => tile.value !== null && tile.value !== undefined);
 
 const BuilderStats = () => (
   <div className="px-4 sm:px-6 md:px-12 lg:px-16 pb-24 md:pb-32 lg:pb-40">
     <div className="container-max">
       <Reveal className="mb-12 lg:mb-16">
-        <span className="text-sm text-muted-foreground tracking-widest uppercase">Building with AI</span>
+        <span className="text-sm text-muted-foreground tracking-widest uppercase">{copy.label}</span>
         <div className="w-6 h-px bg-accent mt-2" />
         <p className="mt-6 text-base lg:text-lg text-muted-foreground max-w-3xl leading-relaxed">
-          How I pair AI agents with data engineering fundamentals to ship faster.
+          {copy.intro}
         </p>
       </Reveal>
 
@@ -38,7 +43,7 @@ const BuilderStats = () => (
 
       {cursor.models?.length > 0 && (
         <Reveal className="flex flex-wrap items-center gap-3 mb-16 lg:mb-24">
-          <span className="text-sm text-muted-foreground tracking-widest uppercase">Models I build with</span>
+          <span className="text-sm text-muted-foreground tracking-widest uppercase">{copy.modelsLabel}</span>
           {cursor.models.map((model) => (
             <span
               key={model}
@@ -66,14 +71,14 @@ const BuilderStats = () => (
 
       {cursor.asOf && (
         <p className="mt-10 text-xs text-muted-foreground">
-          Cursor stats as of {formatDate(cursor.asOf)} ·{' '}
+          {copy.asOfLabel} {formatDate(cursor.asOf)} ·{' '}
           <a
             href={cursor.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-accent"
           >
-            Cursor profile
+            {copy.profileLinkLabel}
           </a>
         </p>
       )}

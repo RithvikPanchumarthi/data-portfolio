@@ -4,7 +4,7 @@ import GrainOverlay from './components/GrainOverlay';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
-import { hasExperience } from './data/profile.js';
+import { hasExperience } from './data/portfolioData.js';
 import PipelineArchitecture from './components/PipelineArchitecture';
 import Projects from './components/Projects';
 import GitHubActivity from './components/GitHubActivity';
