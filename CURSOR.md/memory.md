@@ -13,7 +13,7 @@ Last updated: 2026-11-24
 | Owner | Rithvik Panchumarthi |
 | Live site | https://rithvikpanchumarthi.github.io/data-portfolio/ |
 | Vite base | `/data-portfolio/` |
-| Local URL | Vite default http://localhost:5173/data-portfolio/. On the owner's machine this clone uses **5174** because a sibling clone holds 5173. Cloud sessions use 5173. |
+| Local URL | Vite default http://localhost:5173/data-portfolio/. On the owner's machine this clone uses **5174** because a sibling clone holds 5173. Cloud sessions use 5173. The Claude desktop preview (`.claude/launch.json`) is pinned to **5180** (`--strictPort`). |
 | Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. No `ThemeToggle`, `useTheme`, or `themeConfig`. |
 | Pipelines | `#pipelines` between Experience and Projects (nav item “Pipelines”): `PipelineArchitecture.jsx` + `portfolioData.pipelines`, a clickable Databricks medallion (Sources → Bronze → Silver → Quality gate → Gold) restating only the Curi role in `portfolioData.profile`. No Fabric / AutoSys content. Tokens `--bronze` / `--silver` / `--gold`. |
 | SEO / previews | `index.html`: title “Rithvik Panchumarthi \| Senior Data Engineer”, description from the LinkedIn headline, canonical, Open Graph + Twitter tags, `public/og-image.png` (1200×630), `public/favicon.svg` (the old `/vite.svg` icon never existed). |
@@ -49,6 +49,7 @@ Last updated: 2026-11-24
 - Headless check at 390 px (menu, Pipelines nav jump, SQL filter, Details modal): no horizontal overflow, 16/16 images load. Only fault was a dev-only 404 at `/data-portfolio/data-portfolio/favicon.svg`.
 - Cause: Vite 4 prefixes the base onto `%BASE_URL%` in dev, so the base was applied twice. `index.html` now uses `href="/favicon.svg"` (Vite adds the base itself). Verified: dev serves `/data-portfolio/favicon.svg` (200), `npm run build` output has the same href, and a re-run shows no console errors or failed requests. Supersedes the `%BASE_URL%favicon.svg` note in the 2026-11-19 entry.
 - Carried the lesson into shared agent context: `CLAUDE.md` (index.html asset-link rule + how to verify UI headlessly), `.cursor/skills/portfolio-dev/SKILL.md` (hard constraint + stuck tip; shared with `.claude/skills` via symlink), `CURSOR.md/customization.md` (favicon line). `.claude/settings.json` and `launch.json` unchanged.
+- Aligned the port docs with `.claude/launch.json`: terminal dev = 5173 (falls forward if taken), owner's clone often 5174, Claude desktop preview = 5180 strict. Documented in `CLAUDE.md`, `portfolio-dev` skill, and the Local URL row above. No config changed.
 - Dev server on this machine was on 5173 (free at the time), not 5174.
 
 ### 2026-11-19 — [Cursor] Single data module and repo cleanup

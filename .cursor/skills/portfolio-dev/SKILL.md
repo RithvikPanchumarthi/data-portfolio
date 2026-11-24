@@ -35,7 +35,7 @@ npm install
 npm run dev
 ```
 
-Local URL includes the Vite base path: `/data-portfolio/`.
+Local URL includes the Vite base path: `/data-portfolio/`. Default port is 5173 (Vite moves to the next free port if taken, so read the "Local:" line). The Claude desktop preview uses `.claude/launch.json`, pinned to 5180 with `--strictPort`.
 
 ### Build and preview
 
