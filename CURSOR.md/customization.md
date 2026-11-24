@@ -36,7 +36,7 @@ Rules:
 
 ## Link previews and favicon
 
-`index.html` holds the title, meta description, canonical URL, Open Graph and Twitter tags. The preview image is `public/og-image.png` (1200×630) and the tab icon is `public/favicon.svg`. Keep the description in step with `profile.headline`.
+`index.html` holds the title, meta description, canonical URL, Open Graph and Twitter tags. The preview image is `public/og-image.png` (1200×630) and the tab icon is `public/favicon.svg`, linked as `href="/favicon.svg"` (Vite prepends the base; `%BASE_URL%` double-prefixes in dev). Keep the description in step with `profile.headline`.
 
 ## Synced data (see the `portfolio-sync` skill)
 
