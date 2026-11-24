@@ -51,6 +51,7 @@ npm run preview
 ## Hard constraints
 
 - Do not change `base: '/data-portfolio/'` in `vite.config.js` unless the user explicitly changes hosting path.
+- In `index.html`, reference `public/` files with a plain root path (`href="/favicon.svg"`); Vite adds the base itself. Do not use `%BASE_URL%` there (Vite 4 dev applies the base twice and 404s). Paths written in JS/JSX data still need the `/data-portfolio/` prefix.
 - Prefer existing scripts in `package.json`; do not invent alternate tooling.
 - Keep changes scoped to the requested task (dev server vs build vs deploy).
 
@@ -58,4 +59,5 @@ npm run preview
 
 - Blank page locally → check URL includes `/data-portfolio/`
 - Broken images after deploy → paths must start with `/data-portfolio/`
+- 404s in the console only in dev → check `index.html` asset hrefs (see constraints above)
 - Build failures → run `npm run build` and fix reported errors only

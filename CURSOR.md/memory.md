@@ -48,6 +48,7 @@ Last updated: 2026-11-24
 - Checked local `main` against `origin/main` (`1fbd49a`): identical, clean tree.
 - Headless check at 390 px (menu, Pipelines nav jump, SQL filter, Details modal): no horizontal overflow, 16/16 images load. Only fault was a dev-only 404 at `/data-portfolio/data-portfolio/favicon.svg`.
 - Cause: Vite 4 prefixes the base onto `%BASE_URL%` in dev, so the base was applied twice. `index.html` now uses `href="/favicon.svg"` (Vite adds the base itself). Verified: dev serves `/data-portfolio/favicon.svg` (200), `npm run build` output has the same href, and a re-run shows no console errors or failed requests. Supersedes the `%BASE_URL%favicon.svg` note in the 2026-11-19 entry.
+- Carried the lesson into shared agent context: `CLAUDE.md` (index.html asset-link rule + how to verify UI headlessly), `.cursor/skills/portfolio-dev/SKILL.md` (hard constraint + stuck tip; shared with `.claude/skills` via symlink), `CURSOR.md/customization.md` (favicon line). `.claude/settings.json` and `launch.json` unchanged.
 - Dev server on this machine was on 5173 (free at the time), not 5174.
 
 ### 2026-11-19 — [Cursor] Single data module and repo cleanup

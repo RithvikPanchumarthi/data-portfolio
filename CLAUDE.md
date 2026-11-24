@@ -16,4 +16,6 @@ project context lives in tool-neutral files and is imported here rather than dup
   - `portfolio-content` — projects, contact, copy, theme
   - `portfolio-sync` — GitHub / LinkedIn / Cursor stats data
 - **Commands**: `npm run dev` (http://localhost:5173/data-portfolio/), `npm run build`, `npm run preview`.
+- **Verifying UI**: no Playwright in the repo. Headless Chrome (`/Applications/Google Chrome.app`) works for screenshots, but `--window-size` won't go below ~500 px, so for a true 390 px mobile check use a 390 px iframe or `playwright-core` installed in the scratchpad with `executablePath` set to Chrome. Don't add either to `package.json`.
+- **index.html asset links**: use `/favicon.svg`-style root paths (Vite adds the base). Never `%BASE_URL%` — it double-prefixes in dev.
 - **Deploy**: pushing to `main` deploys via `.github/workflows/deploy.yml`. Don't run `npm run deploy` or push unless asked.
