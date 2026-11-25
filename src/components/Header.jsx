@@ -47,7 +47,7 @@ const Header = ({ sections }) => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-accent/40">
         <div className="flex items-center justify-between gap-3 px-6 py-3 md:grid md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center md:gap-6 md:px-10">
-          <h1 className="min-w-0 text-sm font-medium tracking-tight leading-snug text-foreground">
+          <div className="min-w-0 text-sm font-medium tracking-tight leading-snug text-foreground">
             <button
               type="button"
               onClick={() => scrollToSection('hero')}
@@ -56,7 +56,7 @@ const Header = ({ sections }) => {
             >
               {IDENTITY}
             </button>
-          </h1>
+          </div>
           <p className="hidden min-w-0 text-center text-xs italic leading-relaxed text-muted-foreground md:block">
             {QUOTE}
           </p>
