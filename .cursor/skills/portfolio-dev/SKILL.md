@@ -3,7 +3,7 @@ name: portfolio-dev
 description: >-
   Run, build, preview, and deploy the React/Vite/Tailwind data portfolio.
   Use when starting the local server, fixing Vite base-path issues, building
-  for production, deploying to GitHub Pages or Netlify, or when the user
+  for production, deploying to GitHub Pages, or when the user
   mentions npm run dev, preview, deploy, or local development setup.
 ---
 

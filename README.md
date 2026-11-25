@@ -28,7 +28,7 @@ Visit the live site: [https://rithvikpanchumarthi.github.io/data-portfolio/](htt
 
 Before running this project, make sure you have:
 
-- **Node.js** (version 16 or higher)
+- **Node.js** (version 18 or higher)
 - **npm** or **yarn** package manager
 
 ### Installing Node.js

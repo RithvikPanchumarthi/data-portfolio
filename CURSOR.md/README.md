@@ -15,7 +15,7 @@ Cursor-oriented docs for the data portfolio. Agents should read these before cha
 | [getting-started.md](getting-started.md) | Install, run, preview locally |
 | [project-structure.md](project-structure.md) | Finding components or data files |
 | [customization.md](customization.md) | Projects, contact, colors, theme |
-| [deployment.md](deployment.md) | Build, GitHub Pages, Netlify |
+| [deployment.md](deployment.md) | Build and GitHub Pages deploy |
 | [roadmap.md](roadmap.md) | Long-term content/feature direction (GitHub activity feed, LinkedIn badge, project prioritization) |
 
 ## Project skills

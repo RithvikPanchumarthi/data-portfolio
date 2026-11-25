@@ -15,6 +15,7 @@ data-portfolio/
 │   │   ├── Hero.jsx         # LinkedIn headline, location, Resume & Links + Building with AI stats (no name H1)
 │   │   ├── About.jsx        # Editorial about + skills list (no project plates)
 │   │   ├── Experience.jsx   # LinkedIn data; hidden until portfolioData.profile is filled
+│   │   ├── PipelineArchitecture.jsx # Databricks medallion (#pipelines)
 │   │   ├── Projects.jsx
 │   │   ├── GitHubActivity.jsx
 │   │   ├── LearningJourney.jsx
@@ -29,8 +30,7 @@ data-portfolio/
 │   │   └── logos.js         # Brand SVG import map (string keys in portfolioData)
 │   ├── hooks/
 │   │   ├── useActiveSection.js
-│   │   ├── useScrollVisibility.js
-│   │   └── useReveal.js
+│   │   └── useScrollVisibility.js
 │   ├── utils/
 │   │   └── format.js        # Compact numbers, relative dates
 │   ├── App.jsx

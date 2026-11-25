@@ -3,7 +3,7 @@
 
 Durable context for Cursor agents. **Read this at session start. Update it after meaningful work.** Prefer facts written here over chat memory or guesses.
 
-Last updated: 2026-11-24
+Last updated: 2026-11-25
 
 ## Ground truth (do not invent)
 
@@ -42,6 +42,12 @@ Last updated: 2026-11-24
 - Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
+
+### 2026-11-25 — [Claude] Repo audit and doc cleanup
+
+- Audited memory against the code: base path, section order, featured ids, favicon href, deploy triggers all match.
+- Removed stale Netlify wording (`CURSOR.md/README.md`, `portfolio-dev` skill description), Node 16+ → 18+ in `README.md` (CI uses 18), deleted unused `src/hooks/useReveal.js`, added `PipelineArchitecture.jsx` to `project-structure.md`, added `public/robots.txt`. `npm run build` passes and emits `dist/robots.txt`.
+- Not done (needs owner OK): visually hidden name H1 in the Hero, JSON-LD Person schema, dbt logo. Noted but untouched: unneeded `@types/*` devDependencies, old `lucide-react` pin.
 
 ### 2026-11-24 — [Claude] Favicon dev 404 fix
 
