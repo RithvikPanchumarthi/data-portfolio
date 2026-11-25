@@ -27,7 +27,7 @@ Portfolio project guidance for Cursor (local and cloud) and Claude Code.
 ## Non-negotiables
 
 - Vite base path: `/data-portfolio/`
-- Cream-light editorial; identity lives in the sticky Header (not a giant Hero H1) — see `CURSOR.md/memory.md`
+- Top of page is the Elias author hero (its own navbar, giant name H1, orange/ink palette); no sticky Header. The rest of the site stays cream-light editorial — see `CURSOR.md/memory.md`
 - Do not hallucinate facts missing from memory or source — verify in the repo
 - Update `CURSOR.md/memory.md` after meaningful work
 - `src/data/portfolioData.js` is the content module. Items marked **Planned** in `.cursor/rules/portfolio-memory.mdc` (`/docs/contracts` and the other `/docs` lanes, `/tests`, a dark-mode toggle) are not built. Do not create them unless the owner asks.

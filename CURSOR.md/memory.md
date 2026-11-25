@@ -14,12 +14,12 @@ Last updated: 2026-11-25
 | Live site | https://rithvikpanchumarthi.github.io/data-portfolio/ |
 | Vite base | `/data-portfolio/` |
 | Local URL | Vite default http://localhost:5173/data-portfolio/. On the owner's machine this clone uses **5174** because a sibling clone holds 5173. Cloud sessions use 5173. The Claude desktop preview (`.claude/launch.json`) is pinned to **5180** (`--strictPort`). |
-| Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. No `ThemeToggle`, `useTheme`, or `themeConfig`. |
+| Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. Exception: the Elias hero keeps its template look (`--color-ea-*` orange/ink tokens; Inter 900, Figtree, IBM Plex Mono from Google Fonts in `index.html`). No `ThemeToggle`, `useTheme`, or `themeConfig`. |
 | Pipelines | `#pipelines` between Experience and Projects (nav item “Pipelines”): `PipelineArchitecture.jsx` + `portfolioData.pipelines`, a clickable Databricks medallion (Sources → Bronze → Silver → Quality gate → Gold) restating only the Curi role in `portfolioData.profile`. No Fabric / AutoSys content. Tokens `--bronze` / `--silver` / `--gold`. |
 | SEO / previews | `index.html`: title “Rithvik Panchumarthi \| Senior Data Engineer”, description from the LinkedIn headline, canonical, Open Graph + Twitter tags, `public/og-image.png` (1200×630), `public/favicon.svg` (the old `/vite.svg` icon never existed). |
-| Hero | LinkedIn `portfolioData.profile.headline`, Minneapolis, Resume & Links, then Building with AI stats from `portfolioData.aiStats`. The only `<h1>` is a visually hidden (`sr-only`) one in `Hero.jsx` reading `site.header.identity`; no visible name H1 and no portrait photo. |
-| Header | Sticky bar: site identity “Rithvik Panchumarthi \| Agentic Data Engineer” (scrolls to `#hero`); data-oil quote; GitHub / LinkedIn / Email; corner section nav. |
-| Motion | `framer-motion` (`Reveal`, hero entrance). Grain overlay in `GrainOverlay.jsx`. |
+| Hero | Elias author hero: `src/components/EliasHero.jsx` (props from `portfolioData.site.eliasHero`) renders the vendored `src/components/ui/elias-author-hero.tsx`. Splash intro, navbar (About, Pipelines, Projects, Contact; Resume CTA = `site.hero.resume.href`; status “Now · Senior Data Engineer, Curi”), giant name RITHVIK / PANCHUMARTHI (the page's only `<h1>`; sized by `nameScale`), placeholder intro copy, data-oil quote as description, featured projects 7/5/2/1 as the book carousel, social links from `site.header.socialLinks`. Portrait off (`portrait: null`) until the owner supplies a cut-out; the “letter to tomorrow” is hidden until the owner writes it. Building with AI (`BuilderStats`) renders in its own section right after. |
+| Header | None. `Header.jsx`, `Hero.jsx`, `useActiveSection`, `useScrollVisibility` and `--header-height` were removed (2026-11-25); the Elias navbar is the only nav and does not stick. `site.header` in data is still read for the quote and social links. |
+| Motion | `framer-motion` 11 (`Reveal`; the Elias hero imports `m` / `LazyMotion` from it — no `motion` package). Grain overlay in `GrainOverlay.jsx`. |
 | Project data | `portfolioData.projects` in `src/data/portfolioData.js`. Array order = display order. Featured (capped at four): 7, 5, 2, 1; list rows: 4, 6, 8, 9, 3. Martian Dynamics (9) has no repo link (private), so `Projects.jsx` hides View Code when `github` is unset. Snowflake (7) and Martian Dynamics (9) have an `architecture` diagram in its Details modal. Filter labels and technology patterns are `portfolioData.site.projects.filters`. |
 | Contact | Formspree `https://formspree.io/f/xgvlranb` in `portfolioData.site.contact.formspreeUrl`; analytics GA `G-HSZSSRQ2ST`, Clarity `s37la0ur19` in `index.html` |
 | Deploy | GitHub Pages via GitHub Actions (`build_type: workflow`) on push to `main` + weekly + manual dispatch. No `gh-pages` script or dependency. `netlify.toml` removed (2026-11-19); no Netlify site deploys this repo. |
@@ -37,11 +37,18 @@ Last updated: 2026-11-25
 - Content is `src/data/portfolioData.js` (`portfolioData`, `hasExperience`). Split files `profile.js`, `projects.js`, `pipelines.js`, `learning.js`, and `aiStats.js` are gone. `github.json` and `logos.js` remain.
 - Deploy is GitHub Actions only. `netlify.toml` and the `gh-pages` script/devDependency are gone. `deploy.yml` is unchanged.
 - PRs #3–#12 merged and deployed (2026-11-18: #11 rule reconcile, #12 DP-600 + Martian Dynamics).
-- Cream-light editorial with identity in the sticky header (a plain `div` + button, not an `h1`), no visible Hero name H1 (hidden `sr-only` h1 only), AI stats in the hero, sticky quote, About without project plates, no AI Builder nav.
+- Elias author hero at the top (no sticky header), Building with AI section after it, cream-light editorial below, About without project plates, no AI Builder nav.
 - The remote `claude` and `claude-cloud-session` branches are gone (2026-11-18: only `main` on origin), so `claude/*` branch names work again.
 - Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
+
+### 2026-11-25 — [Claude] Elias author hero replaces Header + Hero
+
+- Owner asked to integrate the Elias author-hero template and chose: replace Header and Hero, keep the template's orange/ink look, use verified site data now, add their own portrait later.
+- Vendored the template as `src/components/ui/elias-author-hero.tsx` (Vite compiles `.tsx`; no shadcn CLI, TS migration or `@/` alias). Local edits are listed at the top of the file: `framer-motion` import instead of `motion/react`, `<div>` root instead of `<main>`, `h-[76px]` for Tailwind v3, lowercase `fetchpriority`, `nameScale` prop (first line drops to sit above the last so the book card stays clear), no empty paper block without a portrait.
+- Content in `portfolioData.site.eliasHero`, wired by `src/components/EliasHero.jsx`. Fonts added to the Google Fonts link. Deleted `Header.jsx`, `Hero.jsx`, the two Header-only hooks and `--header-height`.
+- Checked with playwright-core + Chrome at 1440, 1280, 1024 and 390: no horizontal scroll, no console errors or failed requests, one `<h1>`, splash opens, nav anchors land on their sections, reduced motion skips the splash. `npm run build` passes.
 
 ### 2026-11-25 — [Claude] Hidden name H1
 
@@ -205,6 +212,7 @@ Last updated: 2026-11-25
 
 ## Open next steps
 
+0. **Elias hero, owner input:** portrait (transparent cut-out cropped at the waist → `public/portrait.webp`, then set `site.eliasHero.portrait` with its pixel size), personalized intro roles / headline, and optional “letter to tomorrow” text (add a `letter` prop in `EliasHero.jsx`).
 1. **Owner wording needed (owner will send later)** for the remaining verified facts: Cloud IT Tec GCP Dataproc highlight, Curi MLflow detail, Midtown Fabric / Synapse ML detail, and what UCF DARE is and where it belongs. Add them to `src/data/portfolioData.js` using the owner's wording only.
 2. **Owner input needed:**
    - Resume PDF → put in `public/` and point “Resume & Links” (`portfolioData.site.hero.resume`) / Contact at it.

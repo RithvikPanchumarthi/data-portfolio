@@ -32,15 +32,15 @@ description: >-
 Edit both when relevant:
 
 - `src/components/Contact.jsx`
-- `src/components/Header.jsx`
+- `portfolioData.site.header.socialLinks` (feeds the hero's social links)
 
 ### Update header / hero / about copy
 
-- **Identity lives in the header**, not the hero. Edit `portfolioData.site.header.identity` (currently “Rithvik Panchumarthi | Agentic Data Engineer”). That button is the site H1 and scrolls to `#hero`. Do not put a giant name H1 back in Hero.
-- Hero: LinkedIn `portfolioData.profile.headline`, `site.hero.location`, Resume & Links, then Building with AI stats (`BuilderStats` / `portfolioData.aiStats`). No portrait.
+- **Hero is the Elias author hero.** Copy lives in `portfolioData.site.eliasHero`; see `CURSOR.md/customization.md` (Hero / about) for the name scale, portrait and letter. Its giant name is the page's only H1.
+- Building with AI stats (`BuilderStats` / `portfolioData.aiStats`) render in their own section after the hero.
 - About: text + skills from `portfolioData.site.about` only. **No project screenshot plates** — Tableau / COVID / Power BI images stay in `Projects.jsx`. The unverified 30% / 25% pull quote stays removed.
-- Sticky data-oil quote lives in `Header.jsx`. Do not re-add it to the Contact footer.
-- Nav comes from `sections` in `src/App.jsx`. There is no AI Builder nav item.
+- The data-oil quote (`site.header.quote`) is the hero intro description. Do not re-add it to the Contact footer.
+- Nav is the Elias navbar (`eliasHero.navLinks`). There is no sticky header and no AI Builder nav item.
 
 ### Colors / type
 
