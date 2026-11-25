@@ -614,6 +614,44 @@ export const portfolioData = {
         "label": "Resume & Links"
       }
     },
+    // Elias author hero (src/components/EliasHero.jsx). Placeholder copy until the owner personalizes it.
+    // The quote, resume link and social links are read from site.header / site.hero, and the books
+    // from the featured projects, so only hero-specific values live here.
+    "eliasHero": {
+      "brand": { "name": "Rithvik", "href": "#top" },
+      "name": { "first": "Rithvik", "last": "Panchumarthi" },
+      // Shrinks the two giant name lines; the design is tuned for 5 and 6 letter names.
+      "nameScale": { "first": 0.68, "last": 0.5 },
+      "navLinks": {
+        "left": [
+          { "label": "About", "href": "#about" },
+          { "label": "Pipelines", "href": "#pipelines" }
+        ],
+        "right": [
+          { "label": "Projects", "href": "#projects" },
+          { "label": "Contact", "href": "#contact" }
+        ]
+      },
+      "navCtaLabel": "Resume",
+      "navStatus": { "label": "Now", "detail": "Senior Data Engineer, Curi" },
+      "intro": {
+        "roles": ["Senior Data Engineer", "Minneapolis"],
+        "headline": ["Scalable data solutions,", "complex datasets,", "actionable insights."]
+      },
+      // Featured project ids, in carousel order, with hand-set cover lines and cover art.
+      "books": [
+        { "projectId": 7, "coverLines": ["Snow-", "flake", "ware-", "house"], "art": "days", "colors": { "cover": "#d3e6f1", "type": "#171412", "spine": "#a3c8de" } },
+        { "projectId": 5, "coverLines": ["Covid", "data", "intel-", "ligence"], "art": "sunrise", "colors": { "cover": "#f8dccb", "type": "#171412", "spine": "#ff9f80" } },
+        { "projectId": 2, "coverLines": ["Advan-", "ced", "SQL"], "art": "lamp", "colors": { "cover": "#d3e3d2", "type": "#171412", "spine": "#8fb59a" } },
+        { "projectId": 1, "coverLines": ["Python", "data", "engin-", "eering"], "art": "path", "colors": { "cover": "#e2daf0", "type": "#171412", "spine": "#b4a6d8" } }
+      ],
+      "bookLabel": "Featured project",
+      "bookChapter": "Built with",
+      "bookCard": { "href": "#projects", "open": "Open", "close": "Close and show the next project", "folio": "1" },
+      // Owner's photo goes here later: a transparent cut-out cropped at the waist, saved as public/portrait.webp.
+      // "portrait": { "src": "/data-portfolio/portrait.webp", "alt": "Rithvik Panchumarthi", "width": 1072, "height": 1336 },
+      "portrait": null
+    },
     "about": {
       "label": "About",
       "paragraphs": [

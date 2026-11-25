@@ -49,13 +49,16 @@ Rules:
 
 Never invent values: a `null` stat or empty list keeps its tile or section hidden.
 
-## Header identity / hero / about
+## Hero / about
 
-- Site identity lives in `portfolioData.site.header.identity`: “Rithvik Panchumarthi | Agentic Data Engineer”. That control is the page H1 and scrolls to `#hero`. Do not restore a giant name H1 in Hero.
-- Hero: LinkedIn `portfolioData.profile.headline`, `site.hero.location`, Resume & Links, then Building with AI (`BuilderStats`). No portrait.
+- The top of the page is the Elias author hero. Edit its copy in `portfolioData.site.eliasHero` (brand, name, `nameScale`, nav links, CTA label, status, intro roles and headline, book covers). The description is `site.header.quote`, the CTA link is `site.hero.resume.href`, the socials are `site.header.socialLinks`, and the books are the featured projects listed in `eliasHero.books`.
+- If you change the name, retune `nameScale` (first / last) and check at 1440 and 390 px that neither line is clipped and the first line clears the book card.
+- Portrait: save a transparent cut-out cropped at the waist as `public/portrait.webp`, then set `eliasHero.portrait` to `{ "src": "/data-portfolio/portrait.webp", "alt": "Rithvik Panchumarthi", "width": <px>, "height": <px> }`.
+- Letter to tomorrow: hidden. To show it, pass a `letter` prop in `src/components/EliasHero.jsx` (fields in `EliasLetter` in the .tsx file) with owner-written text.
+- The hero's colors and fonts are its own `--color-ea-*` / `--font-ea-*` tokens in `BLOCK_CSS` inside `src/components/ui/elias-author-hero.tsx`.
 - About is text + skills from `portfolioData.site.about`. Skills use `logos` keys (`logos.js`) or a Lucide `icon` key. The unverified 30% / 25% pull quote stays removed. Project screenshots belong in `Projects.jsx` only.
-- The data-oil quote is sticky in the header, not the Contact footer.
-- Nav is the `sections` list in `src/App.jsx` (no AI Builder item).
+- The data-oil quote is the hero intro description, not the Contact footer.
+- Nav is the Elias navbar (`eliasHero.navLinks`); there is no sticky header and no AI Builder item.
 
 ## Contact information
 
