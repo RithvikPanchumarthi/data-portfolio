@@ -12,7 +12,7 @@ data-portfolio/
 │   ├── components/
 │   │   ├── Header.jsx       # Sticky identity + quote bar + corner nav from `sections` in App.jsx
 │   │   ├── GrainOverlay.jsx # Film-grain overlay
-│   │   ├── Hero.jsx         # LinkedIn headline, location, Resume & Links + Building with AI stats (no name H1)
+│   │   ├── Hero.jsx         # LinkedIn headline, location, Resume & Links + Building with AI stats (hidden sr-only name h1, no visible one)
 │   │   ├── About.jsx        # Editorial about + skills list (no project plates)
 │   │   ├── Experience.jsx   # LinkedIn data; hidden until portfolioData.profile is filled
 │   │   ├── PipelineArchitecture.jsx # Databricks medallion (#pipelines)

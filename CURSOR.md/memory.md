@@ -17,7 +17,7 @@ Last updated: 2026-11-25
 | Theme | Cream-light editorial (warm cream page, charcoal type, pale yellow accent). Bebas Neue + Inter. Tokens in `src/index.css`. No `ThemeToggle`, `useTheme`, or `themeConfig`. |
 | Pipelines | `#pipelines` between Experience and Projects (nav item “Pipelines”): `PipelineArchitecture.jsx` + `portfolioData.pipelines`, a clickable Databricks medallion (Sources → Bronze → Silver → Quality gate → Gold) restating only the Curi role in `portfolioData.profile`. No Fabric / AutoSys content. Tokens `--bronze` / `--silver` / `--gold`. |
 | SEO / previews | `index.html`: title “Rithvik Panchumarthi \| Senior Data Engineer”, description from the LinkedIn headline, canonical, Open Graph + Twitter tags, `public/og-image.png` (1200×630), `public/favicon.svg` (the old `/vite.svg` icon never existed). |
-| Hero | LinkedIn `portfolioData.profile.headline`, Minneapolis, Resume & Links, then Building with AI stats from `portfolioData.aiStats`. No name H1 and no portrait photo. |
+| Hero | LinkedIn `portfolioData.profile.headline`, Minneapolis, Resume & Links, then Building with AI stats from `portfolioData.aiStats`. The only `<h1>` is a visually hidden (`sr-only`) one in `Hero.jsx` reading `site.header.identity`; no visible name H1 and no portrait photo. |
 | Header | Sticky bar: site identity “Rithvik Panchumarthi \| Agentic Data Engineer” (scrolls to `#hero`); data-oil quote; GitHub / LinkedIn / Email; corner section nav. |
 | Motion | `framer-motion` (`Reveal`, hero entrance). Grain overlay in `GrainOverlay.jsx`. |
 | Project data | `portfolioData.projects` in `src/data/portfolioData.js`. Array order = display order. Featured (capped at four): 7, 5, 2, 1; list rows: 4, 6, 8, 9, 3. Martian Dynamics (9) has no repo link (private), so `Projects.jsx` hides View Code when `github` is unset. Snowflake (7) and Martian Dynamics (9) have an `architecture` diagram in its Details modal. Filter labels and technology patterns are `portfolioData.site.projects.filters`. |
@@ -37,17 +37,21 @@ Last updated: 2026-11-25
 - Content is `src/data/portfolioData.js` (`portfolioData`, `hasExperience`). Split files `profile.js`, `projects.js`, `pipelines.js`, `learning.js`, and `aiStats.js` are gone. `github.json` and `logos.js` remain.
 - Deploy is GitHub Actions only. `netlify.toml` and the `gh-pages` script/devDependency are gone. `deploy.yml` is unchanged.
 - PRs #3–#12 merged and deployed (2026-11-18: #11 rule reconcile, #12 DP-600 + Martian Dynamics).
-- Cream-light editorial with identity in the sticky header, no Hero name H1, AI stats in the hero, sticky quote, About without project plates, no AI Builder nav.
+- Cream-light editorial with identity in the sticky header (a plain `div` + button, not an `h1`), no visible Hero name H1 (hidden `sr-only` h1 only), AI stats in the hero, sticky quote, About without project plates, no AI Builder nav.
 - The remote `claude` and `claude-cloud-session` branches are gone (2026-11-18: only `main` on origin), so `claude/*` branch names work again.
 - Formspree, GA, Clarity, and Vite base `/data-portfolio/` unchanged.
 
 ## Session log (newest first)
 
+### 2026-11-25 — [Claude] Hidden name H1
+
+- Added `<h1 className="sr-only">` to `Hero.jsx` (text from `portfolioData.site.header.identity`). Header's wrapper changed from `h1` to `div` so the page has exactly one `h1` (verified in headless Chrome DOM). Visual design unchanged; `npm run build` passes.
+
 ### 2026-11-25 — [Claude] Repo audit and doc cleanup
 
 - Audited memory against the code: base path, section order, featured ids, favicon href, deploy triggers all match.
 - Removed stale Netlify wording (`CURSOR.md/README.md`, `portfolio-dev` skill description), Node 16+ → 18+ in `README.md` (CI uses 18), deleted unused `src/hooks/useReveal.js`, added `PipelineArchitecture.jsx` to `project-structure.md`, added `public/robots.txt`. `npm run build` passes and emits `dist/robots.txt`.
-- Not done (needs owner OK): visually hidden name H1 in the Hero, JSON-LD Person schema, dbt logo. Noted but untouched: unneeded `@types/*` devDependencies, old `lucide-react` pin.
+- Not done (needs owner OK): JSON-LD Person schema, dbt logo. Noted but untouched: unneeded `@types/*` devDependencies, old `lucide-react` pin.
 
 ### 2026-11-24 — [Claude] Favicon dev 404 fix
 

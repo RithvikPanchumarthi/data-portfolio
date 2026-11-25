@@ -5,6 +5,7 @@ import BuilderStats from './BuilderStats';
 
 const { profile, site } = portfolioData;
 const { location, resume } = site.hero;
+const { identity } = site.header;
 
 const Hero = () => {
   const reduceMotion = useReducedMotion();
@@ -18,6 +19,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
+            <h1 className="sr-only">{identity}</h1>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
